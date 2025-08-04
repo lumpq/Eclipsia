@@ -108,8 +108,17 @@ tasks.build {
 
 bukkit {
     name = "Eclipsia"
-    main = "io.lumpq.eclipsia.EclipsiaPlugin"
+    main = "kr.lumpq126.eclipsia.EclipsiaPlugin"
     version = pluginVersion
     apiVersion = "1.21"
     authors = listOf("_LumPq_")
+    commands {
+        register("fish") {
+            permission = "op"
+            aliases = listOf("f")
+        }
+        register("month") {
+            permission = "op"
+        }
+    }
 }
