@@ -15,21 +15,21 @@ public class PlayerInfoManager {
     private static File file;
     private static FileConfiguration config;
 
-    public PlayerInfoManager(EclipsiaPlugin plugin) {
-        file = new File(plugin.getDataFolder(), "PlayerInfo.yml");
+    public static void load(EclipsiaPlugin plugin) {
+        file = new File(plugin.getDataFolder(), "playerInfo.yml");
 
         if (!file.exists()) {
             File parent = file.getParentFile();
             if (parent != null && !parent.exists() && !parent.mkdirs()) {
-                plugin.getLogger().warning("[Eclipsia] PlayerInfo.yml 상위 디렉토리 생성 실패: " + parent.getAbsolutePath());
+                plugin.getLogger().warning("[Eclipsia] playerInfo.yml 상위 디렉토리 생성 실패: " + parent.getAbsolutePath());
             }
 
             try {
                 if (!file.createNewFile()) {
-                    plugin.getLogger().warning("[Eclipsia] PlayerInfo.yml 파일 생성 실패");
+                    plugin.getLogger().warning("[Eclipsia] playerInfo.yml 파일 생성 실패");
                 }
             } catch (IOException e) {
-                plugin.getLogger().log(Level.SEVERE, "[Eclipsia] PlayerInfo.yml 생성 중 오류", e);
+                plugin.getLogger().log(Level.SEVERE, "[Eclipsia] playerInfo.yml 생성 중 오류", e);
             }
         }
 
@@ -129,7 +129,7 @@ public class PlayerInfoManager {
     // ────────────────────── STAT POINT ──────────────────────
 
     public static int getStatPoint(Player player) {
-        return config.getInt(path(player, "stat", "point"), 0);
+        return config.getInt(path(player, "stat", "point"), 5);
     }
 
     public static void setStatPoint(Player player, int point) {

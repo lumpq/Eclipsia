@@ -3,11 +3,11 @@ package kr.lumpq126.eclipsia;
 import kr.lumpq126.eclipsia.commands.FishCommand;
 import kr.lumpq126.eclipsia.commands.MonthCommand;
 import kr.lumpq126.eclipsia.listeners.FishListener;
-import kr.lumpq126.eclipsia.ui.gui.MainGUI;
 import kr.lumpq126.eclipsia.ui.listener.MainGUIEvent;
 import kr.lumpq126.eclipsia.utilities.FishCatalog;
 import kr.lumpq126.eclipsia.utilities.PlayerPage;
 import kr.lumpq126.eclipsia.utilities.manager.MonthManager;
+import kr.lumpq126.eclipsia.utilities.manager.PlayerInfoManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -30,6 +30,8 @@ public final class EclipsiaPlugin extends JavaPlugin {
         PlayerPage.save();
         FishCatalog.load(this);
         FishCatalog.save();
+        PlayerInfoManager.load(this);
+        PlayerInfoManager.save();
 
         File folder = new File(getDataFolder(), "fish");
         if (!folder.exists() && !folder.mkdirs()) {
