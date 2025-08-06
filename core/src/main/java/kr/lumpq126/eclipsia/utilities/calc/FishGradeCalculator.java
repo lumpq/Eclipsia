@@ -1,4 +1,4 @@
-package kr.lumpq126.eclipsia.utility.calc;
+package kr.lumpq126.eclipsia.utilities.calc;
 
 public class FishGradeCalculator {
 

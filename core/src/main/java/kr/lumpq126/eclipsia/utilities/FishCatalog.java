@@ -1,4 +1,4 @@
-package kr.lumpq126.eclipsia.utility;
+package kr.lumpq126.eclipsia.utilities;
 
 import kr.lumpq126.eclipsia.EclipsiaPlugin;
 import org.bukkit.configuration.file.FileConfiguration;

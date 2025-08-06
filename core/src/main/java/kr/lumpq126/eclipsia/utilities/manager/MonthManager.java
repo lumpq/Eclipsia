@@ -1,4 +1,4 @@
-package kr.lumpq126.eclipsia.utility.manager;
+package kr.lumpq126.eclipsia.utilities.manager;
 
 import kr.lumpq126.eclipsia.EclipsiaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;

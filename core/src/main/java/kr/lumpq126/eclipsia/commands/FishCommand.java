@@ -1,4 +1,4 @@
-package kr.lumpq126.eclipsia.command;
+package kr.lumpq126.eclipsia.commands;
 
 import kr.lumpq126.eclipsia.EclipsiaPlugin;
 import kr.lumpq126.eclipsia.fish.items.FishItems;

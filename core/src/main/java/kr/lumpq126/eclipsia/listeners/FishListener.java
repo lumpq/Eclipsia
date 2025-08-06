@@ -1,10 +1,10 @@
-package kr.lumpq126.eclipsia.listener;
+package kr.lumpq126.eclipsia.listeners;
 
 import kr.lumpq126.eclipsia.EclipsiaPlugin;
 import kr.lumpq126.eclipsia.fish.ui.FishUI;
 import kr.lumpq126.eclipsia.fish.items.FishItems;
-import kr.lumpq126.eclipsia.utility.manager.MonthManager;
-import kr.lumpq126.eclipsia.utility.PlayerPage;
+import kr.lumpq126.eclipsia.utilities.manager.MonthManager;
+import kr.lumpq126.eclipsia.utilities.PlayerPage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;

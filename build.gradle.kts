@@ -13,7 +13,7 @@ class NMSVersion(val nmsVersion: String, val serverVersion: String)
 infix fun String.toNms(that: String) = NMSVersion(this, that)
 
 val nMSVersions = listOf(
-    "nms:v1_21_R3" toNms "1.21.4-R0.1-SNAPSHOT",
+    "nms:v1_21_R3" toNms "1.21.4-R0.1-SNAPSHOT"
 )
 
 val pluginVersion = project.version.toString()

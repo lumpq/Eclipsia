@@ -1,11 +1,13 @@
 package kr.lumpq126.eclipsia;
 
-import kr.lumpq126.eclipsia.command.FishCommand;
-import kr.lumpq126.eclipsia.command.MonthCommand;
-import kr.lumpq126.eclipsia.listener.FishListener;
-import kr.lumpq126.eclipsia.utility.FishCatalog;
-import kr.lumpq126.eclipsia.utility.PlayerPage;
-import kr.lumpq126.eclipsia.utility.manager.MonthManager;
+import kr.lumpq126.eclipsia.commands.FishCommand;
+import kr.lumpq126.eclipsia.commands.MonthCommand;
+import kr.lumpq126.eclipsia.listeners.FishListener;
+import kr.lumpq126.eclipsia.ui.gui.MainGUI;
+import kr.lumpq126.eclipsia.ui.listener.MainGUIEvent;
+import kr.lumpq126.eclipsia.utilities.FishCatalog;
+import kr.lumpq126.eclipsia.utilities.PlayerPage;
+import kr.lumpq126.eclipsia.utilities.manager.MonthManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,6 +24,8 @@ public final class EclipsiaPlugin extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
+        saveDefaultConfig();
+
         PlayerPage.load(this);
         PlayerPage.save();
         FishCatalog.load(this);
@@ -35,12 +39,13 @@ public final class EclipsiaPlugin extends JavaPlugin {
 
         File file = new File(folder, "fish.yml");
         if (!file.exists()) {
-            saveResource("fish/fish.yml", false);
+            saveResource("fish.yml", false);
         }
 
         fishConfig = YamlConfiguration.loadConfiguration(file);
 
         getServer().getPluginManager().registerEvents(new FishListener(), this);
+        getServer().getPluginManager().registerEvents(new MainGUIEvent(), this);
 
         Objects.requireNonNull(getCommand("month")).setExecutor(new MonthCommand(new MonthManager(this)));
         Objects.requireNonNull(getCommand("fish")).setExecutor(new FishCommand());

@@ -1,8 +1,8 @@
 package kr.lumpq126.eclipsia.fish.items;
 
 import kr.lumpq126.eclipsia.EclipsiaPlugin;
-import kr.lumpq126.eclipsia.utility.FishCatalog;
-import kr.lumpq126.eclipsia.utility.calc.FishGradeCalculator;
+import kr.lumpq126.eclipsia.utilities.FishCatalog;
+import kr.lumpq126.eclipsia.utilities.calc.FishGradeCalculator;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.minimessage.MiniMessage;

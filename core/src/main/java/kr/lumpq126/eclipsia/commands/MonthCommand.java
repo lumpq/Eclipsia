@@ -1,6 +1,6 @@
-package kr.lumpq126.eclipsia.command;
+package kr.lumpq126.eclipsia.commands;
 
-import kr.lumpq126.eclipsia.utility.manager.MonthManager;
+import kr.lumpq126.eclipsia.utilities.manager.MonthManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.command.Command;

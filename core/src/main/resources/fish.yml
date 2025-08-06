@@ -1,0 +1,4263 @@
+Abalone:
+  enable: false
+  display:
+    name: "<italic:false><gold>전복"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false><italic:false>단단한 껍질에 바위 틈에서 잘 붙어 다니는 전복."
+      - "<gray><italic:false><italic:false>버터 구이에 고소한 맛이 일품."
+      - "<gray><italic:false><italic:false>가격은 꽤 높은 편."
+  length-unit: cm
+  weight-unit: g
+  min-length: 3
+  max-length: 25
+  min-weight: 20
+  max-weight: 910
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+    large-object-capture:
+      enable: true
+      month:
+        - 6
+        - 7
+        - 8
+        - 9
+      min-length: 10
+      min-weight: 500
+    small-object-capture:
+      enable: true
+      month:
+        - 3
+        - 4
+        - 5
+      max-length: 15
+      max-weight: 600
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 1
+Albacore:
+  enable: true
+  display:
+    name: "<italic:false><gold><aqua>날개 다랑어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false><italic:false>대서양과 태평양을 오가는 빠른 어종."
+      - "<gray><italic:false><italic:false>생선회나 구이로 잘 어울리는 맛."
+      - "<gray><italic:false><italic:false>시장에서 인기 있는 중급 가격대."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 40
+  max-length: 110
+  min-weight: 2
+  max-weight: 30
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+        - 9
+      min-length: 80
+      min-weight: 15
+    small-object-capture:
+      enable: true
+      month:
+        - 5
+        - 6
+      max-length: 60
+      max-weight: 10
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 2
+Amberjack:
+  enable: true
+  display:
+    name: "<italic:false><gold><red>방어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false><italic:false>온대 및 열대 바다에서 자라며 빠른 성장속도."
+      - "<gray><italic:false><italic:false>회나 조림으로 맛이 뛰어난 어종."
+      - "<gray><italic:false><italic:false>가격은 중상급."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 50
+  max-length: 150
+  min-weight: 5
+  max-weight: 40
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+      min-length: 100
+      min-weight: 25
+    small-object-capture:
+      enable: true
+      month:
+        - 6
+        - 9
+      max-length: 70
+      max-weight: 20
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 3
+Anchovy:
+  enable: true
+  display:
+    name: "<italic:false><gold><gray>멸치"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false><italic:false>주로 바다 근처 해안에서 무리지어 다니는 작은 물고기."
+      - "<gray><italic:false><italic:false>짭짤하고 고소한 맛이 강한 조미료 재료."
+      - "<gray><italic:false><italic:false>저렴한 가격대."
+  length-unit: cm
+  weight-unit: g
+  min-length: 5
+  max-length: 15
+  min-weight: 5
+  max-weight: 30
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 4
+Bass:
+  enable: true
+  display:
+    name: "<italic:false><gold><blue>배스"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false><italic:false>민물과 바닷물 경계에서 잡히는 잡식성 어류."
+      - "<gray><italic:false><italic:false>구이와 튀김 요리에 무난한 맛."
+      - "<gray><italic:false><italic:false>중저가 가격대."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 20
+  max-length: 60
+  min-weight: 1
+  max-weight: 6
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+    large-object-capture:
+      enable: true
+      month:
+        - 6
+        - 7
+        - 8
+      min-length: 40
+      min-weight: 4
+    small-object-capture:
+      enable: true
+      month:
+        - 4
+        - 5
+      max-length: 30
+      max-weight: 3
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 5
+BlackSeabream:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_green>감성돔"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false><italic:false>주로 바닷가 암초 근처에 서식하는 어종."
+      - "<gray><italic:false><italic:false>신선하게 구우면 담백한 맛이 일품."
+      - "<gray><italic:false><italic:false>가격은 중상급."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 30
+  max-length: 70
+  min-weight: 2
+  max-weight: 8
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+        - 9
+      min-length: 50
+      min-weight: 5
+    small-object-capture:
+      enable: true
+      month:
+        - 5
+        - 6
+      max-length: 40
+      max-weight: 6
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 6
+Blobfish:
+  enable: true
+  display:
+    name: "<italic:false><gold><light_purple>블롭피쉬"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>심해 깊은 곳에 사는 독특한 모양의 물고기."
+      - "<gray><italic:false>주로 관상용이며 식용은 드물다."
+      - "<gray><italic:false>가격은 희귀해서 높음."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 20
+  max-length: 40
+  min-weight: 5
+  max-weight: 15
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 7
+BlueDiscus:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_aqua>블루디스커스"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>아마존 강 유역에 사는 화려한 민물어."
+      - "<gray><italic:false>관상용으로 유명하고 맛은 약한 편."
+      - "<gray><italic:false>가격은 중간 수준."
+  length-unit: cm
+  weight-unit: g
+  min-length: 10
+  max-length: 15
+  min-weight: 30
+  max-weight: 80
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 8
+Bream:
+  enable: true
+  display:
+    name: "<italic:false><gold><green>도미"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>해안가와 암초 부근에서 흔히 잡히는 어종."
+      - "<gray><italic:false>회와 구이 모두 무난한 맛."
+      - "<gray><italic:false>가격은 보통 수준."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 25
+  max-length: 70
+  min-weight: 1.5
+  max-weight: 8
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+        - 9
+      min-length: 50
+      min-weight: 5
+    small-object-capture:
+      enable: true
+      month:
+        - 4
+        - 5
+      max-length: 40
+      max-weight: 4
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 9
+Bullhead:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_gray>황소멸치"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>바다 밑바닥에 주로 서식하는 작은 어류."
+      - "<gray><italic:false>튀김이나 조림 요리에 잘 어울림."
+      - "<gray><italic:false>저렴한 가격대."
+  length-unit: cm
+  weight-unit: g
+  min-length: 10
+  max-length: 30
+  min-weight: 20
+  max-weight: 150
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 10
+Crimsonfish:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_red>크림슨피쉬"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>산호초 주변 깊은 바다에 사는 붉은 빛 물고기."
+      - "<gray><italic:false>회로 먹으면 색과 맛 모두 훌륭함."
+      - "<gray><italic:false>가격은 높은 편."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 40
+  max-length: 90
+  min-weight: 5
+  max-weight: 20
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+      - 8
+      - 9
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+      min-length: 70
+      min-weight: 10
+    small-object-capture:
+      enable: true
+      month:
+        - 6
+        - 9
+      max-length: 50
+      max-weight: 15
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 15
+Croaker:
+  enable: true
+  display:
+    name: "<italic:false><gold><yellow>동갈민어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>저음 울림 소리 내는 바다 물고기."
+      - "<gray><italic:false>튀김과 조림 요리에 좋음."
+      - "<gray><italic:false>가격은 중간 수준."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 30
+  max-length: 60
+  min-weight: 3
+  max-weight: 12
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 5
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 6
+        - 7
+      min-length: 50
+      min-weight: 8
+    small-object-capture:
+      enable: true
+      month:
+        - 5
+      max-length: 40
+      max-weight: 7
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 16
+CrucianCarp:
+  enable: true
+  display:
+    name: "<italic:false><gold>붕어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>담수에 흔한 작고 튼튼한 물고기."
+      - "<gray><italic:false>튀김과 찜으로 맛 좋음."
+      - "<gray><italic:false>저렴한 가격대."
+  length-unit: cm
+  weight-unit: g
+  min-length: 10
+  max-length: 35
+  min-weight: 50
+  max-weight: 400
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 17
+Daegu:
+  enable: true
+  display:
+    name: "<italic:false><gold><red>대구"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>찬 바다에서 잘 자라는 하얀살 생선."
+      - "<gray><italic:false>조림과 찜에 특히 맛있음."
+      - "<gray><italic:false>가격은 중간 수준."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 40
+  max-length: 90
+  min-weight: 4
+  max-weight: 25
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 10
+      - 11
+      - 12
+      - 1
+      - 2
+      - 3
+    large-object-capture:
+      enable: true
+      month:
+        - 11
+        - 12
+        - 1
+      min-length: 70
+      min-weight: 15
+    small-object-capture:
+      enable: true
+      month:
+        - 10
+        - 3
+      max-length: 50
+      max-weight: 12
+    can't-capture-month:
+      enable: true
+      month:
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+    capture-zone:
+      enable: false
+  custom-model-data: 18
+Dorado:
+  enable: true
+  display:
+    name: "<italic:false><gold><light_purple>도라도"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>열대 바다의 빛나는 생선."
+      - "<gray><italic:false>구이로 먹으면 향이 진함."
+      - "<gray><italic:false>가격은 꽤 높음."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 35
+  max-length: 80
+  min-weight: 3
+  max-weight: 18
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 5
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 6
+        - 7
+      min-length: 60
+      min-weight: 12
+    small-object-capture:
+      enable: true
+      month:
+        - 5
+        - 8
+      max-length: 45
+      max-weight: 10
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 19
+Eel:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_green>장어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>민물과 바닷물 경계에 사는 뱀 같은 물고기."
+      - "<gray><italic:false>구이나 조림에 깊은 맛."
+      - "<gray><italic:false>가격은 중상."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 40
+  max-length: 120
+  min-weight: 4
+  max-weight: 25
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 7
+      - 8
+      - 9
+      - 10
+    large-object-capture:
+      enable: true
+      month:
+        - 8
+        - 9
+      min-length: 90
+      min-weight: 18
+    small-object-capture:
+      enable: true
+      month:
+        - 7
+        - 10
+      max-length: 60
+      max-weight: 15
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 20
+Flatfish:
+  enable: true
+  display:
+    name: "<italic:false><gold><gray>광어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>바닥에 납작하게 붙어 사는 생선."
+      - "<gray><italic:false>회와 구이 모두 인기 좋음."
+      - "<gray><italic:false>가격은 보통."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 30
+  max-length: 80
+  min-weight: 2
+  max-weight: 15
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+    large-object-capture:
+      enable: true
+      month:
+        - 6
+        - 7
+        - 8
+      min-length: 60
+      min-weight: 10
+    small-object-capture:
+      enable: true
+      month:
+        - 4
+        - 5
+      max-length: 40
+      max-weight: 7
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 21
+Flounder:
+  enable: true
+  display:
+    name: "<italic:false><gold>넙치"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>평평한 몸매와 바닥에 숨는 생선."
+      - "<gray><italic:false>조림과 구이 모두 좋은 맛."
+      - "<gray><italic:false>가격은 중상."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 35
+  max-length: 75
+  min-weight: 3
+  max-weight: 18
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+    large-object-capture:
+      enable: true
+      month:
+        - 6
+        - 7
+        - 8
+      min-length: 55
+      min-weight: 12
+    small-object-capture:
+      enable: true
+      month:
+        - 5
+        - 9
+      max-length: 40
+      max-weight: 10
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 22
+Ghostfish:
+  enable: true
+  display:
+    name: "<italic:false><gold><white>고스트피쉬"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>신비한 모습의 희귀한 생선."
+      - "<gray><italic:false>주로 관상용으로 인기."
+      - "<gray><italic:false>가격은 매우 높음."
+  length-unit: cm
+  weight-unit: g
+  min-length: 15
+  max-length: 40
+  min-weight: 200
+  max-weight: 800
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+      - 8
+      - 9
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 23
+Glacierfish:
+  enable: true
+  display:
+    name: "<italic:false><gold><aqua>글레이셔피쉬"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>차가운 빙하 근처 바다에 사는 생선."
+      - "<gray><italic:false>회로 먹으면 감칠맛 일품."
+      - "<gray><italic:false>가격은 높음."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 35
+  max-length: 70
+  min-weight: 3
+  max-weight: 20
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 12
+      - 1
+      - 2
+      - 3
+    large-object-capture:
+      enable: true
+      month:
+        - 12
+        - 1
+        - 2
+      min-length: 50
+      min-weight: 15
+    small-object-capture:
+      enable: true
+      month:
+        - 3
+      max-length: 40
+      max-weight: 12
+    can't-capture-month:
+      enable: true
+      month:
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+    capture-zone:
+      enable: false
+  custom-model-data: 24
+GlacierfishJr:
+  enable: true
+  display:
+    name: "<italic:false><gold><green>글레이셔피쉬(색이다름)"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>빙하 근처 작은 생선, 색이 다르며 매우 희귀하다."
+      - "<gray><italic:false>회로 먹으면 부드러운 맛."
+      - "<gray><italic:false>가격은 매우비쌈."
+  length-unit: cm
+  weight-unit: g
+  min-length: 10
+  max-length: 25
+  min-weight: 100
+  max-weight: 400
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 25
+Goby:
+  enable: true
+  display:
+    name: "<italic:false><gold><gray>망둥이"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>민물과 바닷물 모두에서 볼 수 있는 작은 어류."
+      - "<gray><italic:false>튀김용으로 적합."
+      - "<gray><italic:false>가격은 저렴."
+  length-unit: cm
+  weight-unit: g
+  min-length: 5
+  max-length: 20
+  min-weight: 10
+  max-weight: 100
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 26
+Halibut:
+  enable: true
+  display:
+    name: "<italic:false><gold><blue>큰 넙치"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>넓고 평평한 몸을 가진 대형 생선."
+      - "<gray><italic:false>구이나 찜으로 인기가 많음."
+      - "<gray><italic:false>가격은 상급."
+  length-unit: cm
+  weight-unit: kg
+  min-length: 50
+  max-length: 140
+  min-weight: 8
+  max-weight: 40
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+      - 8
+      - 9
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+      min-length: 90
+      min-weight: 25
+    small-object-capture:
+      enable: true
+      month:
+        - 6
+        - 9
+      max-length: 70
+      max-weight: 20
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 27
+Herring:
+  enable: true
+  display:
+    name: "<italic:false><gold><aqua>청어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>무리지어 다니는 작은 바닷물고기."
+      - "<gray><italic:false>절임이나 조림에 적합."
+      - "<gray><italic:false>가격은 저렴."
+  length-unit: cm
+  weight-unit: g
+  min-length: 10
+  max-length: 25
+  min-weight: 30
+  max-weight: 150
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 28
+IcePip:
+  enable: true
+  display:
+    name: "<italic:false><gold><red>아이스핍"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>차가운 물에서 자라는 희귀한 어종"
+      - "<gray><italic:false>회로 먹으면 특별한 감칠맛"
+      - "<gray><italic:false>가격대가 꽤 높음"
+  length-unit: cm
+  weight-unit: g
+  min-length: 15
+  max-length: 40
+  min-weight: 200
+  max-weight: 800
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 12
+      - 1
+      - 2
+      - 3
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: true
+      month:
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+    capture-zone:
+      enable: false
+  custom-model-data: 29
+LargemouthBass:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_green>배스"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>담수에서 인기 좋은 강한 물고기"
+      - "<gray><italic:false>튀김이나 구이로 무난한 맛"
+      - "<gray><italic:false>가격은 중간 정도"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 25
+  max-length: 60
+  min-weight: 2
+  max-weight: 8
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 30
+LavaEel:
+  enable: true
+  display:
+    name: "<italic:false><gold>용암장어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>화산 주변 뜨거운 물에서 사는 독특한 장어"
+      - "<gray><italic:false>구워 먹으면 고소하고 진한 맛"
+      - "<gray><italic:false>가격은 꽤 높은 편"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 40
+  max-length: 120
+  min-weight: 5
+  max-weight: 25
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 7
+      - 8
+      - 9
+    large-object-capture:
+      enable: true
+      month:
+        - 8
+        - 9
+      min-length: 70
+      min-weight: 15
+    small-object-capture:
+      enable: true
+      month:
+        - 7
+      max-length: 50
+      max-weight: 10
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 31
+Legend:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_purple>신비한 물고기"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>???"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 50
+  max-length: 150
+  min-weight: 10
+  max-weight: 60
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+      min-length: 100
+      min-weight: 40
+    small-object-capture:
+      enable: true
+      month:
+        - 6
+      max-length: 80
+      max-weight: 30
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 32
+Legend2:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_purple>신비한 물고기(색이다름)"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>???"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 55
+  max-length: 160
+  min-weight: 12
+  max-weight: 65
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 7
+      - 8
+      - 9
+    large-object-capture:
+      enable: true
+      month:
+        - 8
+      min-length: 110
+      min-weight: 45
+    small-object-capture:
+      enable: true
+      month:
+        - 7
+      max-length: 85
+      max-weight: 35
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 33
+Lingcod:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_aqua>버펄로 대구"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>차가운 바다 밑바닥에서 주로 서식"
+      - "<gray><italic:false>구워 먹으면 담백한 맛"
+      - "<gray><italic:false>가격은 보통 수준"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 30
+  max-length: 90
+  min-weight: 4
+  max-weight: 18
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+      min-length: 60
+      min-weight: 14
+    small-object-capture:
+      enable: true
+      month:
+        - 5
+        - 6
+      max-length: 50
+      max-weight: 12
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 34
+Lionfish:
+  enable: true
+  display:
+    name: "<italic:false><gold><red>쏠베감펭"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>화려한 색을 가진 열대어"
+      - "<gray><italic:false>회나 구이로 즐기기 좋음"
+      - "<gray><italic:false>가격대는 중간 정도"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 15
+  max-length: 40
+  min-weight: 0.5
+  max-weight: 3
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 35
+Mackerel:
+  enable: true
+  display:
+    name: "<italic:false><gold><blue>고등어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>바다에서 흔히 잡히는 맛 좋은 생선"
+      - "<gray><italic:false>구이나 조림에 제격"
+      - "<gray><italic:false>가격은 저렴한 편"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 20
+  max-length: 45
+  min-weight: 1
+  max-weight: 4
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 36
+MidnightCarp:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_green>심해의 잉어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>어두운 물에서 사는 희귀한 잉어"
+      - "<gray><italic:false>찜이나 조림으로 맛있음"
+      - "<gray><italic:false>가격은 중간 정도"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 30
+  max-length: 75
+  min-weight: 3
+  max-weight: 15
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 9
+      - 10
+      - 11
+      - 12
+      - 1
+      - 2
+    large-object-capture:
+      enable: true
+      month:
+        - 10
+        - 11
+      min-length: 50
+      min-weight: 10
+    small-object-capture:
+      enable: true
+      month:
+        - 9
+      max-length: 40
+      max-weight: 7
+    can't-capture-month:
+      enable: true
+      month:
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+    capture-zone:
+      enable: false
+  custom-model-data: 37
+MidnightSquid:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_purple>심해의 오징어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>어두운 밤 바다에서 사는 오징어"
+      - "<gray><italic:false>볶음이나 구이로 제격"
+      - "<gray><italic:false>가격대는 중간"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 20
+  max-length: 60
+  min-weight: 2
+  max-weight: 10
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 38
+MsAngler:
+  enable: true
+  display:
+    name: "<italic:false><gold>아귀(색이다름)"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>드문 아귀 물고기"
+      - "<gray><italic:false>구이나 찜으로 괜찮음"
+      - "<gray><italic:false>가격은 최상급"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 40
+  max-length: 100
+  min-weight: 5
+  max-weight: 30
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 5
+      - 6
+      - 7
+    large-object-capture:
+      enable: true
+      month:
+        - 6
+        - 7
+      min-length: 80
+      min-weight: 20
+    small-object-capture:
+      enable: true
+      month:
+        - 5
+      max-length: 60
+      max-weight: 15
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 39
+Mullet:
+  enable: true
+  display:
+    name: "<italic:false><gold><yellow>점농어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>연안에서 쉽게 잡히는 생선"
+      - "<gray><italic:false>튀김이나 조림으로 맛이 좋음"
+      - "<gray><italic:false>가격은 보통 수준"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 25
+  max-length: 50
+  min-weight: 2
+  max-weight: 7
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 40
+MutantCarp:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_green>돌연변이 잉어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>돌연변이로 생긴 독특한 잉어"
+      - "<gray><italic:false>찜이나 구이로 괜찮음"
+      - "<gray><italic:false>가격은 중간"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 35
+  max-length: 80
+  min-weight: 4
+  max-weight: 20
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+      min-length: 60
+      min-weight: 15
+    small-object-capture:
+      enable: true
+      month:
+        - 6
+      max-length: 45
+      max-weight: 12
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 41
+Octopus:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_purple>문어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>바다 밑에서 사는 문어"
+      - "<gray><italic:false>회와 볶음에 잘 어울림"
+      - "<gray><italic:false>가격은 보통"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 30
+  max-length: 60
+  min-weight: 3
+  max-weight: 15
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 42
+Perch:
+  enable: true
+  display:
+    name: "<italic:false><gold><green>농어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>맑은 강물에서 자라는 농어"
+      - "<gray><italic:false>구이나 찜으로 추천"
+      - "<gray><italic:false>가격은 중간 정도"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 20
+  max-length: 45
+  min-weight: 2
+  max-weight: 8
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 43
+Pike:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_green>강꼬치고기"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>강에서 사는 맹렬한 물고기"
+      - "<gray><italic:false>구이나 튀김으로 좋음"
+      - "<gray><italic:false>가격은 보통"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 30
+  max-length: 70
+  min-weight: 3
+  max-weight: 18
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 5
+        - 6
+      min-length: 50
+      min-weight: 12
+    small-object-capture:
+      enable: true
+      month:
+        - 4
+      max-length: 40
+      max-weight: 7
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 44
+Pufferfish:
+  enable: true
+  display:
+    name: "<italic:false><gold><red>복어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>독특한 모습의 복어"
+      - "<gray><italic:false>회는 독을 조심하며"
+      - "<gray><italic:false>가격은 꽤 높음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 15
+  max-length: 45
+  min-weight: 1
+  max-weight: 6
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 8
+      min-length: 30
+      min-weight: 4
+    small-object-capture:
+      enable: true
+      month:
+        - 7
+      max-length: 25
+      max-weight: 3
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 45
+RadioactiveCarp:
+  enable: true
+  display:
+    name: "<italic:false><gold><green>방사능 잉어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>방사능에 노출된 독특한 잉어"
+      - "<gray><italic:false>찜으로 조심스럽게 조리"
+      - "<gray><italic:false>가격은 매우 높음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 40
+  max-length: 90
+  min-weight: 6
+  max-weight: 35
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 8
+      - 9
+      - 10
+    large-object-capture:
+      enable: true
+      month:
+        - 9
+      min-length: 70
+      min-weight: 25
+    small-object-capture:
+      enable: true
+      month:
+        - 8
+      max-length: 55
+      max-weight: 15
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 46
+RainbowTrout:
+  enable: true
+  display:
+    name: "<italic:false><gold><aqua>무지개 송어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>산천에서 빛나는 무지개 빛 송어"
+      - "<gray><italic:false>구이나 찜으로 맛이 좋음"
+      - "<gray><italic:false>가격은 보통"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 25
+  max-length: 60
+  min-weight: 2
+  max-weight: 10
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 47
+RedMullet:
+  enable: true
+  display:
+    name: "<italic:false><gold><red>붉은 농어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>붉은 빛을 띄는 농어"
+      - "<gray><italic:false>회나 구이로 인기가 많음"
+      - "<gray><italic:false>가격은 중간 정도"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 20
+  max-length: 50
+  min-weight: 2
+  max-weight: 9
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 48
+RedSeaBream:
+  enable: true
+  display:
+    name: "<italic:false><gold><light_purple>붉은 도미"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>도미 중에서도 붉은 색 도미"
+      - "<gray><italic:false>구이나 찜에 제격"
+      - "<gray><italic:false>가격은 꽤 높음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 25
+  max-length: 55
+  min-weight: 3
+  max-weight: 15
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 49
+RedSnapper:
+  enable: true
+  display:
+    name: "<italic:false><gold><red>붉은 퉁돔"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>주로 바다에서 잡히는 붉은 농어"
+      - "<gray><italic:false>회와 구이 모두 훌륭"
+      - "<gray><italic:false>가격은 중간에서 높음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 25
+  max-length: 60
+  min-weight: 3
+  max-weight: 18
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 50
+Rockfish:
+  enable: true
+  display:
+    name: "<italic:false><gold>바위돔"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>바위 근처에 사는 단단한 생선"
+      - "<gray><italic:false>구이로 맛이 좋음"
+      - "<gray><italic:false>가격은 중간"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 30
+  max-length: 55
+  min-weight: 4
+  max-weight: 14
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 51
+Salmon:
+  enable: true
+  display:
+    name: "<italic:false><gold><aqua>연어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>강과 바다를 오가는 연어"
+      - "<gray><italic:false>회와 구이 모두 인기"
+      - "<gray><italic:false>가격은 보통에서 높음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 40
+  max-length: 80
+  min-weight: 5
+  max-weight: 25
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+      min-length: 60
+      min-weight: 20
+    small-object-capture:
+      enable: true
+      month:
+        - 6
+      max-length: 50
+      max-weight: 15
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 52
+Sandfish:
+  enable: true
+  display:
+    name: "<italic:false><gold><yellow>도루묵"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>모래 바닥에 숨어사는 생선"
+      - "<gray><italic:false>튀김이나 조림에 적합"
+      - "<gray><italic:false>가격은 낮음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 15
+  max-length: 40
+  min-weight: 1
+  max-weight: 5
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 53
+Sardine:
+  enable: true
+  display:
+    name: "<italic:false><gold><gray>정어리"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>작고 빠른 정어리"
+      - "<gray><italic:false>구이나 통조림으로 활용"
+      - "<gray><italic:false>가격은 낮음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 10
+  max-length: 25
+  min-weight: 0.2
+  max-weight: 1
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 54
+Saury:
+  enable: true
+  display:
+    name: "<italic:false><gold><blue>꽁치"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>가을철 대표 생선 꽁치"
+      - "<gray><italic:false>구이로 인기 많음"
+      - "<gray><italic:false>가격은 보통"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 30
+  max-length: 60
+  min-weight: 2
+  max-weight: 8
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 55
+ScorpionCarp:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_red>전갈잉어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>전갈 독을 가진 잉어"
+      - "<gray><italic:false>조리 시 주의 필요"
+      - "<gray><italic:false>가격은 중간"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 25
+  max-length: 55
+  min-weight: 3
+  max-weight: 10
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 8
+      min-length: 45
+      min-weight: 8
+    small-object-capture:
+      enable: true
+      month:
+        - 7
+      max-length: 35
+      max-weight: 6
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 56
+Seabream:
+  enable: true
+  display:
+    name: "<italic:false><gold><light_purple>도미"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>도미 중 대표 어종"
+      - "<gray><italic:false>구이나 찜에 인기"
+      - "<gray><italic:false>가격은 중간"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 20
+  max-length: 50
+  min-weight: 2
+  max-weight: 9
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 57
+SeaCucumber:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_purple>해삼"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>바닷속에서 사는 해삼"
+      - "<gray><italic:false>건조나 찜으로 활용"
+      - "<gray><italic:false>가격은 보통"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 15
+  max-length: 35
+  min-weight: 1
+  max-weight: 5
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 58
+Shad:
+  enable: true
+  display:
+    name: "<italic:false><gold><aqua>전어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>강에서 자라는 청어"
+      - "<gray><italic:false>구이나 훈제로 인기"
+      - "<gray><italic:false>가격은 보통"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 25
+  max-length: 55
+  min-weight: 3
+  max-weight: 12
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 59
+Skates:
+  enable: true
+  display:
+    name: "<italic:false><gold><gray>가오리"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>넓은 날개를 가진 가오리"
+      - "<gray><italic:false>구이나 찜으로 좋음"
+      - "<gray><italic:false>가격은 중간"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 40
+  max-length: 90
+  min-weight: 6
+  max-weight: 30
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 60
+Slimejack:
+  enable: true
+  display:
+    name: "<italic:false><gold><green>슬라임피쉬"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>슬라임 특유의 광택"
+      - "<gray><italic:false>튀김이나 조림에 적합"
+      - "<gray><italic:false>가격은 낮음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 15
+  max-length: 40
+  min-weight: 1
+  max-weight: 6
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 61
+SmallmouthBass:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_green>작은입 배스"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>작은 배스 종류"
+      - "<gray><italic:false>구이나 튀김으로 맛있음"
+      - "<gray><italic:false>가격은 보통"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 20
+  max-length: 45
+  min-weight: 2
+  max-weight: 8
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 62
+SonOfCrimsonFish:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_red>새끼 크림슨피쉬"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>크림슨피쉬의 작은 새끼"
+      - "<gray><italic:false>조림이나 구이로 적당"
+      - "<gray><italic:false>가격은 낮음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 10
+  max-length: 30
+  min-weight: 0.5
+  max-weight: 3
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 63
+Spookfish:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_purple>통안어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>어두운 바다에 사는 신비한 물고기"
+      - "<gray><italic:false>회나 튀김으로 특별함"
+      - "<gray><italic:false>가격은 중간"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 25
+  max-length: 55
+  min-weight: 3
+  max-weight: 14
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 64
+Squid:
+  enable: true
+  display:
+    name: "<italic:false><gold><blue>오징어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>바다에서 흔히 잡히는 오징어"
+      - "<gray><italic:false>회, 튀김, 볶음 등 다양"
+      - "<gray><italic:false>가격은 보통"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 20
+  max-length: 50
+  min-weight: 2
+  max-weight: 8
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 65
+Stingray:
+  enable: true
+  display:
+    name: "<italic:false><gold>가시가오리"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>날카로운 가시를 가진 가오리"
+      - "<gray><italic:false>조림이나 구이로 좋음"
+      - "<gray><italic:false>가격은 중간"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 35
+  max-length: 80
+  min-weight: 5
+  max-weight: 22
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 66
+Stonefish:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_gray>돌쏘치"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>독이 있는 바위물고기"
+      - "<gray><italic:false>조심해야 하는 생선"
+      - "<gray><italic:false>가격은 높음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 20
+  max-length: 50
+  min-weight: 3
+  max-weight: 12
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 5
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 6
+        - 7
+      min-length: 40
+      min-weight: 10
+    small-object-capture:
+      enable: true
+      month:
+        - 5
+        - 8
+      max-length: 30
+      max-weight: 7
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 67
+Sturgeon:
+  enable: true
+  display:
+    name: "<italic:false><gold><aqua>철갑상어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>거대한 몸집의 철갑상어"
+      - "<gray><italic:false>캐비어 원료로 유명"
+      - "<gray><italic:false>가격은 매우 높음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 80
+  max-length: 150
+  min-weight: 20
+  max-weight: 90
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+      min-length: 120
+      min-weight: 50
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 68
+Sunfish:
+  enable: true
+  display:
+    name: "<italic:false><gold><yellow>선피쉬"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>독이 있는 복어"
+      - "<gray><italic:false>특별한 조리 필요"
+      - "<gray><italic:false>가격은 매우 높음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 25
+  max-length: 60
+  min-weight: 4
+  max-weight: 15
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+      min-length: 50
+      min-weight: 12
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 69
+SuperCucumber:
+  enable: true
+  display:
+    name: "<italic:false><gold><green>슈퍼해삼"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>커다란 해삼"
+      - "<gray><italic:false>건조나 찜에 인기"
+      - "<gray><italic:false>가격은 높음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 30
+  max-length: 60
+  min-weight: 3
+  max-weight: 12
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 70
+TigerTrout:
+  enable: true
+  display:
+    name: "<italic:false><gold><red>타이거송어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>호랑이 무늬를 가진 송어"
+      - "<gray><italic:false>구이나 회로 인기"
+      - "<gray><italic:false>가격은 중간"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 30
+  max-length: 70
+  min-weight: 4
+  max-weight: 20
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 9
+      - 10
+      - 11
+    large-object-capture:
+      enable: true
+      month:
+        - 10
+      min-length: 55
+      min-weight: 18
+    small-object-capture:
+      enable: true
+      month:
+        - 9
+      max-length: 45
+      max-weight: 12
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 71
+Tilapia:
+  enable: true
+  display:
+    name: "<italic:false><gold><green>틸라피아"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>열대 지방에서 자라는 물고기"
+      - "<gray><italic:false>튀김이나 구이로 맛있음"
+      - "<gray><italic:false>가격은 낮음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 20
+  max-length: 45
+  min-weight: 2
+  max-weight: 7
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 72
+Tuna:
+  enable: true
+  display:
+    name: "<italic:false><gold><red>참치"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>큰 몸집의 참치"
+      - "<gray><italic:false>회와 구이에 인기"
+      - "<gray><italic:false>가격은 매우 높음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 80
+  max-length: 200
+  min-weight: 50
+  max-weight: 250
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+      min-length: 150
+      min-weight: 150
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 73
+VoidSalmon:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_purple>공허의 연어"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>공허한 에너지로 빛나는 연어"
+      - "<gray><italic:false>특별한 요리에 적합"
+      - "<gray><italic:false>가격은 높음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 40
+  max-length: 70
+  min-weight: 6
+  max-weight: 22
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 10
+      - 11
+    large-object-capture:
+      enable: true
+      month:
+        - 11
+      min-length: 60
+      min-weight: 20
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 74
+Walleye:
+  enable: true
+  display:
+    name: "<italic:false><gold><yellow>월아이"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>미국과 캐나다에서 인기있는 어종"
+      - "<gray><italic:false>구이나 튀김에 좋음"
+      - "<gray><italic:false>가격은 중간"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 30
+  max-length: 60
+  min-weight: 3
+  max-weight: 15
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 75
+Woodskip:
+  enable: true
+  display:
+    name: "<gold>숲고기"
+    general-lore:
+      - "<italic:false><white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>나무 아래에서 사는 물고기"
+      - "<gray><italic:false>튀김이나 조림에 적합"
+      - "<gray><italic:false>가격은 낮음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 15
+  max-length: 40
+  min-weight: 1
+  max-weight: 5
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 76
+Yeonsoolim:
+  enable: true
+  display:
+    name: "<italic:false><gold><aqua>연수림"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>맑은 강에서 자라는 물고기"
+      - "<gray><italic:false>구이나 조림에 좋음"
+      - "<gray><italic:false>가격은 보통"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 20
+  max-length: 50
+  min-weight: 2
+  max-weight: 9
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 77
+Angler:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_purple>아귀"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>심해에서 빛을 내는 물고기"
+      - "<gray><italic:false>회나 조림에 특별함"
+      - "<gray><italic:false>가격은 높음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 25
+  max-length: 55
+  min-weight: 4
+  max-weight: 15
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+      min-length: 50
+      min-weight: 13
+    small-object-capture:
+      enable: true
+      month:
+        - 6
+      max-length: 40
+      max-weight: 10
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 78
+CaveJelly:
+  enable: true
+  display:
+    name: "<italic:false><gold><light_purple>동굴 해파리"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>동굴 주변에서 발견"
+      - "<gray><italic:false>연체동물"
+      - "<gray><italic:false>가격은 보통"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 10
+  max-length: 30
+  min-weight: 0.5
+  max-weight: 2
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 7
+      - 8
+      - 9
+      - 10
+    large-object-capture:
+      enable: true
+      month:
+        - 9
+        - 10
+      min-length: 25
+      min-weight: 1.8
+    small-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+      max-length: 20
+      max-weight: 1.2
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 79
+Clam:
+  enable: false
+  display:
+    name: "<italic:false><gold><white>조개"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>해변에서 발견되는 조개"
+      - "<gray><italic:false>낚시로는 잡히지 않음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 3
+  max-length: 8
+  min-weight: 0.2
+  max-weight: 1
+  capture-condition:
+    always-can-capture: false
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 80
+Cockle:
+  enable: false
+  display:
+    name: "<italic:false><gold><white>꼬막"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>해안 진흙밭에서 발견"
+      - "<gray><italic:false>낚시로는 잡히지 않음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 2
+  max-length: 6
+  min-weight: 0.1
+  max-weight: 0.7
+  capture-condition:
+    always-can-capture: false
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 81
+Coral:
+  enable: false
+  display:
+    name: "<italic:false><gold><red>산호"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>열대 바다 바위에 서식"
+      - "<gray><italic:false>낚시로는 잡히지 않음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 5
+  max-length: 20
+  min-weight: 0.5
+  max-weight: 2
+  capture-condition:
+    always-can-capture: false
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 82
+Crab:
+  enable: true
+  display:
+    name: "<italic:false><gold><red>게"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>모래사장에서 발견"
+      - "<gray><italic:false>집게가 강력함"
+      - "<gray><italic:false>가격은 보통"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 5
+  max-length: 15
+  min-weight: 0.5
+  max-weight: 2
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 5
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 6
+        - 7
+      min-length: 13
+      min-weight: 1.8
+    small-object-capture:
+      enable: true
+      month:
+        - 5
+      max-length: 10
+      max-weight: 1
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 83
+Crayfish:
+  enable: true
+  display:
+    name: "<italic:false><gold><red>가재"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>강가 진흙 속에 숨어있음"
+      - "<gray><italic:false>튀김에 적합"
+      - "<gray><italic:false>가격은 낮음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 8
+  max-length: 20
+  min-weight: 0.3
+  max-weight: 1.5
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+      min-length: 18
+      min-weight: 1.3
+    small-object-capture:
+      enable: true
+      month:
+        - 6
+      max-length: 12
+      max-weight: 0.8
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 84
+GreenAlgae:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_green>녹조류"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>바닷속 떠다니는 해조류"
+      - "<gray><italic:false>영양가 풍부"
+      - "<gray><italic:false>낚시로 잡을 수 있음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 30
+  max-length: 150
+  min-weight: 0.5
+  max-weight: 4
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 85
+Lobster:
+  enable: true
+  display:
+    name: "<italic:false><gold>바닷가재"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>암초 근처 서식"
+      - "<gray><italic:false>고급 요리에 사용"
+      - "<gray><italic:false>가격은 높음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 25
+  max-length: 60
+  min-weight: 3
+  max-weight: 12
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+      min-length: 50
+      min-weight: 10
+    small-object-capture:
+      enable: true
+      month:
+        - 6
+      max-length: 40
+      max-weight: 8
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 87
+Mussel:
+  enable: true
+  display:
+    name: "<italic:false><gold><white>홍합"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>바위에 붙어 서식"
+      - "<gray><italic:false>요리 재료로 사용"
+      - "<gray><italic:false>낚시로 잡을 수 있음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 4
+  max-length: 10
+  min-weight: 0.2
+  max-weight: 0.8
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 88
+NautilusShell:
+  enable: true
+  display:
+    name: "<italic:false><gold><yellow>앵무조개"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>깊은 바다에서 서식"
+      - "<gray><italic:false>조개껍질"
+      - "<gray><italic:false>낚시로 잡을 수 있음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 15
+  max-length: 25
+  min-weight: 1
+  max-weight: 2.5
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+      min-length: 22
+      min-weight: 2
+    small-object-capture:
+      enable: true
+      month:
+        - 6
+      max-length: 20
+      max-weight: 2
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 89
+Oyster:
+  enable: true
+  display:
+    name: "<italic:false><gold><white>굴"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>바위에 붙어 서식"
+      - "<gray><italic:false>낚시로 잡을 수 있음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 5
+  max-length: 12
+  min-weight: 0.4
+  max-weight: 1.5
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 90
+Pearl:
+  enable: true
+  display:
+    name: "<italic:false><gold><white>진주"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>조개의 내부에서 발견"
+      - "<gray><italic:false>귀중한 보석"
+      - "<gray><italic:false>낚시로 간혹 획득"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 1
+  max-length: 3
+  min-weight: 0.05
+  max-weight: 0.1
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 7
+      - 8
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: true
+      month:
+        - 7
+      max-length: 3
+      max-weight: 0.1
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 91
+Periwinkle:
+  enable: true
+  display:
+    name: "<italic:false><gold><white>보라고둥"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>바위 사이에서 발견"
+      - "<gray><italic:false>낚시로 잡을 수 있음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 1
+  max-length: 3
+  min-weight: 0.05
+  max-weight: 0.2
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 5
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: true
+      month:
+        - 5
+        - 6
+      max-length: 3
+      max-weight: 0.2
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 92
+RiverJelly:
+  enable: true
+  display:
+    name: "<italic:false><gold><aqua>강 해파리"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>강에서 서식하는 해파리"
+      - "<gray><italic:false>투명하고 부드러운 몸체"
+      - "<gray><italic:false>낚시로 잡을 수 있음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 10
+  max-length: 25
+  min-weight: 0.3
+  max-weight: 1.5
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+      min-length: 20
+      min-weight: 1.2
+    small-object-capture:
+      enable: true
+      month:
+        - 6
+      max-length: 15
+      max-weight: 0.8
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 93
+SeaJelly:
+  enable: true
+  display:
+    name: "<italic:false><gold><light_purple>바다 해파리"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>투명한 몸체를 가진 바다 생물"
+      - "<gray><italic:false>여름철에 주로 잡힘"
+      - "<gray><italic:false>가격은 보통"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 12
+  max-length: 35
+  min-weight: 0.6
+  max-weight: 2.2
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 7
+      - 8
+      - 9
+    large-object-capture:
+      enable: true
+      month:
+        - 8
+        - 9
+      min-length: 30
+      min-weight: 2
+    small-object-capture:
+      enable: true
+      month:
+        - 7
+      max-length: 20
+      max-weight: 1
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 94
+SeaUrchin:
+  enable: false
+  display:
+    name: "<italic:false><gold><dark_purple>성게"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>바위에 붙어 있는 성게"
+      - "<gray><italic:false>낚시로는 획득 불가"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 5
+  max-length: 12
+  min-weight: 0.3
+  max-weight: 1.1
+  capture-condition:
+    always-can-capture: false
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 95
+Seaweed:
+  enable: true
+  display:
+    name: "<italic:false><gold><dark_green>해조류"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>바다 속 해조류"
+      - "<gray><italic:false>영양가 풍부"
+      - "<gray><italic:false>낚시로 잡을 수 있음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 50
+  max-length: 150
+  min-weight: 0.4
+  max-weight: 3
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 96
+Shrimp:
+  enable: true
+  display:
+    name: "<italic:false><gold><red>새우"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>강과 바다 근처에서 자주 발견"
+      - "<gray><italic:false>튀김 요리에 적합"
+      - "<gray><italic:false>가격은 낮음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 3
+  max-length: 12
+  min-weight: 0.1
+  max-weight: 0.5
+  capture-condition:
+    always-can-capture: false
+    can-capture-month:
+      - 6
+      - 7
+      - 8
+    large-object-capture:
+      enable: true
+      month:
+        - 7
+        - 8
+      min-length: 10
+      min-weight: 0.4
+    small-object-capture:
+      enable: true
+      month:
+        - 6
+      max-length: 6
+      max-weight: 0.3
+    can't-capture-month:
+      enable: true
+      month:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 9
+        - 10
+        - 11
+        - 12
+    capture-zone:
+      enable: false
+  custom-model-data: 97
+WhiteAlgae:
+  enable: true
+  display:
+    name: "<italic:false><gold><white>백조류"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>흰색 해조류"
+      - "<gray><italic:false>낚시로 잡을 수 있음"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 40
+  max-length: 100
+  min-weight: 0.3
+  max-weight: 2
+  capture-condition:
+    always-can-capture: true
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 99
+RainbowShell:
+  enable: false
+  display:
+    name: "<italic:false><gold><light_purple>무지개 조개"
+    general-lore:
+      - "<white><italic:false>길이 : </white><italic:false><dark_aqua><length> <length.unit>"
+      - "<white><italic:false>무게 : </white><italic:false><gold><weight> <weight.unit>"
+      - "<white><italic:false>등급 : </white><italic:false><grade>"
+      - ""
+    explain-lore:
+      - "<gray><italic:false>무지갯빛 조개껍질"
+      - "<gray><italic:false>낚시로는 획득 불가"
+  length-unit: cm
+  weight-unit: kg
+  min-length: 10
+  max-length: 20
+  min-weight: 0.3
+  max-weight: 1
+  capture-condition:
+    always-can-capture: false
+    can-capture-month: []
+    large-object-capture:
+      enable: false
+      month: []
+      min-length: 0
+      min-weight: 0
+    small-object-capture:
+      enable: false
+      month: []
+      max-length: 0
+      max-weight: 0
+    can't-capture-month:
+      enable: false
+      month: []
+    capture-zone:
+      enable: false
+  custom-model-data: 100
