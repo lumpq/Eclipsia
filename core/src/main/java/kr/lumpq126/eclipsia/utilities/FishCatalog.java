@@ -17,7 +17,7 @@ public class FishCatalog {
 
     public static void init(EclipsiaPlugin pluginInstance) {
         plugin = pluginInstance;
-        file = new File(plugin.getDataFolder(), "fish/fishCatalog.yml");
+        file = new File(plugin.getDataFolder(), "fishCatalog.yml");
 
         if (!file.exists()) {
             File parent = file.getParentFile();

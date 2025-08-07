@@ -31,13 +31,7 @@ public final class EclipsiaPlugin extends JavaPlugin {
         FishCatalog.init(this);
         PlayerInfoManager.init(this);
 
-        File folder = new File(getDataFolder(), "fish");
-        if (!folder.exists() && !folder.mkdirs()) {
-            Logger logger = getLogger();
-            logger.warning("디렉터리 생성 실패: " + folder.getAbsolutePath());
-        }
-
-        File file = new File(folder, "fish.yml");
+        File file = new File(getDataFolder(), "fish.yml");
         if (!file.exists()) {
             saveResource("fish.yml", false);
         }

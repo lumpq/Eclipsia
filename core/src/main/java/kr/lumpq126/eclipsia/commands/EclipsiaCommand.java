@@ -288,10 +288,27 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                 case "stat" -> completions.addAll(List.of("get", "set", "add", "reset", "statPoint"));
             }
         } else if (args.length == 3) {
-            if (args[1].equalsIgnoreCase("statpoint")) completions.add("add");
-            else completions.addAll(getPlayersAndSelectors(args[2]));
-        } else if (args.length == 4 && args[1].equalsIgnoreCase("statpoint")) {
-            completions.addAll(getPlayersAndSelectors(args[3]));
+            if (args[0].equalsIgnoreCase("fish") && args[1].equalsIgnoreCase("give")) {
+                completions.addAll(getPlayersAndSelectors(args[2]));
+            } else if (args[1].equalsIgnoreCase("statpoint")) {
+                completions.add("add");
+            } else {
+                completions.addAll(getPlayersAndSelectors(args[2]));
+            }
+        } else if (args.length == 4) {
+            if (args[0].equalsIgnoreCase("fish") && args[1].equalsIgnoreCase("give")) {
+                // fish.yml 기반 fish ID 자동완성
+                ConfigurationSection section = EclipsiaPlugin.getFishConfig().getConfigurationSection("");
+                if (section != null) {
+                    for (String key : section.getKeys(false)) {
+                        if (key.toLowerCase().startsWith(args[3].toLowerCase())) {
+                            completions.add(key);
+                        }
+                    }
+                }
+            } else if (args[1].equalsIgnoreCase("statpoint")) {
+                completions.addAll(getPlayersAndSelectors(args[3]));
+            }
         }
 
         return completions;
