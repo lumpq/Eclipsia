@@ -65,6 +65,21 @@ public class PlayerInfoManager {
         return (int) (base * Math.pow(level, exponent));
     }
 
+    // ────────────────────── INITIAL ──────────────────────
+
+    public static void playerInitialSetting(Player player) {
+        if (config.getKeys(false).contains(player.getUniqueId().toString())) return;
+        setLevel(player, 1);
+        setExp(player, 0);
+        setStatPoint(player, 5);
+        setStat(player, "str", 5);
+        setStat(player, "con", 5);
+        setStat(player, "agi", 5);
+        setStat(player, "dex", 5);
+        setStat(player, "int", 5);
+        setStat(player, "wis", 5);
+    }
+
     // ────────────────────── LEVEL / EXP ──────────────────────
 
     public static int getLevel(Player player) {

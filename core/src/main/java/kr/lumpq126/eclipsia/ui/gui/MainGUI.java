@@ -26,12 +26,12 @@ public class MainGUI {
         Inventory inventory = InventoryUtility.inventory(player, 36, "stat");
 
         // 여기에 6개의 스탯 아이템을 순서대로 배치
-        inventory.setItem(10, statItem(player, "str")); // 근력
-        inventory.setItem(11, statItem(player, "con")); // 건강
-        inventory.setItem(12, statItem(player, "agi")); // 민첩
-        inventory.setItem(13, statItem(player, "dex")); // 재주
-        inventory.setItem(14, statItem(player, "wis")); // 지혜
-        inventory.setItem(15, statItem(player, "int")); // 지능
+        inventory.setItem(11, statItem(player, "str")); // 근력
+        inventory.setItem(12, statItem(player, "con")); // 건강
+        inventory.setItem(13, statItem(player, "agi")); // 민첩
+        inventory.setItem(20, statItem(player, "dex")); // 재주
+        inventory.setItem(21, statItem(player, "wis")); // 지혜
+        inventory.setItem(22, statItem(player, "int")); // 지능
 
         player.openInventory(inventory);
     }
@@ -48,9 +48,7 @@ public class MainGUI {
         if (meta == null) return item;
 
         // 철검과 네더라이트 갑옷일 경우 능력치 숨기기
-        if (type.material == Material.IRON_SWORD || type.material == Material.NETHERITE_CHESTPLATE) {
-            meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        }
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         String gradient = type.color.replace("<gradient:", "").replace(">", "");
         Component displayName = deserializeMM(
