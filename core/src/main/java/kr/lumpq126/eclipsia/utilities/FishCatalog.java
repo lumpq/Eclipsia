@@ -13,22 +13,24 @@ import java.util.logging.Level;
 public class FishCatalog {
     private static File file;
     private static FileConfiguration config;
+    private static EclipsiaPlugin plugin;
 
-    public static void load(EclipsiaPlugin plugin) {
+    public static void init(EclipsiaPlugin pluginInstance) {
+        plugin = pluginInstance;
         file = new File(plugin.getDataFolder(), "fish/fishCatalog.yml");
 
         if (!file.exists()) {
             File parent = file.getParentFile();
             if (parent != null && !parent.exists() && !parent.mkdirs()) {
-                plugin.getLogger().warning("[FishCatalogManager] fishCatalog.yml 파일의 상위 디렉토리 생성 실패: " + parent.getAbsolutePath());
+                plugin.getLogger().warning("[FishCatalogManager] 디렉토리 생성 실패: " + parent.getAbsolutePath());
             }
 
             try {
                 if (!file.createNewFile()) {
-                    plugin.getLogger().warning("[FishCatalogManager] fishCatalog.yml 파일 생성 실패");
+                    plugin.getLogger().warning("[FishCatalogManager] 파일 생성 실패");
                 }
             } catch (IOException e) {
-                plugin.getLogger().log(Level.SEVERE, "[FishCatalogManager] fishCatalog.yml 파일 생성 중 오류 발생", e);
+                plugin.getLogger().log(Level.SEVERE, "[FishCatalogManager] 파일 생성 중 오류", e);
             }
         }
 
@@ -43,7 +45,7 @@ public class FishCatalog {
         try {
             config.save(file);
         } catch (IOException e) {
-            EclipsiaPlugin.getInstance().getLogger().log(Level.SEVERE, "[FishCatalogManager] fishCatalog.yml 저장 실패", e);
+            plugin.getLogger().log(Level.SEVERE, "[FishCatalogManager] 저장 실패", e);
         }
     }
 

@@ -14,25 +14,25 @@ public class PlayerPage {
     private static FileConfiguration config;
     private static EclipsiaPlugin plugin;
 
-    public static void load(EclipsiaPlugin plugin) {
-        PlayerPage.plugin = plugin;
-        file = new File(PlayerPage.plugin.getDataFolder(), "page.yml");
+    public static void init(EclipsiaPlugin pluginInstance) {
+        plugin = pluginInstance;
+        file = new File(plugin.getDataFolder(), "page.yml");
 
         if (!file.exists()) {
             File parent = file.getParentFile();
             if (parent != null && !parent.exists()) {
                 if (!parent.mkdirs()) {
-                    PlayerPage.plugin.getLogger().warning("[PageManager] 디렉토리 생성 실패: " + parent.getAbsolutePath());
+                    plugin.getLogger().warning("[PageManager] 디렉토리 생성 실패: " + parent.getAbsolutePath());
                 }
             }
             try {
                 if (file.createNewFile()) {
-                    PlayerPage.plugin.getLogger().info("[PageManager] 파일 생성 완료: " + file.getName());
+                    plugin.getLogger().info("[PageManager] 파일 생성 완료: " + file.getName());
                 } else {
-                    PlayerPage.plugin.getLogger().warning("[PageManager] 파일 생성 실패: " + file.getName());
+                    plugin.getLogger().warning("[PageManager] 파일 생성 실패: " + file.getName());
                 }
             } catch (IOException e) {
-                PlayerPage.plugin.getLogger().log(Level.SEVERE, "[PageManager] 파일 생성 중 오류 발생", e);
+                plugin.getLogger().log(Level.SEVERE, "[PageManager] 파일 생성 중 오류 발생", e);
             }
         }
 

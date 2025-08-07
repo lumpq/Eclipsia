@@ -120,5 +120,9 @@ bukkit {
         register("month") {
             permission = "op"
         }
+        register("eclipsia") {
+            permission = "op"
+            aliases = listOf("e", "ec", "ecc", "ep")
+        }
     }
 }

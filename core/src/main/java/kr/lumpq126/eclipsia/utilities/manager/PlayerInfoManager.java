@@ -12,10 +12,20 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 public class PlayerInfoManager {
+    private static final int MAX_LEVEL = 999;
+    private static final int INITIAL_LEVEL = 1;
+    private static final int INITIAL_STAT = 5;
+    private static final int STAT_POINT_PER_LEVEL = 5;
+    private static final double EXP_BASE = 10;
+    private static final double EXP_EXPONENT = 2.25;
+
     private static File file;
     private static FileConfiguration config;
+    private static final Object lock = new Object();
 
-    public static void load(EclipsiaPlugin plugin) {
+    // ────────────────────── INIT / RELOAD / SAVE ──────────────────────
+
+    public static void init(EclipsiaPlugin plugin) {
         file = new File(plugin.getDataFolder(), "playerInfo.yml");
 
         if (!file.exists()) {
@@ -37,14 +47,20 @@ public class PlayerInfoManager {
     }
 
     public static void reload() {
-        config = YamlConfiguration.loadConfiguration(file);
+        try {
+            config = YamlConfiguration.loadConfiguration(file);
+        } catch (Exception e) {
+            EclipsiaPlugin.getInstance().getLogger().log(Level.SEVERE, "[Eclipsia] playerInfo.yml 로딩 중 오류", e);
+        }
     }
 
     public static void save() {
-        try {
-            config.save(file);
-        } catch (IOException e) {
-            EclipsiaPlugin.getInstance().getLogger().log(Level.SEVERE, "[Eclipsia] PlayerInfo.yml 저장 실패", e);
+        synchronized (lock) {
+            try {
+                config.save(file);
+            } catch (IOException e) {
+                EclipsiaPlugin.getInstance().getLogger().log(Level.SEVERE, "[Eclipsia] playerInfo.yml 저장 실패", e);
+            }
         }
     }
 
@@ -52,38 +68,49 @@ public class PlayerInfoManager {
         return config;
     }
 
-    // ────────────────────── UTIL ──────────────────────
+    // ────────────────────── PATH UTIL ──────────────────────
 
     private static String path(Player player, String... keys) {
         return player.getUniqueId() + "." + String.join(".", keys);
     }
 
     private static int getRequiredExp(int level) {
-        if (level >= 999) return Integer.MAX_VALUE;
-        double base = 10;
-        double exponent = 2.25;
-        return (int) (base * Math.pow(level, exponent));
+        if (level >= MAX_LEVEL) return Integer.MAX_VALUE;
+        return (int) (EXP_BASE * Math.pow(level, EXP_EXPONENT));
     }
 
-    // ────────────────────── INITIAL ──────────────────────
+    // ────────────────────── 초기화 ──────────────────────
 
     public static void playerInitialSetting(Player player) {
-        if (config.getKeys(false).contains(player.getUniqueId().toString())) return;
-        setLevel(player, 1);
+        if (config.contains(player.getUniqueId().toString())) return;
+        playerInfoReset(player);
+    }
+
+    public static void playerInfoReset(Player player) {
+        setLevel(player, INITIAL_LEVEL);
         setExp(player, 0);
-        setStatPoint(player, 5);
-        setStat(player, "str", 5);
-        setStat(player, "con", 5);
-        setStat(player, "agi", 5);
-        setStat(player, "dex", 5);
-        setStat(player, "int", 5);
-        setStat(player, "wis", 5);
+        setStatPoint(player, STAT_POINT_PER_LEVEL);
+        setInitialStats(player);
+    }
+
+    private static void setInitialStats(Player player) {
+        setStat(player, "str", INITIAL_STAT);
+        setStat(player, "con", INITIAL_STAT);
+        setStat(player, "agi", INITIAL_STAT);
+        setStat(player, "dex", INITIAL_STAT);
+        setStat(player, "int", INITIAL_STAT);
+        setStat(player, "wis", INITIAL_STAT);
+    }
+
+    public static void deletePlayerData(Player player) {
+        config.set(player.getUniqueId().toString(), null);
+        save();
     }
 
     // ────────────────────── LEVEL / EXP ──────────────────────
 
     public static int getLevel(Player player) {
-        return config.getInt(path(player, "level"), 1);
+        return config.getInt(path(player, "level"), INITIAL_LEVEL);
     }
 
     public static void setLevel(Player player, int level) {
@@ -92,7 +119,14 @@ public class PlayerInfoManager {
     }
 
     public static void addLevel(Player player, int amount) {
-        setLevel(player, getLevel(player) + amount);
+        int oldLevel = getLevel(player);
+        int newLevel = Math.min(oldLevel + amount, MAX_LEVEL);
+        levelUp(player, oldLevel, newLevel);
+    }
+
+    public static void resetLevel(Player player) {
+        config.set(path(player, "level"), INITIAL_LEVEL);
+        save();
     }
 
     public static double getExp(Player player) {
@@ -107,44 +141,47 @@ public class PlayerInfoManager {
     public static void addExp(Player player, double exp) {
         int currentLevel = getLevel(player);
 
-        // 이미 맥스레벨 도달 시 경험치 초기화 및 추가 경험치 무시
-        if (currentLevel >= 999) {
+        if (currentLevel >= MAX_LEVEL) {
             setExp(player, 0);
             return;
         }
 
-        double currentExp = getExp(player);
-        double newExp = currentExp + exp;
+        double currentExp = getExp(player) + exp;
         int newLevel = currentLevel;
 
-        while (newExp >= getRequiredExp(newLevel)) {
-            newExp -= getRequiredExp(newLevel);
+        while (currentExp >= getRequiredExp(newLevel)) {
+            currentExp -= getRequiredExp(newLevel);
             newLevel++;
-            if (newLevel >= 999) {
-                newExp = 0;  // 맥스레벨 도달 시 경험치 초기화
+            if (newLevel >= MAX_LEVEL) {
+                currentExp = 0;
                 break;
             }
         }
 
         if (newLevel > currentLevel) {
-            int levelGain = newLevel - currentLevel;
-
-            // 레벨업 이벤트 호출
-            PlayerLevelUpEvent levelUpEvent = new PlayerLevelUpEvent(player, currentLevel, newLevel);
-            Bukkit.getPluginManager().callEvent(levelUpEvent);
-
-            // 레벨당 5 포인트씩 능력치 포인트 지급
-            addStatPoint(player, levelGain * 5);
+            levelUp(player, currentLevel, newLevel);
         }
 
         setLevel(player, newLevel);
-        setExp(player, newExp);
+        setExp(player, currentExp);
+    }
+
+    private static void levelUp(Player player, int oldLevel, int newLevel) {
+        if (newLevel <= oldLevel) return;
+
+        setLevel(player, newLevel);
+        setExp(player, 0); // 경험치 초기화
+
+        addStatPoint(player, (newLevel - oldLevel) * STAT_POINT_PER_LEVEL);
+
+        // 레벨업 이벤트 호출 - 사용자 정의 이벤트로 처리
+        Bukkit.getPluginManager().callEvent(new PlayerLevelUpEvent(player, oldLevel, newLevel));
     }
 
     // ────────────────────── STAT POINT ──────────────────────
 
     public static int getStatPoint(Player player) {
-        return config.getInt(path(player, "stat", "point"), 5);
+        return config.getInt(path(player, "stat", "point"), STAT_POINT_PER_LEVEL);
     }
 
     public static void setStatPoint(Player player, int point) {
@@ -159,7 +196,7 @@ public class PlayerInfoManager {
     // ────────────────────── INDIVIDUAL STATS ──────────────────────
 
     public static int getStat(Player player, String statName) {
-        return config.getInt(path(player, "stat", statName), 5);
+        return config.getInt(path(player, "stat", statName), INITIAL_STAT);
     }
 
     public static void setStat(Player player, String statName, int value) {

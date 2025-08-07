@@ -1,7 +1,7 @@
 package kr.lumpq126.eclipsia;
 
+import kr.lumpq126.eclipsia.commands.EclipsiaCommand;
 import kr.lumpq126.eclipsia.commands.FishCommand;
-import kr.lumpq126.eclipsia.commands.MonthCommand;
 import kr.lumpq126.eclipsia.listeners.FishListener;
 import kr.lumpq126.eclipsia.ui.listener.MainGUIEvent;
 import kr.lumpq126.eclipsia.utilities.FishCatalog;
@@ -26,12 +26,10 @@ public final class EclipsiaPlugin extends JavaPlugin {
 
         saveDefaultConfig();
 
-        PlayerPage.load(this);
-        PlayerPage.save();
-        FishCatalog.load(this);
-        FishCatalog.save();
-        PlayerInfoManager.load(this);
-        PlayerInfoManager.save();
+        MonthManager.init(this);
+        PlayerPage.init(this);
+        FishCatalog.init(this);
+        PlayerInfoManager.init(this);
 
         File folder = new File(getDataFolder(), "fish");
         if (!folder.exists() && !folder.mkdirs()) {
@@ -49,8 +47,8 @@ public final class EclipsiaPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FishListener(), this);
         getServer().getPluginManager().registerEvents(new MainGUIEvent(), this);
 
-        Objects.requireNonNull(getCommand("month")).setExecutor(new MonthCommand(new MonthManager(this)));
         Objects.requireNonNull(getCommand("fish")).setExecutor(new FishCommand());
+        Objects.requireNonNull(getCommand("eclipsia")).setExecutor(new EclipsiaCommand());
     }
 
     @Override
