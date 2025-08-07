@@ -9,6 +9,9 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.logging.Level;
 
 public class PlayerInfoManager {
@@ -64,8 +67,14 @@ public class PlayerInfoManager {
         }
     }
 
-    public static FileConfiguration getConfig() {
-        return config;
+
+    public static Set<String> getStatKeysExceptPoint(Player player) {
+        String statPath = path(player, "stat");
+        if (config.getConfigurationSection(statPath) == null) return new HashSet<>();
+
+        Set<String> keys = Objects.requireNonNull(config.getConfigurationSection(statPath)).getKeys(false);
+        keys.remove("point");  // point 키 제외
+        return keys;
     }
 
     // ────────────────────── PATH UTIL ──────────────────────

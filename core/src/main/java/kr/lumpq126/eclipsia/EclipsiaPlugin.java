@@ -49,6 +49,8 @@ public final class EclipsiaPlugin extends JavaPlugin {
 
         Objects.requireNonNull(getCommand("fish")).setExecutor(new FishCommand());
         Objects.requireNonNull(getCommand("eclipsia")).setExecutor(new EclipsiaCommand());
+
+        Objects.requireNonNull(getCommand("eclipsia")).setTabCompleter(new EclipsiaCommand());
     }
 
     @Override
