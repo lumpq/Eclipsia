@@ -83,7 +83,7 @@ public class PlayerInfoManager {
         return player.getUniqueId() + "." + String.join(".", keys);
     }
 
-    private static int getRequiredExp(int level) {
+    public static int getRequiredExp(int level) {
         if (level >= MAX_LEVEL) return Integer.MAX_VALUE;
         return (int) (EXP_BASE * Math.pow(level, EXP_EXPONENT));
     }
@@ -135,6 +135,7 @@ public class PlayerInfoManager {
 
     public static void resetLevel(Player player) {
         config.set(path(player, "level"), INITIAL_LEVEL);
+        config.set(path(player, "exp"), 0);
         save();
     }
 

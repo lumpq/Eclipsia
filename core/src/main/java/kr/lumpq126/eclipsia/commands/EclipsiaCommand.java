@@ -155,7 +155,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
             switch (sub) {
                 case "get" -> sendMessage(sender, target.getName() + " 레벨: " + PlayerInfoManager.getLevel(target), NamedTextColor.YELLOW);
                 case "reset" -> {
-                    PlayerInfoManager.setLevel(target, 1);
+                    PlayerInfoManager.resetLevel(target);
                     sendMessage(sender, target.getName() + "의 레벨이 1로 초기화됨.", NamedTextColor.GREEN);
                 }
                 case "set", "add" -> {
@@ -240,11 +240,22 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
             return;
         }
 
-        String sub = args[1];
+        String sub = args[1].toLowerCase();
         List<Player> targets = resolveTargets(sender, args[2]);
-        String stat = args[3];
+        String stat = args[3].toLowerCase(); // 소문자로 비교
+
+        if (targets.isEmpty()) {
+            sendMessage(sender, "대상 플레이어 없음.", NamedTextColor.RED);
+            return;
+        }
 
         for (Player target : targets) {
+            Set<String> validStats = PlayerInfoManager.getStatKeysExceptPoint(target);
+            if (!validStats.contains(stat)) {
+                sendMessage(sender, "알 수 없는 능력치입니다: " + stat, NamedTextColor.RED);
+                continue;
+            }
+
             switch (sub) {
                 case "get" -> {
                     int statValue = PlayerInfoManager.getStat(target, stat);
@@ -279,7 +290,11 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
 
         if (args.length == 1) {
             List<String> main = List.of("fish", "month", "level", "exp", "stat");
-            for (String s : main) if (s.startsWith(args[0].toLowerCase())) completions.add(s);
+            for (String s : main) {
+                if (s.startsWith(args[0].toLowerCase())) {
+                    completions.add(s);
+                }
+            }
         } else if (args.length == 2) {
             switch (args[0].toLowerCase()) {
                 case "fish" -> completions.add("give");
@@ -297,7 +312,6 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
             }
         } else if (args.length == 4) {
             if (args[0].equalsIgnoreCase("fish") && args[1].equalsIgnoreCase("give")) {
-                // fish.yml 기반 fish ID 자동완성
                 ConfigurationSection section = EclipsiaPlugin.getFishConfig().getConfigurationSection("");
                 if (section != null) {
                     for (String key : section.getKeys(false)) {
@@ -308,6 +322,19 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                 }
             } else if (args[1].equalsIgnoreCase("statpoint")) {
                 completions.addAll(getPlayersAndSelectors(args[3]));
+            } else if (args[0].equalsIgnoreCase("stat") &&
+                    List.of("get", "set", "add", "reset").contains(args[1].toLowerCase())) {
+
+                List<Player> targets = resolveTargets(sender, args[2]);
+                if (!targets.isEmpty()) {
+                    Player target = targets.getFirst(); // 첫 번째 플레이어 기준
+                    Set<String> statKeys = PlayerInfoManager.getStatKeysExceptPoint(target);
+                    for (String key : statKeys) {
+                        if (key.toLowerCase().startsWith(args[3].toLowerCase())) {
+                            completions.add(key);
+                        }
+                    }
+                }
             }
         }
 

@@ -1,4 +1,4 @@
-package kr.lumpq126.eclipsia.utilities;
+package kr.lumpq126.eclipsia.utilities.manager;
 
 import kr.lumpq126.eclipsia.EclipsiaPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Level;
 
-public class PlayerPage {
+public class PlayerPageManager {
     private static File file;
     private static FileConfiguration config;
     private static EclipsiaPlugin plugin;

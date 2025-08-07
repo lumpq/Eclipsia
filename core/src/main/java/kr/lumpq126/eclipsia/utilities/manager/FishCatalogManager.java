@@ -1,4 +1,4 @@
-package kr.lumpq126.eclipsia.utilities;
+package kr.lumpq126.eclipsia.utilities.manager;
 
 import kr.lumpq126.eclipsia.EclipsiaPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 
-public class FishCatalog {
+public class FishCatalogManager {
     private static File file;
     private static FileConfiguration config;
     private static EclipsiaPlugin plugin;

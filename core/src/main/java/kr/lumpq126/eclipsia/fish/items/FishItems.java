@@ -1,7 +1,7 @@
 package kr.lumpq126.eclipsia.fish.items;
 
 import kr.lumpq126.eclipsia.EclipsiaPlugin;
-import kr.lumpq126.eclipsia.utilities.FishCatalog;
+import kr.lumpq126.eclipsia.utilities.manager.FishCatalogManager;
 import kr.lumpq126.eclipsia.utilities.calc.FishGradeCalculator;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
@@ -91,8 +91,8 @@ public class FishItems {
                 "<white>길이 <dark_aqua>%.1f %s<white>, 무게 <gold>%.1f %s<white>의 <bold>%s</bold><white>를 낚았다! <bold><gray>(등급: <white>%s<gray>)</bold>",
                 length, lengthUnit, weight, weightUnit, section.getString("display.name", "Unknown Fish"), gradeStr)));
 
-        if (!FishCatalog.isFishUnlocked(p, id)) {
-            FishCatalog.addUnlockedFish(p, id);
+        if (!FishCatalogManager.isFishUnlocked(p, id)) {
+            FishCatalogManager.addUnlockedFish(p, id);
             p.sendMessage(mm(
                     "<bold><white>도감에 새로운 물고기</white> <bold>" +
                             section.getString("display.name", "Unknown Fish") +
