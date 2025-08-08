@@ -1,5 +1,7 @@
+// 최상위 build.gradle.kts
+
 plugins {
-    id ("java")
+    id("java")
     id("xyz.jpenilla.run-paper") version "2.3.1"
     id("io.github.goooler.shadow") version "8.1.8"
     id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
@@ -9,21 +11,29 @@ plugins {
 group = "kr.lumpq126"
 version = "1.0.0"
 
+// NMS 버전 매핑
 class NMSVersion(val nmsVersion: String, val serverVersion: String)
 infix fun String.toNms(that: String) = NMSVersion(this, that)
 
 val nMSVersions = listOf(
-    "nms:v1_19_R3" toNms "1.21.4-R0.1-SNAPSHOT",
-    "nms:v1_20_R1" toNms "1.21.4-R0.1-SNAPSHOT",
-    "nms:v1_20_R2" toNms "1.21.4-R0.1-SNAPSHOT",
-    "nms:v1_20_R3" toNms "1.21.4-R0.1-SNAPSHOT",
-    "nms:v1_20_R4" toNms "1.21.4-R0.1-SNAPSHOT",
-    "nms:v1_21_R1" toNms "1.21.4-R0.1-SNAPSHOT",
-    "nms:v1_21_R2" toNms "1.21.4-R0.1-SNAPSHOT",
+    "nms:v1_19_R3" toNms "1.19.4-R0.1-SNAPSHOT",
+    "nms:v1_20_R1" toNms "1.20.1-R0.1-SNAPSHOT",
+    "nms:v1_20_R2" toNms "1.20.2-R0.1-SNAPSHOT",
+    "nms:v1_20_R3" toNms "1.20.4-R0.1-SNAPSHOT",
+    "nms:v1_20_R4" toNms "1.20.6-R0.1-SNAPSHOT",
+    "nms:v1_21_R1" toNms "1.21.1-R0.1-SNAPSHOT",
+    "nms:v1_21_R2" toNms "1.21.2-R0.1-SNAPSHOT",
     "nms:v1_21_R3" toNms "1.21.4-R0.1-SNAPSHOT",
-    "nms:v1_21_R4" toNms "1.21.4-R0.1-SNAPSHOT",
-    "nms:v1_21_R5" toNms "1.21.4-R0.1-SNAPSHOT"
+    "nms:v1_21_R4" toNms "1.21.5-R0.1-SNAPSHOT",
+    "nms:v1_21_R5" toNms "1.21.8-R0.1-SNAPSHOT"
 )
+
+// 빌드 시 사용할 NMS 버전 선택 (gradle.properties 에서 지정 가능)
+val buildNmsVersions: List<NMSVersion> by lazy {
+    val prop = findProperty("buildNmsVersions")?.toString()
+    if (prop.isNullOrBlank()) nMSVersions
+    else nMSVersions.filter { it.nmsVersion in prop.split(",") }
+}
 
 val pluginVersion = project.version.toString()
 
@@ -67,7 +77,7 @@ dependencies {
     implementation(project(":api"))
     implementation(project(":core"))
     implementation(project(":plugin"))
-    nMSVersions.forEach {
+    buildNmsVersions.forEach {
         implementation(project(":${it.nmsVersion}", configuration = "reobf"))
     }
 }
@@ -80,16 +90,42 @@ tasks {
         }
     }
 
+    // Factory 자동 생성
+    register("generateNmsFactory") {
+        val outputDir = layout.projectDirectory.dir("core/src/main/java/kr/lumpq126/eclipsia/nms")
+        outputs.dir(outputDir)
+        doLast {
+            val code = buildString {
+                appendLine("package kr.lumpq126.eclipsia.nms;")
+                appendLine("import org.bukkit.Bukkit;")
+                appendLine("public class NMSHandlerFactory {")
+                appendLine("    public static NMSHandler loadNMS() {")
+                appendLine("        String version = Bukkit.getServer().getBukkitVersion();")
+                appendLine("        switch (version) {")
+                nMSVersions.forEach {
+                    val simpleName = it.nmsVersion.substringAfter(":").replace("-", "_")
+                    appendLine("            case \"${it.serverVersion}\":")
+                    appendLine("                return new kr.lumpq126.eclipsia.${it.nmsVersion}.NMSHandler_${simpleName}();")
+                }
+                appendLine("            default: throw new IllegalStateException(\"지원하지 않는 버전: \" + version);")
+                appendLine("        }")
+                appendLine("    }")
+                appendLine("}")
+            }
+            val file = outputDir.file("NMSHandlerFactory.java").asFile
+            file.parentFile.mkdirs()
+            file.writeText(code)
+        }
+    }
+
     shadowJar {
-        nMSVersions.forEach { dependsOn(":${it.nmsVersion}:reobfJar") }
+        buildNmsVersions.forEach { dependsOn(":${it.nmsVersion}:reobfJar") }
+        dependsOn("generateNmsFactory")
 
         archiveClassifier.set("")
         archiveFileName.set("Eclipsia-$pluginVersion.jar")
 
-        exclude("META-INF/*.SF")
-        exclude("META-INF/*.DSA")
-        exclude("META-INF/*.RSA")
-        exclude("module-info.class")
+        exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA", "module-info.class")
 
         relocate("org.bstats", "io.lumpq.shadowed.bstats")
     }
@@ -122,7 +158,7 @@ bukkit {
     name = "Eclipsia"
     main = "kr.lumpq126.eclipsia.EclipsiaPlugin"
     version = pluginVersion
-    apiVersion = "1.21"
+    apiVersion = "1.19"
     authors = listOf("_LumPq_")
     commands {
         register("fish") {

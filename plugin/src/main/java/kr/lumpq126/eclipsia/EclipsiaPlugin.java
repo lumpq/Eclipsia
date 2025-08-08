@@ -4,6 +4,8 @@ import kr.lumpq126.eclipsia.commands.EclipsiaCommand;
 import kr.lumpq126.eclipsia.commands.FishCommand;
 import kr.lumpq126.eclipsia.listeners.FishListener;
 import kr.lumpq126.eclipsia.listeners.LevelUPListener;
+import kr.lumpq126.eclipsia.nms.NMSHandler;
+import kr.lumpq126.eclipsia.nms.NMSHandlerFactory;
 import kr.lumpq126.eclipsia.scheduler.ActionBarScheduler;
 import kr.lumpq126.eclipsia.ui.listener.MainGUIEvent;
 import kr.lumpq126.eclipsia.utilities.manager.FishCatalogManager;
@@ -18,10 +20,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.Objects;
+import java.util.logging.Level;
 
 public final class EclipsiaPlugin extends JavaPlugin {
     private static EclipsiaPlugin instance;
     private static FileConfiguration fishConfig;
+    private static NMSHandler nms;
 
     @Override
     public void onEnable() {
@@ -55,6 +59,14 @@ public final class EclipsiaPlugin extends JavaPlugin {
                 ActionBarScheduler.showLevelAndExp(player);
             }
         }, 0L, 1L);
+
+        try {
+            nms = NMSHandlerFactory.loadNMS();
+        } catch (UnsupportedOperationException e) {
+            getLogger().severe("NMS 핸들러 생성 실패: " + e.getMessage());
+            getLogger().log(Level.SEVERE, "Exception stacktrace:", e);
+            getServer().getPluginManager().disablePlugin(this);
+        }
     }
 
     @Override

@@ -1,13 +1,14 @@
 package kr.lumpq126.eclipsia.utilities;
 
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Bukkit;
+import kr.lumpq126.eclipsia.nms.NMSHandler;
+import kr.lumpq126.eclipsia.nms.NMSHandlerFactory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 public class InventoryUtility {
+    private static final NMSHandler NMS = NMSHandlerFactory.loadNMS();
 
     public static Inventory inventory(Player owner, int size, String name) {
-        return Bukkit.createInventory(owner, size, MiniMessage.miniMessage().deserialize(name));
+        return NMS.createInventory(owner, size, name);
     }
 }
