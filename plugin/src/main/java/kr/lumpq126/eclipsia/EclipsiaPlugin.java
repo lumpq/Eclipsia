@@ -64,8 +64,8 @@ public final class EclipsiaPlugin extends JavaPlugin {
 
         try {
             nms = NMSHandlerFactory.loadNMS();
-            getComponentLogger().info(PlainTextComponentSerializer.plainText().serialize(MiniMessage.miniMessage().deserialize(
-                    "<green>NMS 핸들러 생성 성공! 서버 버전: " + getServer().getBukkitVersion() + ", NMS 버전: " + NMSHandlerFactory.versionOfNMS() + "</green>")));
+            getComponentLogger().info(MiniMessage.miniMessage().deserialize(
+                    "<green>NMS 핸들러 생성 성공! 서버 버전: " + getServer().getBukkitVersion() + ", NMS 버전: " + NMSHandlerFactory.versionOfNMS() + "</green>"));
         } catch (UnsupportedOperationException e) {
             getLogger().severe("NMS 핸들러 생성 실패: " + e.getMessage());
             getLogger().log(Level.SEVERE, "Exception stacktrace:", e);
