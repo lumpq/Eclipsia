@@ -13,7 +13,6 @@ import io.lumpq126.eclipsia.listeners.LevelUPListener;
 import io.lumpq126.eclipsia.scheduler.ActionBarScheduler;
 import io.lumpq126.eclipsia.listeners.MainGUIEvent;
 import io.lumpq126.eclipsia.utilities.Mm;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -25,14 +24,11 @@ import java.util.Objects;
 import java.util.logging.Level;
 
 public final class EclipsiaPlugin extends JavaPlugin {
-    private static EclipsiaPlugin instance;
     private static FileConfiguration fishConfig;
     private static NMSHandler nms;
 
     @Override
     public void onEnable() {
-        instance = this;
-
         saveDefaultConfig();
 
         MonthManager.init(this);
@@ -76,10 +72,6 @@ public final class EclipsiaPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-    }
-
-    public static EclipsiaPlugin getInstance() {
-        return instance;
     }
 
     public static FileConfiguration getFishConfig() {
