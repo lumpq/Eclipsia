@@ -52,7 +52,7 @@ public class MainGUI {
 
         String gradient = type.color.replace("<gradient:", "").replace(">", "");
         Component displayName = Mm.mm(
-                String.format("%s:white><bold>%s</bold><gray> : </gray><yellow><bold>[ %d ]</bold></yellow>",
+                String.format("<italic:false>%s:white><bold>%s</bold><gray> : </gray><yellow><bold>[ %d ]</bold></yellow>",
                         gradient, type.display, statValue));
         meta.displayName(displayName);
 
@@ -63,16 +63,16 @@ public class MainGUI {
 
         if (statValue >= 9999) {
             addEmptyLine(lore);
-            lore.add(Mm.mm("<gradient:#e5ccff:#7f00ff><bold>최대 레벨</bold></gradient>"));
+            lore.add(Mm.mm("<italic:false><gradient:#e5ccff:#7f00ff><bold>최대 레벨</bold></gradient>"));
         }
 
         addEmptyLine(lore);
-        lore.add(Mm.mm("<white>분배 가능한 능력치</white><gray> : </gray><gold><bold>" + statPoint + "</bold></gold>"));
+        lore.add(Mm.mm("<italic:false><white>분배 가능한 능력치</white><gray> : </gray><gold><bold>" + statPoint + "</bold></gold>"));
 
         addEmptyLine(lore);
-        lore.add(Mm.mm("<gray>----------------------------------------</gray>"));
+        lore.add(Mm.mm("<italic:false><gray>----------------------------------------</gray>"));
         addEmptyLine(lore);
-        lore.add(Mm.mm("<gray>쉬프트 + 우클릭으로 눌러 분배가능한 능력치 10개를 사용합니다."));
+        lore.add(Mm.mm("<italic:false><gray>쉬프트 + 우클릭으로 눌러 분배가능한 능력치 10개를 사용합니다."));
 
         meta.lore(lore);
         item.setItemMeta(meta);
