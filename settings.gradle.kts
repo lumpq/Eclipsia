@@ -7,5 +7,6 @@ pluginManagement {
 
 rootProject.name = "Eclipsia"
 
+include("api")
 include("core")
 include("nms:v1_21_R3")

@@ -8,8 +8,6 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":api"))
-    implementation(project(":nms:v1_21_R3"))
 }
 
 java {

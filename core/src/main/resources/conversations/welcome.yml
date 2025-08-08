@@ -1,0 +1,20 @@
+welcome:
+  type: "chat"
+  start-condition:
+    - api: "citizen"
+      type: "npcRightClick"
+      npc-id: 0
+  conversation:
+    - text: "<white>자네가 이 마을에 이주하러온 <player.name>인가?"
+      option:
+        - text: "<green>[ 네 ]" {b=t}
+          click-action:
+            type: "link"
+            link:
+              file: this
+              conversation: "welcome.conversation"
+              sequence: 2
+    - text: "오호 돈은 들고 왔는가?"
+      option:
+        - text: "<green>[ 네 ]" {b=t}
+          condition:

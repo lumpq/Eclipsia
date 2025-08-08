@@ -31,6 +31,8 @@ allprojects {
         maven("https://repo.md-5.net/content/groups/public/")
         maven("https://repo.codemc.io/repository/maven-releases/")
         maven("https://repo.codemc.io/repository/maven-snapshots/")
+        maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+        maven("https://oss.sonatype.org/content/repositories/snapshots")
     }
 
     dependencies {
