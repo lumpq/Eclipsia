@@ -4,6 +4,7 @@ plugins {
     id("io.github.goooler.shadow") version "8.1.8"
     id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
     id("io.papermc.paperweight.userdev") version "2.0.0-beta.18" apply false
+    id("maven-publish")
 }
 
 group = "kr.lumpq126"
@@ -60,6 +61,28 @@ allprojects {
 
     java {
         toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            groupId = "com.github.lumpq"
+            artifactId = "Eclipsia"
+            version = pluginVersion
+
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/lumpq/Eclipsia")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
     }
 }
 
