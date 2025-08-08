@@ -6,26 +6,23 @@ plugins {
     id("io.papermc.paperweight.userdev") version "2.0.0-beta.18" apply false
 }
 
-group = "kr.lumpq126"
+group = "io.lumpq126"
 version = "1.0.0"
 
-class NMSVersion(val nmsVersion: String, val serverVersion: String)
-infix fun String.toNms(that: String) = NMSVersion(this, that)
-
-val nMSVersions = listOf(
-    "nms:v1_19_R3" toNms "1.19.4-R0.1-SNAPSHOT",
-    "nms:v1_20_R1" toNms "1.20.1-R0.1-SNAPSHOT",
-    "nms:v1_20_R2" toNms "1.20.2-R0.1-SNAPSHOT",
-    "nms:v1_20_R3" toNms "1.20.4-R0.1-SNAPSHOT",
-    "nms:v1_20_R4" toNms "1.20.6-R0.1-SNAPSHOT",
-    "nms:v1_21_R1" toNms "1.21.1-R0.1-SNAPSHOT",
-    "nms:v1_21_R2" toNms "1.21.2-R0.1-SNAPSHOT",
-    "nms:v1_21_R3" toNms "1.21.4-R0.1-SNAPSHOT",
-    "nms:v1_21_R4" toNms "1.21.5-R0.1-SNAPSHOT",
-    "nms:v1_21_R5" toNms "1.21.8-R0.1-SNAPSHOT"
-)
-
 val pluginVersion = project.version.toString()
+
+val nmsVersions = mapOf(
+    "nms:v1_19_R3" to "1.19.4-R0.1-SNAPSHOT",
+    "nms:v1_20_R1" to "1.20.1-R0.1-SNAPSHOT",
+    "nms:v1_20_R2" to "1.20.2-R0.1-SNAPSHOT",
+    "nms:v1_20_R3" to "1.20.4-R0.1-SNAPSHOT",
+    "nms:v1_20_R4" to "1.20.6-R0.1-SNAPSHOT",
+    "nms:v1_21_R1" to "1.21.1-R0.1-SNAPSHOT",
+    "nms:v1_21_R2" to "1.21.2-R0.1-SNAPSHOT",
+    "nms:v1_21_R3" to "1.21.4-R0.1-SNAPSHOT",
+    "nms:v1_21_R4" to "1.21.5-R0.1-SNAPSHOT",
+    "nms:v1_21_R5" to "1.21.8-R0.1-SNAPSHOT"
+)
 
 allprojects {
     apply(plugin = "java")
@@ -67,9 +64,7 @@ dependencies {
     implementation(project(":api"))
     implementation(project(":core"))
     implementation(project(":plugin"))
-    nMSVersions.forEach {
-        implementation(project(":${it.nmsVersion}", configuration = "reobf"))
-    }
+    nmsVersions.keys.forEach { implementation(project(":$it", configuration = "reobf")) }
 }
 
 tasks {
@@ -81,7 +76,7 @@ tasks {
     }
 
     shadowJar {
-        nMSVersions.forEach { dependsOn(":${it.nmsVersion}:reobfJar") }
+        nmsVersions.keys.forEach { dependsOn(":$it:reobfJar") }
 
         archiveClassifier.set("")
         archiveFileName.set("Eclipsia-$pluginVersion.jar")
@@ -120,7 +115,7 @@ tasks.build {
 
 bukkit {
     name = "Eclipsia"
-    main = "kr.lumpq126.eclipsia.EclipsiaPlugin"
+    main = "io.lumpq126.eclipsia.EclipsiaPlugin"
     version = pluginVersion
     apiVersion = "1.19"
     authors = listOf("_LumPq_")

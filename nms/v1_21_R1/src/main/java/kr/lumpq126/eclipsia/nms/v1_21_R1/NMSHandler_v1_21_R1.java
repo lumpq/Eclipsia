@@ -1,6 +1,6 @@
 package kr.lumpq126.eclipsia.nms.v1_21_R1;
 
-import kr.lumpq126.eclipsia.nms.NMSHandler;
+import io.lumpq126.eclipsia.nms.NMSHandler;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
