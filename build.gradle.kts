@@ -13,7 +13,16 @@ class NMSVersion(val nmsVersion: String, val serverVersion: String)
 infix fun String.toNms(that: String) = NMSVersion(this, that)
 
 val nMSVersions = listOf(
-    "nms:v1_21_R3" toNms "1.21.4-R0.1-SNAPSHOT"
+    "nms:v1_19_R3" toNms "1.21.4-R0.1-SNAPSHOT",
+    "nms:v1_20_R1" toNms "1.21.4-R0.1-SNAPSHOT",
+    "nms:v1_20_R2" toNms "1.21.4-R0.1-SNAPSHOT",
+    "nms:v1_20_R3" toNms "1.21.4-R0.1-SNAPSHOT",
+    "nms:v1_20_R4" toNms "1.21.4-R0.1-SNAPSHOT",
+    "nms:v1_21_R1" toNms "1.21.4-R0.1-SNAPSHOT",
+    "nms:v1_21_R2" toNms "1.21.4-R0.1-SNAPSHOT",
+    "nms:v1_21_R3" toNms "1.21.4-R0.1-SNAPSHOT",
+    "nms:v1_21_R4" toNms "1.21.4-R0.1-SNAPSHOT",
+    "nms:v1_21_R5" toNms "1.21.4-R0.1-SNAPSHOT"
 )
 
 val pluginVersion = project.version.toString()
@@ -39,7 +48,6 @@ allprojects {
         implementation("me.libraryaddict.disguises:libsdisguises:11.0.6")
         implementation("io.netty:netty-all:4.2.3.Final")
         implementation("net.dv8tion:JDA:5.0.0")
-        compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
         compileOnly("com.comphenix.protocol:ProtocolLib:5.3.0")
         compileOnly("com.github.retrooper:packetevents-spigot:2.9.1")
         compileOnly("net.citizensnpcs:citizensapi:2.0.37-SNAPSHOT")
@@ -56,7 +64,9 @@ allprojects {
 }
 
 dependencies {
+    implementation(project(":api"))
     implementation(project(":core"))
+    implementation(project(":plugin"))
     nMSVersions.forEach {
         implementation(project(":${it.nmsVersion}", configuration = "reobf"))
     }
