@@ -54,7 +54,7 @@ public class FishUI {
 
         List<String> fishIds;
         if (isCatalog) {
-            fishIds = new ArrayList<>(config.getStringList(p.getUniqueId().toString() + ".unlocked"));
+            fishIds = new ArrayList<>(config.getStringList(p.getUniqueId() + ".unlocked"));
         } else {
             fishIds = new ArrayList<>(config.getKeys(false));
         }

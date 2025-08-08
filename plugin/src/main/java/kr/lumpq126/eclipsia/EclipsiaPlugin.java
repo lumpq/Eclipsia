@@ -12,6 +12,8 @@ import kr.lumpq126.eclipsia.utilities.manager.FishCatalogManager;
 import kr.lumpq126.eclipsia.utilities.manager.PlayerPageManager;
 import kr.lumpq126.eclipsia.utilities.manager.MonthManager;
 import kr.lumpq126.eclipsia.utilities.manager.PlayerInfoManager;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -62,6 +64,8 @@ public final class EclipsiaPlugin extends JavaPlugin {
 
         try {
             nms = NMSHandlerFactory.loadNMS();
+            getComponentLogger().info(PlainTextComponentSerializer.plainText().serialize(MiniMessage.miniMessage().deserialize(
+                    "<green>NMS 핸들러 생성 성공! 서버 버전: " + getServer().getBukkitVersion() + ", NMS 버전: " + NMSHandlerFactory.versionOfNMS() + "</green>")));
         } catch (UnsupportedOperationException e) {
             getLogger().severe("NMS 핸들러 생성 실패: " + e.getMessage());
             getLogger().log(Level.SEVERE, "Exception stacktrace:", e);
@@ -80,5 +84,9 @@ public final class EclipsiaPlugin extends JavaPlugin {
 
     public static FileConfiguration getFishConfig() {
         return fishConfig;
+    }
+
+    public static NMSHandler getNms() {
+        return nms;
     }
 }
