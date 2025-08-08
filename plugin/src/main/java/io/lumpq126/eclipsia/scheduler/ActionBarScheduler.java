@@ -9,8 +9,12 @@ public class ActionBarScheduler {
         int level = PlayerInfoManager.getLevel(player);
         double exp = PlayerInfoManager.getExp(player);
         double nextLevelExp = PlayerInfoManager.getRequiredExp(level);
+        int sia = PlayerInfoManager.getSia(player);
 
-        String message = "§a[ Lv. " + level + " ] §8| §e[ EXP§f:§e " + String.format("%.1f", exp) + " §f/§e " + nextLevelExp + " ]";
+        String message =
+                "§a[ Lv§f. §a" + level + " ] §8| " +
+                "§e[ EXP§f:§e " + String.format("%.1f", exp) +
+                " §f/§e " + nextLevelExp + " ] §8| §2[ CASH§f: §2" + sia + " SIA §2]";
         ActionBarUtility.sendActionBar(player, message);
     }
 }
