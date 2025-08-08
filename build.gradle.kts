@@ -64,28 +64,6 @@ allprojects {
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            groupId = "com.github.lumpq"
-            artifactId = "Eclipsia"
-            version = pluginVersion
-
-            from(components["java"])
-        }
-    }
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/lumpq/Eclipsia")
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
-}
-
 dependencies {
     implementation(project(":api"))
     implementation(project(":core"))
