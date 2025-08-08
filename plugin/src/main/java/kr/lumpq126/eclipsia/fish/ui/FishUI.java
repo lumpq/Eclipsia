@@ -2,8 +2,8 @@ package kr.lumpq126.eclipsia.fish.ui;
 
 import kr.lumpq126.eclipsia.EclipsiaPlugin;
 import kr.lumpq126.eclipsia.fish.items.FishItems;
-import kr.lumpq126.eclipsia.utilities.manager.FishCatalogManager;
-import kr.lumpq126.eclipsia.utilities.manager.PlayerPageManager;
+import kr.lumpq126.eclipsia.api.utilities.manager.FishCatalogManager;
+import kr.lumpq126.eclipsia.api.utilities.manager.PlayerPageManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;

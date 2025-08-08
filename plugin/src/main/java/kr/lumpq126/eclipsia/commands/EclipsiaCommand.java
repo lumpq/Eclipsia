@@ -2,8 +2,8 @@ package kr.lumpq126.eclipsia.commands;
 
 import kr.lumpq126.eclipsia.EclipsiaPlugin;
 import kr.lumpq126.eclipsia.fish.items.FishItems;
-import kr.lumpq126.eclipsia.utilities.manager.MonthManager;
-import kr.lumpq126.eclipsia.utilities.manager.PlayerInfoManager;
+import kr.lumpq126.eclipsia.api.utilities.manager.MonthManager;
+import kr.lumpq126.eclipsia.api.utilities.manager.PlayerInfoManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;

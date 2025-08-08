@@ -1,7 +1,7 @@
 package kr.lumpq126.eclipsia.ui.listener;
 
 import kr.lumpq126.eclipsia.ui.gui.MainGUI;
-import kr.lumpq126.eclipsia.utilities.manager.PlayerInfoManager;
+import kr.lumpq126.eclipsia.api.utilities.manager.PlayerInfoManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

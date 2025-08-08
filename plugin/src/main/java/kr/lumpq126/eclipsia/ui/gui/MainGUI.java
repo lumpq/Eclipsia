@@ -1,7 +1,7 @@
 package kr.lumpq126.eclipsia.ui.gui;
 
 import kr.lumpq126.eclipsia.utilities.InventoryUtility;
-import kr.lumpq126.eclipsia.utilities.manager.PlayerInfoManager;
+import kr.lumpq126.eclipsia.api.utilities.manager.PlayerInfoManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;

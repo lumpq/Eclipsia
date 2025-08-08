@@ -1,6 +1,6 @@
-package kr.lumpq126.eclipsia.utilities.manager;
+package kr.lumpq126.eclipsia.api.utilities.manager;
 
-import kr.lumpq126.eclipsia.EclipsiaPlugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.yaml.snakeyaml.Yaml;
 
@@ -14,9 +14,9 @@ import java.util.Map;
 public class MonthManager {
     private static File monthFile;
     private static int currentMonth;
-    private static EclipsiaPlugin plugin;
+    private static JavaPlugin plugin;
 
-    public static void init(EclipsiaPlugin instance) {
+    public static void init(JavaPlugin instance) {
         plugin = instance;
         monthFile = new File(plugin.getDataFolder(), "month.yml");
         loadMonth();

@@ -1,8 +1,8 @@
-package kr.lumpq126.eclipsia.utilities.manager;
+package kr.lumpq126.eclipsia.api.utilities.manager;
 
-import kr.lumpq126.eclipsia.EclipsiaPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,9 +12,9 @@ import java.util.logging.Level;
 public class PlayerPageManager {
     private static File file;
     private static FileConfiguration config;
-    private static EclipsiaPlugin plugin;
+    private static JavaPlugin plugin;
 
-    public static void init(EclipsiaPlugin pluginInstance) {
+    public static void init(JavaPlugin pluginInstance) {
         plugin = pluginInstance;
         file = new File(plugin.getDataFolder(), "page.yml");
 

@@ -1,7 +1,7 @@
 package kr.lumpq126.eclipsia.scheduler;
 
 import kr.lumpq126.eclipsia.utilities.ActionBarUtility;
-import kr.lumpq126.eclipsia.utilities.manager.PlayerInfoManager;
+import kr.lumpq126.eclipsia.api.utilities.manager.PlayerInfoManager;
 import org.bukkit.entity.Player;
 
 public class ActionBarScheduler {

@@ -1,11 +1,11 @@
-package kr.lumpq126.eclipsia.utilities.manager;
+package kr.lumpq126.eclipsia.api.utilities.manager;
 
-import kr.lumpq126.eclipsia.EclipsiaPlugin;
 import kr.lumpq126.eclipsia.api.events.PlayerLevelUpEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,9 +26,12 @@ public class PlayerInfoManager {
     private static FileConfiguration config;
     private static final Object lock = new Object();
 
+    private static JavaPlugin plugin;
+
     // ────────────────────── INIT / RELOAD / SAVE ──────────────────────
 
-    public static void init(EclipsiaPlugin plugin) {
+    public static void init(JavaPlugin instance) {
+        plugin = instance;
         file = new File(plugin.getDataFolder(), "playerInfo.yml");
 
         if (!file.exists()) {
@@ -53,7 +56,7 @@ public class PlayerInfoManager {
         try {
             config = YamlConfiguration.loadConfiguration(file);
         } catch (Exception e) {
-            EclipsiaPlugin.getInstance().getLogger().log(Level.SEVERE, "[Eclipsia] playerInfo.yml 로딩 중 오류", e);
+            plugin.getLogger().log(Level.SEVERE, "[Eclipsia] playerInfo.yml 로딩 중 오류", e);
         }
     }
 
@@ -62,7 +65,7 @@ public class PlayerInfoManager {
             try {
                 config.save(file);
             } catch (IOException e) {
-                EclipsiaPlugin.getInstance().getLogger().log(Level.SEVERE, "[Eclipsia] playerInfo.yml 저장 실패", e);
+                plugin.getLogger().log(Level.SEVERE, "[Eclipsia] playerInfo.yml 저장 실패", e);
             }
         }
     }
@@ -134,8 +137,7 @@ public class PlayerInfoManager {
     }
 
     public static void resetLevel(Player player) {
-        config.set(path(player, "level"), INITIAL_LEVEL);
-        config.set(path(player, "exp"), 0);
+        playerInfoReset(player);
         save();
     }
 
