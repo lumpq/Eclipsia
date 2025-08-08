@@ -12,6 +12,7 @@ import io.lumpq126.eclipsia.listeners.FishListener;
 import io.lumpq126.eclipsia.listeners.LevelUPListener;
 import io.lumpq126.eclipsia.scheduler.ActionBarScheduler;
 import io.lumpq126.eclipsia.listeners.MainGUIEvent;
+import io.lumpq126.eclipsia.utilities.Mm;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -63,7 +64,7 @@ public final class EclipsiaPlugin extends JavaPlugin {
 
         try {
             nms = NMSHandlerFactory.loadNMS();
-            getComponentLogger().info(MiniMessage.miniMessage().deserialize(
+            getComponentLogger().info(Mm.mm(
                     "<green>NMS 핸들러 생성 성공! 서버 버전: " + getServer().getBukkitVersion() + ", NMS 버전: " + NMSHandlerFactory.getNMSVersion() + "</green>"));
         } catch (UnsupportedOperationException e) {
             getLogger().severe("NMS 핸들러 생성 실패: " + e.getMessage());
