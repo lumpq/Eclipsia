@@ -285,6 +285,10 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
         }
     }
 
+    private void handleSia(CommandSender sender, String[] args) {
+        if (args.length)
+    }
+
     private void reload(CommandSender sender) {
         FishCatalogManager.reload();
         PlayerInfoManager.reload();
