@@ -3,6 +3,7 @@ package io.lumpq126.eclipsia.commands;
 import io.lumpq126.eclipsia.EclipsiaPlugin;
 import io.lumpq126.eclipsia.api.utilities.manager.*;
 import io.lumpq126.eclipsia.items.FishItems;
+import io.lumpq126.eclipsia.utilities.Mm;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
@@ -51,7 +52,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
             case "level" -> handleLevel(sender, args);
             case "exp" -> handleExp(sender, args);
             case "stat" -> handleStat(sender, args);
-            case "reload" -> reload();
+            case "reload" -> reload(sender);
             default -> sendMessage(sender, "알 수 없는 명령어입니다.", NamedTextColor.RED);
         }
 
@@ -284,12 +285,12 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
         }
     }
 
-    private void reload() {
+    private void reload(CommandSender sender) {
         FishCatalogManager.reload();
         PlayerInfoManager.reload();
         PlayerPageManager.reload();
-        StocksManager.reload();
         MonthManager.reload();
+        sender.sendMessage(Mm.mm("<green>리로드 완료!"));
     }
 
     @Override
