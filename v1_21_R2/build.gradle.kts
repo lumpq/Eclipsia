@@ -23,7 +23,4 @@ tasks {
     compileJava {
         options.encoding = "UTF-8"
     }
-    build {
-        dependsOn(clean)
-    }
 }
