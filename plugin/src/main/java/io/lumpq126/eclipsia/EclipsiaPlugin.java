@@ -13,10 +13,10 @@ import io.lumpq126.eclipsia.listeners.LevelUPListener;
 import io.lumpq126.eclipsia.scheduler.ActionBarScheduler;
 import io.lumpq126.eclipsia.listeners.MainGUIListener;
 import io.lumpq126.eclipsia.utilities.Mm;
-import org.bukkit.Bukkit;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -27,24 +27,24 @@ public final class EclipsiaPlugin extends JavaPlugin {
     private static FileConfiguration fishConfig;
     private static EclipsiaPlugin instance;
     private static NMSHandler nms;
+    private static JDA jda;
 
     @Override
     public void onEnable() {
-        instance = this;
-
-        saveDefaultConfig();
-
-        MonthManager.init(this);
-        PlayerInfoManager.init(this);
-        PlayerPageManager.init(this);
-        FishCatalogManager.init(this);
-
         File file = new File(getDataFolder(), "fish.yml");
         if (!file.exists()) {
             saveResource("fish.yml", false);
         }
 
+        saveDefaultConfig();
+
+        instance = this;
         fishConfig = YamlConfiguration.loadConfiguration(file);
+
+        MonthManager.init(this);
+        PlayerInfoManager.init(this);
+        PlayerPageManager.init(this);
+        FishCatalogManager.init(this);
 
         getServer().getPluginManager().registerEvents(new FishListener(), this);
         getServer().getPluginManager().registerEvents(new MainGUIListener(), this);
@@ -55,28 +55,39 @@ public final class EclipsiaPlugin extends JavaPlugin {
 
         Objects.requireNonNull(getCommand("eclipsia")).setTabCompleter(new EclipsiaCommand());
 
-        Bukkit.getScheduler().runTaskTimer(this, () -> {
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                ActionBarScheduler.showLevelAndExp(player);
-            }
-        }, 0L, 1L);
-
         try {
             nms = NMSHandlerFactory.loadNMS();
             getComponentLogger().info(Mm.mm(
-                    "<green>NMS 핸들러 생성 성공! 서버 버전: " + getServer().getBukkitVersion() + ", NMS 버전: " + NMSHandlerFactory.getNMSVersion() + "</green>"));
+                    "<green>NMS 핸들러 활성화 성공! 서버 버전: " + getServer().getBukkitVersion() + ", NMS 버전: " + NMSHandlerFactory.getNMSVersion() + "</green>"));
         } catch (UnsupportedOperationException e) {
-            getLogger().severe("NMS 핸들러 생성 실패: " + e.getMessage());
-            getLogger().log(Level.SEVERE, "Exception stacktrace:", e);
+            getLogger().severe("NMS 핸들러 활성화 실패: " + e.getMessage());
+            getLogger().log(Level.SEVERE, "Exception stacktrace: ", e);
             getServer().getPluginManager().disablePlugin(this);
         }
+
+        getServer().getScheduler().runTaskAsynchronously(this, () -> {
+            try {
+                jda = JDABuilder.createDefault(getConfig().getString("token"))
+                        .build()
+                        .awaitReady();
+                getComponentLogger().info(Mm.mm(
+                        "<green>디스코드 봇 활성화 성공! 봇 토큰: " + "<gradient:#b266ff:#e5ccff>" + getConfig().getString("token") + "</gradient>"
+                ));
+            } catch (Exception e) {
+                getLogger().severe("디스코드 봇 활성화 실패");
+                getLogger().log(Level.SEVERE, "Exception stacktrace: ", e);
+                getServer().getPluginManager().disablePlugin(this);
+            }
+        });
 
         ActionBarScheduler.start();
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        if (jda != null) {
+            jda.shutdown();
+        }
     }
 
     public static EclipsiaPlugin getInstance() {
@@ -89,5 +100,9 @@ public final class EclipsiaPlugin extends JavaPlugin {
 
     public static NMSHandler getNms() {
         return nms;
+    }
+
+    public static JDA getJda() {
+        return jda;
     }
 }
