@@ -39,6 +39,7 @@ allprojects {
         maven("https://repo.md-5.net/content/groups/public/")
         maven("https://repo.codemc.io/repository/maven-releases/")
         maven("https://repo.codemc.io/repository/maven-snapshots/")
+        maven("https://repo.codemc.org/repository/maven-public/")
         maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
         maven("https://oss.sonatype.org/content/repositories/snapshots")
     }
@@ -50,6 +51,7 @@ allprojects {
         compileOnly("com.comphenix.protocol:ProtocolLib:5.3.0")
         compileOnly("com.github.retrooper:packetevents-spigot:2.9.1")
         compileOnly("net.citizensnpcs:citizensapi:2.0.37-SNAPSHOT")
+        compileOnly("dev.jorel:commandapi-bukkit-core:10.1.2")
     }
 
     tasks.withType<JavaCompile>().configureEach {

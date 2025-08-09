@@ -14,7 +14,6 @@ import io.lumpq126.eclipsia.scheduler.ActionBarScheduler;
 import io.lumpq126.eclipsia.listeners.MainGUIListener;
 import io.lumpq126.eclipsia.utilities.Mm;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -65,6 +64,7 @@ public final class EclipsiaPlugin extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
         }
 
+        /*
         getServer().getScheduler().runTaskAsynchronously(this, () -> {
             try {
                 jda = JDABuilder.createDefault(getConfig().getString("token"))
@@ -79,6 +79,8 @@ public final class EclipsiaPlugin extends JavaPlugin {
                 getServer().getPluginManager().disablePlugin(this);
             }
         });
+
+         */
 
         ActionBarScheduler.start();
     }
