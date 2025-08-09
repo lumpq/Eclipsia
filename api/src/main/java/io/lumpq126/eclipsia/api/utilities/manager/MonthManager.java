@@ -1,5 +1,7 @@
 package io.lumpq126.eclipsia.api.utilities.manager;
 
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.yaml.snakeyaml.Yaml;
@@ -12,34 +14,35 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MonthManager {
-    private static File monthFile;
+    private static File file;
+    private static FileConfiguration config;
     private static int currentMonth;
     private static JavaPlugin plugin;
 
     public static void init(JavaPlugin instance) {
         plugin = instance;
-        monthFile = new File(plugin.getDataFolder(), "month.yml");
+        file = new File(plugin.getDataFolder(), "month.yml");
         loadMonth();
         startMonthUpdater();
     }
 
     private static void loadMonth() {
         try {
-            if (!monthFile.exists()) {
-                File parent = monthFile.getParentFile();
+            if (!file.exists()) {
+                File parent = file.getParentFile();
                 if (parent != null && !parent.exists()) {
                     if (!parent.mkdirs()) {
                         plugin.getLogger().warning("[Eclipsia] 월 파일의 부모 디렉토리 생성 실패: " + parent.getAbsolutePath());
                     }
                 }
-                if (!monthFile.createNewFile()) {
-                    plugin.getLogger().warning("[Eclipsia] 월 파일 생성 실패: " + monthFile.getAbsolutePath());
+                if (!file.createNewFile()) {
+                    plugin.getLogger().warning("[Eclipsia] 월 파일 생성 실패: " + file.getAbsolutePath());
                 }
                 currentMonth = 1;
                 saveMonth();
             } else {
                 Yaml yaml = new Yaml();
-                Map<String, Object> data = yaml.load(Files.newBufferedReader(monthFile.toPath()));
+                Map<String, Object> data = yaml.load(Files.newBufferedReader(file.toPath()));
                 currentMonth = (int) data.getOrDefault("month", 1);
             }
         } catch (IOException e) {
@@ -49,8 +52,12 @@ public class MonthManager {
         }
     }
 
+    public static void reload() {
+        config = YamlConfiguration.loadConfiguration(file);
+    }
+
     private static void saveMonth() {
-        try (FileWriter writer = new FileWriter(monthFile)) {
+        try (FileWriter writer = new FileWriter(file)) {
             Yaml yaml = new Yaml();
             Map<String, Object> data = new HashMap<>();
             data.put("month", currentMonth);

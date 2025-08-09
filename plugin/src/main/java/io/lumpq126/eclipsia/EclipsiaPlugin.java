@@ -11,7 +11,7 @@ import io.lumpq126.eclipsia.commands.FishCommand;
 import io.lumpq126.eclipsia.listeners.FishListener;
 import io.lumpq126.eclipsia.listeners.LevelUPListener;
 import io.lumpq126.eclipsia.scheduler.ActionBarScheduler;
-import io.lumpq126.eclipsia.listeners.MainGUIEvent;
+import io.lumpq126.eclipsia.listeners.MainGUIListener;
 import io.lumpq126.eclipsia.utilities.Mm;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -25,10 +25,13 @@ import java.util.logging.Level;
 
 public final class EclipsiaPlugin extends JavaPlugin {
     private static FileConfiguration fishConfig;
+    private static EclipsiaPlugin instance;
     private static NMSHandler nms;
 
     @Override
     public void onEnable() {
+        instance = this;
+
         saveDefaultConfig();
 
         MonthManager.init(this);
@@ -44,7 +47,7 @@ public final class EclipsiaPlugin extends JavaPlugin {
         fishConfig = YamlConfiguration.loadConfiguration(file);
 
         getServer().getPluginManager().registerEvents(new FishListener(), this);
-        getServer().getPluginManager().registerEvents(new MainGUIEvent(), this);
+        getServer().getPluginManager().registerEvents(new MainGUIListener(), this);
         getServer().getPluginManager().registerEvents(new LevelUPListener(), this);
 
         Objects.requireNonNull(getCommand("fish")).setExecutor(new FishCommand());
@@ -67,11 +70,17 @@ public final class EclipsiaPlugin extends JavaPlugin {
             getLogger().log(Level.SEVERE, "Exception stacktrace:", e);
             getServer().getPluginManager().disablePlugin(this);
         }
+
+        ActionBarScheduler.start();
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    public static EclipsiaPlugin getInstance() {
+        return instance;
     }
 
     public static FileConfiguration getFishConfig() {

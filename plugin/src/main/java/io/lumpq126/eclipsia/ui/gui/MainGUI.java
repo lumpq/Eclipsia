@@ -18,7 +18,7 @@ import java.util.List;
 public class MainGUI {
 
     public static void openHomeGUI(Player player) {
-        Inventory inventory = InventoryUtility.inventory(player, 36, "main");
+        Inventory inventory = InventoryUtility.inventory(player, 36, "main-home");
         player.openInventory(inventory);
     }
 

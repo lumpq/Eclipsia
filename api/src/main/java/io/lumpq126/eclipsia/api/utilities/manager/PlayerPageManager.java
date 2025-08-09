@@ -49,6 +49,10 @@ public class PlayerPageManager {
         }
     }
 
+    public static void reload() {
+        config = YamlConfiguration.loadConfiguration(file);
+    }
+
     public static void setBookPage(UUID uuid, int page) {
         if (config == null) return;
 
