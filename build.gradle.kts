@@ -12,6 +12,8 @@ version = "1.0.0"
 val pluginVersion = project.version.toString()
 
 val nmsVersions = mapOf(
+    "v1_19_R1" to "1.19.2-R0.1-SNAPSHOT",
+    "v1_19_R2" to "1.19.3-R0.1-SNAPSHOT",
     "v1_19_R3" to "1.19.4-R0.1-SNAPSHOT",
     "v1_20_R1" to "1.20.1-R0.1-SNAPSHOT",
     "v1_20_R2" to "1.20.2-R0.1-SNAPSHOT",

@@ -8,6 +8,8 @@ public class NMSHandlerFactory {
         String version = Bukkit.getBukkitVersion();
 
         return switch (version) {
+            case "1.19-R0.1-SNAPSHOT", "1.19.1-R0.1-SNAPSHOT", "1.19.2-R0.1-SNAPSHOT" -> new io.lumpq126.eclipsia.nms.v1_19_R1.NMSHandler_v1_19_R1();
+            case "1.19.3-R0.1-SNAPSHOT" -> new io.lumpq126.eclipsia.nms.v1_19_R2.NMSHandler_v1_19_R2();
             case "1.19.4-R0.1-SNAPSHOT" -> new io.lumpq126.eclipsia.nms.v1_19_R3.NMSHandler_v1_19_R3();
             case "1.20-R0.1-SNAPSHOT", "1.20.1-R0.1-SNAPSHOT" -> new io.lumpq126.eclipsia.nms.v1_20_R1.NMSHandler_v1_20_R1();
             case "1.20.2-R0.1-SNAPSHOT" -> new io.lumpq126.eclipsia.nms.v1_20_R2.NMSHandler_v1_20_R2();
@@ -26,6 +28,8 @@ public class NMSHandlerFactory {
         String version = Bukkit.getBukkitVersion();
 
         switch (version) {
+            case "1.19-R0.1-SNAPSHOT", "1.19.1-R0.1-SNAPSHOT", "1.19.2-R0.1-SNAPSHOT" -> { return "v1_19_R1"; }
+            case "1.19.3-R0.1-SNAPSHOT" -> { return "v1_19_R2"; }
             case "1.19.4-R0.1-SNAPSHOT" -> { return "v1_19_R3"; }
             case "1.20-R0.1-SNAPSHOT", "1.20.1-R0.1-SNAPSHOT" -> { return "v1_20_R1"; }
             case "1.20.2-R0.1-SNAPSHOT" -> { return "v1_20_R2"; }
