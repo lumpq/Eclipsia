@@ -1,9 +1,8 @@
 package io.lumpq126.eclipsia.listeners;
 
-import io.lumpq126.eclipsia.nms.utilities.Mm;
 import io.lumpq126.eclipsia.nms.utilities.manager.PlayerInfoManager;
 import io.lumpq126.eclipsia.ui.gui.MainGUI;
-import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,7 +29,8 @@ public class MainGUIListener implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
-        if (event.getView().title().contains(Mm.mm("main-"))) {
+        String title = PlainTextComponentSerializer.plainText().serialize(event.getView().title());
+        if (title.contains("main-")) {
             event.setCancelled(true);
             if (event.getSlot() == 0) {
                 MainGUI.openHomeGUI(player);
