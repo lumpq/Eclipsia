@@ -1,7 +1,7 @@
 package io.lumpq126.eclipsia.listeners;
 
 import io.lumpq126.eclipsia.ui.gui.MainGUI;
-import io.lumpq126.eclipsia.api.utilities.manager.PlayerInfoManager;
+import io.lumpq126.eclipsia.nms.utilities.manager.PlayerInfoManager;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

@@ -1,4 +1,4 @@
-package io.lumpq126.eclipsia.api.utilities.manager;
+package io.lumpq126.eclipsia.nms.utilities.manager;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

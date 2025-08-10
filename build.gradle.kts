@@ -68,7 +68,6 @@ allprojects {
 }
 
 dependencies {
-    implementation(project(":api"))
     implementation(project(":core"))
     implementation(project(":plugin"))
     nmsVersions.keys.forEach { implementation(project(":$it", configuration = "reobf")) }

@@ -1,9 +1,9 @@
 package io.lumpq126.eclipsia;
 
-import io.lumpq126.eclipsia.api.utilities.manager.FishCatalogManager;
-import io.lumpq126.eclipsia.api.utilities.manager.MonthManager;
-import io.lumpq126.eclipsia.api.utilities.manager.PlayerInfoManager;
-import io.lumpq126.eclipsia.api.utilities.manager.PlayerPageManager;
+import io.lumpq126.eclipsia.nms.utilities.manager.FishCatalogManager;
+import io.lumpq126.eclipsia.nms.utilities.manager.MonthManager;
+import io.lumpq126.eclipsia.nms.utilities.manager.PlayerInfoManager;
+import io.lumpq126.eclipsia.nms.utilities.manager.PlayerPageManager;
 import io.lumpq126.eclipsia.nms.NMSHandler;
 import io.lumpq126.eclipsia.nms.NMSHandlerFactory;
 import io.lumpq126.eclipsia.commands.EclipsiaCommand;

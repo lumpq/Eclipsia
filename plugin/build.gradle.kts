@@ -8,7 +8,6 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":api"))
     implementation(project(":core"))
     compileOnly(project(":v1_17_R1"))
     compileOnly(project(":v1_18_R1"))

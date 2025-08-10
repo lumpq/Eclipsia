@@ -7,7 +7,6 @@ pluginManagement {
 
 rootProject.name = "Eclipsia"
 
-include("api")
 include("core")
 include("plugin")
 include("v1_17_R1")
