@@ -1,4 +1,4 @@
-package io.lumpq126.eclipsia.utilities;
+package io.lumpq126.eclipsia.nms.utilities;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;

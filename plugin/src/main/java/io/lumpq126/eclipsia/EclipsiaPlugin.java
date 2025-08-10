@@ -1,18 +1,18 @@
 package io.lumpq126.eclipsia;
 
-import io.lumpq126.eclipsia.nms.utilities.manager.FishCatalogManager;
-import io.lumpq126.eclipsia.nms.utilities.manager.MonthManager;
-import io.lumpq126.eclipsia.nms.utilities.manager.PlayerInfoManager;
-import io.lumpq126.eclipsia.nms.utilities.manager.PlayerPageManager;
-import io.lumpq126.eclipsia.nms.NMSHandler;
-import io.lumpq126.eclipsia.nms.NMSHandlerFactory;
 import io.lumpq126.eclipsia.commands.EclipsiaCommand;
 import io.lumpq126.eclipsia.commands.FishCommand;
 import io.lumpq126.eclipsia.listeners.FishListener;
 import io.lumpq126.eclipsia.listeners.LevelUPListener;
-import io.lumpq126.eclipsia.scheduler.ActionBarScheduler;
 import io.lumpq126.eclipsia.listeners.MainGUIListener;
-import io.lumpq126.eclipsia.utilities.Mm;
+import io.lumpq126.eclipsia.nms.NMSHandler;
+import io.lumpq126.eclipsia.nms.NMSHandlerFactory;
+import io.lumpq126.eclipsia.nms.utilities.Mm;
+import io.lumpq126.eclipsia.nms.utilities.manager.FishCatalogManager;
+import io.lumpq126.eclipsia.nms.utilities.manager.MonthManager;
+import io.lumpq126.eclipsia.nms.utilities.manager.PlayerInfoManager;
+import io.lumpq126.eclipsia.nms.utilities.manager.PlayerPageManager;
+import io.lumpq126.eclipsia.scheduler.ActionBarScheduler;
 import net.dv8tion.jda.api.JDA;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
