@@ -30,7 +30,7 @@ public class MainGUIListener implements Listener {
     public void onClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
         String title = PlainTextComponentSerializer.plainText().serialize(event.getView().title());
-        if (title.contains("main-")) {
+        if (title.equals("main-home")) {
             event.setCancelled(true);
             if (event.getSlot() == 0) {
                 MainGUI.openHomeGUI(player);
@@ -38,6 +38,10 @@ public class MainGUIListener implements Listener {
             else if (event.getSlot() == 9) {
                 MainGUI.openStatGUI(player);
             }
+        }
+        else if (title.equals("main-stat")) {
+            event.setCancelled(true);
+            if (event.getSlot() == )
         }
     }
 }
