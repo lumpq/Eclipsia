@@ -1,5 +1,6 @@
 package io.lumpq126.eclipsia.listeners;
 
+import io.lumpq126.eclipsia.nms.utilities.Mm;
 import io.lumpq126.eclipsia.nms.utilities.manager.PlayerInfoManager;
 import io.lumpq126.eclipsia.ui.gui.MainGUI;
 import net.kyori.adventure.text.Component;
@@ -29,15 +30,12 @@ public class MainGUIListener implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
-        if (event.getView().title().contains(Component.text("main-"))) {
+        if (event.getView().title().contains(Mm.mm("main-"))) {
             if (event.getSlot() == 0) {
                 MainGUI.openHomeGUI(player);
             }
             else if (event.getSlot() == 9) {
                 MainGUI.openStatGUI(player);
-            }
-            else if (event.getSlot() == 18) {
-                //TODO
             }
         }
     }

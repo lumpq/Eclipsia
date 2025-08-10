@@ -19,11 +19,23 @@ public class MainGUI {
 
     public static void openHomeGUI(Player player) {
         Inventory inventory = InventoryUtility.inventory(player, 36, "main-home");
+        ItemStack homePaper = ItemStack.of(Material.PAPER);
+        ItemStack statPaper = ItemStack.of(Material.PAPER);
+        ItemMeta homeMeta = homePaper.getItemMeta();
+        ItemMeta statMeta = statPaper.getItemMeta();
+        if (homeMeta == null) return;
+        homeMeta.displayName(Mm.mm("main-home"));
+        homePaper.setItemMeta(homeMeta);
+        if (statMeta == null) return;
+        statMeta.displayName(Mm.mm("main-stat"));
+        homePaper.setItemMeta(homeMeta);
+        inventory.setItem(0, homePaper);
+        inventory.setItem(0, statPaper);
         player.openInventory(inventory);
     }
 
     public static void openStatGUI(Player player) {
-        Inventory inventory = InventoryUtility.inventory(player, 36, "stat");
+        Inventory inventory = InventoryUtility.inventory(player, 36, "main-stat");
 
         // 여기에 6개의 스탯 아이템을 순서대로 배치
         inventory.setItem(11, statItem(player, "str")); // 근력
