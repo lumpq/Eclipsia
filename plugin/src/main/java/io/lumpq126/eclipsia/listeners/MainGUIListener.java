@@ -31,6 +31,7 @@ public class MainGUIListener implements Listener {
     public void onClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
         if (event.getView().title().contains(Mm.mm("main-"))) {
+            event.setCancelled(true);
             if (event.getSlot() == 0) {
                 MainGUI.openHomeGUI(player);
             }

@@ -23,14 +23,12 @@ public class MainGUI {
         ItemStack statPaper = ItemStack.of(Material.PAPER);
         ItemMeta homeMeta = homePaper.getItemMeta();
         ItemMeta statMeta = statPaper.getItemMeta();
-        if (homeMeta == null) return;
         homeMeta.displayName(Mm.mm("main-home"));
         homePaper.setItemMeta(homeMeta);
-        if (statMeta == null) return;
         statMeta.displayName(Mm.mm("main-stat"));
-        homePaper.setItemMeta(homeMeta);
+        statPaper.setItemMeta(homeMeta);
         inventory.setItem(0, homePaper);
-        inventory.setItem(0, statPaper);
+        inventory.setItem(9, statPaper);
         player.openInventory(inventory);
     }
 
