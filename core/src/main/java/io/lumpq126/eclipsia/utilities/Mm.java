@@ -14,31 +14,10 @@ public class Mm {
         return MiniMessage.miniMessage().deserialize(input);
     }
 
-    public static Component mm(String input, boolean bold, boolean italic) {
-        Component comp = MiniMessage.miniMessage().deserialize(input);
-        if (bold) comp = comp.decoration(TextDecoration.BOLD, true);
-        if (italic) comp = comp.decoration(TextDecoration.ITALIC, true);
-        return comp;
-    }
-
     public static List<Component> mm(List<String> input) {
         if (input == null) {
             return new ArrayList<>();
         }
         return input.stream().map(MiniMessage.miniMessage()::deserialize).collect(Collectors.toList());
-    }
-
-    public static List<Component> mm(List<String> input, boolean bold, boolean italic) {
-        if (input == null) {
-            return new ArrayList<>();
-        }
-        return input.stream()
-                .map(s -> {
-                    Component comp = MiniMessage.miniMessage().deserialize(s);
-                    if (bold) comp = comp.decoration(TextDecoration.BOLD, true);
-                    if (italic) comp = comp.decoration(TextDecoration.ITALIC, true);
-                    return comp;
-                })
-                .collect(Collectors.toList());
     }
 }

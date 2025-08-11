@@ -18,14 +18,14 @@ import java.util.List;
 public class MainGUI {
 
     public static void openHomeGUI(Player player) {
-        Inventory inventory = InventoryUtility.inventory(player, 36, "main-home");
+        Inventory inventory = InventoryUtility.inventory(player, 36, "<italic:false>main-home");
         ItemStack homePaper = ItemStack.of(Material.PAPER);
         ItemStack statPaper = ItemStack.of(Material.PAPER);
         ItemMeta homeMeta = homePaper.getItemMeta();
         ItemMeta statMeta = statPaper.getItemMeta();
-        homeMeta.displayName(Mm.mm("main-home"));
+        homeMeta.displayName(Mm.mm("<italic:false>main-home"));
         homePaper.setItemMeta(homeMeta);
-        statMeta.displayName(Mm.mm("main-stat"));
+        statMeta.displayName(Mm.mm("<italic:false>main-stat"));
         statPaper.setItemMeta(homeMeta);
         inventory.setItem(0, homePaper);
         inventory.setItem(9, statPaper);
@@ -37,19 +37,14 @@ public class MainGUI {
 
         ItemStack homePaper = ItemStack.of(Material.PAPER);
         ItemStack statPaper = ItemStack.of(Material.PAPER);
-        ItemStack resetPaper = ItemStack.of(Material.PAPER);
         ItemMeta homeMeta = homePaper.getItemMeta();
         ItemMeta statMeta = statPaper.getItemMeta();
-        ItemMeta resetMeta = resetPaper.getItemMeta();
-        homeMeta.displayName(Mm.mm("main-home", true, true));
+        homeMeta.displayName(Mm.mm("<italic:false>main-home"));
         homePaper.setItemMeta(homeMeta);
-        statMeta.displayName(Mm.mm("main-stat", true, true));
+        statMeta.displayName(Mm.mm("<italic:false>main-stat"));
         statPaper.setItemMeta(homeMeta);
-        resetMeta.displayName(Mm.mm("reset", true, true));
-        resetPaper.setItemMeta(resetMeta);
         inventory.setItem(0, homePaper);
         inventory.setItem(9, statPaper);
-        inventory.setItem(24, resetPaper);
 
         // 여기에 6개의 스탯 아이템을 순서대로 배치
         inventory.setItem(11, statItem(player, "str")); // 근력
@@ -64,7 +59,7 @@ public class MainGUI {
 
     public static ItemStack statItem(Player player, String statName) {
         StatType type = StatType.fromName(statName);
-        if (type == null) return new ItemStack(Material.BARRIER); // fallback
+        if (type == null) return ItemStack.of(Material.BARRIER); // fallback
 
         int statValue = PlayerInfoManager.getStat(player, statName);
         int statPoint = PlayerInfoManager.getStatPoint(player);
