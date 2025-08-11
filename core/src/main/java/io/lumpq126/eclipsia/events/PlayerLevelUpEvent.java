@@ -1,4 +1,4 @@
-package io.lumpq126.eclipsia.nms.events;
+package io.lumpq126.eclipsia.events;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;

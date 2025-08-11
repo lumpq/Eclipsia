@@ -1,7 +1,7 @@
 package io.lumpq126.eclipsia.listeners;
 
 
-import io.lumpq126.eclipsia.nms.events.PlayerLevelUpEvent;
+import io.lumpq126.eclipsia.events.PlayerLevelUpEvent;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Sound;
 import org.bukkit.event.EventHandler;

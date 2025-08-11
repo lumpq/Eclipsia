@@ -1,6 +1,6 @@
-package io.lumpq126.eclipsia.nms.utilities.manager;
+package io.lumpq126.eclipsia.utilities.manager;
 
-import io.lumpq126.eclipsia.nms.events.PlayerLevelUpEvent;
+import io.lumpq126.eclipsia.events.PlayerLevelUpEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

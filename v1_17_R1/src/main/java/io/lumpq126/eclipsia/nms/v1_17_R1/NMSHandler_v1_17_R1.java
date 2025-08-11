@@ -1,7 +1,7 @@
 package io.lumpq126.eclipsia.nms.v1_17_R1;
 
 import io.lumpq126.eclipsia.nms.NMSHandler;
-import io.lumpq126.eclipsia.nms.utilities.Mm;
+import io.lumpq126.eclipsia.utilities.Mm;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;

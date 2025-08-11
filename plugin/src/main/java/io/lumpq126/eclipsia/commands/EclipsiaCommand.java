@@ -2,11 +2,11 @@ package io.lumpq126.eclipsia.commands;
 
 import io.lumpq126.eclipsia.EclipsiaPlugin;
 import io.lumpq126.eclipsia.items.FishItems;
-import io.lumpq126.eclipsia.nms.utilities.Mm;
-import io.lumpq126.eclipsia.nms.utilities.manager.FishCatalogManager;
-import io.lumpq126.eclipsia.nms.utilities.manager.MonthManager;
-import io.lumpq126.eclipsia.nms.utilities.manager.PlayerInfoManager;
-import io.lumpq126.eclipsia.nms.utilities.manager.PlayerPageManager;
+import io.lumpq126.eclipsia.utilities.Mm;
+import io.lumpq126.eclipsia.utilities.manager.FishCatalogManager;
+import io.lumpq126.eclipsia.utilities.manager.MonthManager;
+import io.lumpq126.eclipsia.utilities.manager.PlayerInfoManager;
+import io.lumpq126.eclipsia.utilities.manager.PlayerPageManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;

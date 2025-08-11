@@ -2,8 +2,8 @@ package io.lumpq126.eclipsia.listeners;
 
 import io.lumpq126.eclipsia.EclipsiaPlugin;
 import io.lumpq126.eclipsia.items.FishItems;
-import io.lumpq126.eclipsia.nms.utilities.manager.MonthManager;
-import io.lumpq126.eclipsia.nms.utilities.manager.PlayerPageManager;
+import io.lumpq126.eclipsia.utilities.manager.MonthManager;
+import io.lumpq126.eclipsia.utilities.manager.PlayerPageManager;
 import io.lumpq126.eclipsia.ui.gui.FishUI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;

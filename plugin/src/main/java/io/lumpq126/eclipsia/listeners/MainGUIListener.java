@@ -1,7 +1,7 @@
 package io.lumpq126.eclipsia.listeners;
 
-import io.lumpq126.eclipsia.nms.utilities.Mm;
-import io.lumpq126.eclipsia.nms.utilities.manager.PlayerInfoManager;
+import io.lumpq126.eclipsia.utilities.Mm;
+import io.lumpq126.eclipsia.utilities.manager.PlayerInfoManager;
 import io.lumpq126.eclipsia.ui.gui.MainGUI;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Sound;

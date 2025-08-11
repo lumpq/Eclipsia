@@ -1,4 +1,4 @@
-package io.lumpq126.eclipsia.nms.utilities.calc;
+package io.lumpq126.eclipsia.utilities.calc;
 
 public class FishGradeCalculator {
 

@@ -1,9 +1,9 @@
 package io.lumpq126.eclipsia.items;
 
 import io.lumpq126.eclipsia.EclipsiaPlugin;
-import io.lumpq126.eclipsia.nms.utilities.Mm;
-import io.lumpq126.eclipsia.nms.utilities.calc.FishGradeCalculator;
-import io.lumpq126.eclipsia.nms.utilities.manager.FishCatalogManager;
+import io.lumpq126.eclipsia.utilities.Mm;
+import io.lumpq126.eclipsia.utilities.calc.FishGradeCalculator;
+import io.lumpq126.eclipsia.utilities.manager.FishCatalogManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import org.bukkit.Material;
