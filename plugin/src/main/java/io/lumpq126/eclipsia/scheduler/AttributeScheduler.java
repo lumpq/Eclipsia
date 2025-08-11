@@ -11,9 +11,19 @@ public class AttributeScheduler {
 
     public static void setAttribute(Player player) {
         AttributeInstance attackAttr = player.getAttribute(Attribute.ATTACK_DAMAGE);
+        AttributeInstance healthAttr = player.getAttribute(Attribute.MAX_HEALTH);
+        AttributeInstance speedAttr = player.getAttribute(Attribute.MOVEMENT_SPEED);
         if (attackAttr != null) {
             double str = PlayerInfoManager.getStat(player, "str");
             attackAttr.setBaseValue(str + 1);
+        }
+        if (healthAttr != null) {
+            double con = PlayerInfoManager.getStat(player, "con");
+            healthAttr.setBaseValue(con + 100);
+        }
+        if (speedAttr != null) {
+            double agi = PlayerInfoManager.getStat(player, "agi");
+            speedAttr.setBaseValue(0.1 + agi * 0.2 * 0.1);
         }
     }
 

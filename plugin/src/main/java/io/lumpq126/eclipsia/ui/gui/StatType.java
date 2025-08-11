@@ -31,11 +31,9 @@ public enum StatType {
         lore.add(Component.empty());
 
         lore.add(Mm.mm("<white>최대체력 증가 <color:#bbddbb>+ 1.0%"));  // 조금 진한 초록
-        if (st >= 5000) lore.add(Mm.mm("<white>물리공격력 증가 <color:#88aa88>+ 1.0%"));  // 더 진한 초록
         lore.add(Component.empty());
 
         lore.add(Mm.mm("<white>현재 적용중인 능력치 : </white><color:#44aa44>체력 + " + fmt(st * 1.0) + "%"));  // 진한 초록
-        if (st >= 5000) lore.add(Mm.mm("<white>현재 적용중인 능력치 : </white><color:#117711>물리공격력 증가 + " + fmt(st * 1.0) + "%"));  // 가장 진한 초록
 
         return lore;
     }),
@@ -79,10 +77,10 @@ public enum StatType {
         lore.add(Mm.mm("<color:#e5d6ff>마나 재생 속도를 증가시킵니다!"));  // 연한 보라
         lore.add(Component.empty());
 
-        lore.add(Mm.mm("<white>마나 재생 증가 <color:#c9a6ff>+ 1.0"));  // 조금 진한 보라
+        lore.add(Mm.mm("<white>마나 재생 증가 <color:#c9a6ff>+ 0.1"));  // 조금 진한 보라
         lore.add(Component.empty());
 
-        lore.add(Mm.mm("<white>현재 적용중인 능력치 : </white><color:#a86aff>마나 재생 + " + fmt(st * 1.0)));  // 진한 보라
+        lore.add(Mm.mm("<white>현재 적용중인 능력치 : </white><color:#a86aff>마나 재생 + " + fmt(st * 0.1)));  // 진한 보라
 
         return lore;
     }),
