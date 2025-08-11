@@ -1,7 +1,7 @@
 package io.lumpq126.eclipsia.ui.gui;
 
 import io.lumpq126.eclipsia.utilities.Mm;
-import io.lumpq126.eclipsia.utilities.manager.PlayerInfoManager;
+import io.lumpq126.eclipsia.utilities.storage.PlayerInfoStorage;
 import io.lumpq126.eclipsia.utilities.InventoryUtility;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -61,8 +61,8 @@ public class MainGUI {
         StatType type = StatType.fromName(statName);
         if (type == null) return ItemStack.of(Material.BARRIER); // fallback
 
-        int statValue = PlayerInfoManager.getStat(player, statName);
-        int statPoint = PlayerInfoManager.getStatPoint(player);
+        int statValue = PlayerInfoStorage.getStat(player, statName);
+        int statPoint = PlayerInfoStorage.getStatPoint(player);
 
         ItemStack item = new ItemStack(type.material);
         ItemMeta meta = item.getItemMeta();

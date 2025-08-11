@@ -3,10 +3,10 @@ package io.lumpq126.eclipsia.commands;
 import io.lumpq126.eclipsia.EclipsiaPlugin;
 import io.lumpq126.eclipsia.items.FishItems;
 import io.lumpq126.eclipsia.utilities.Mm;
-import io.lumpq126.eclipsia.utilities.manager.FishCatalogManager;
-import io.lumpq126.eclipsia.utilities.manager.MonthManager;
-import io.lumpq126.eclipsia.utilities.manager.PlayerInfoManager;
-import io.lumpq126.eclipsia.utilities.manager.PlayerPageManager;
+import io.lumpq126.eclipsia.utilities.storage.FishCatalogStorage;
+import io.lumpq126.eclipsia.utilities.storage.MonthStorage;
+import io.lumpq126.eclipsia.utilities.storage.PlayerInfoStorage;
+import io.lumpq126.eclipsia.utilities.storage.PlayerPageStorage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
@@ -124,7 +124,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
 
     private void handleMonth(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            int month = MonthManager.getCurrentMonth();
+            int month = MonthStorage.getCurrentMonth();
             sendMessage(sender, "현재 월: " + month + "월", NamedTextColor.YELLOW);
             return;
         }
@@ -133,7 +133,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
             try {
                 int month = Integer.parseInt(args[2]);
                 if (month < 1 || month > 12) throw new NumberFormatException();
-                MonthManager.setMonth(month);
+                MonthStorage.setMonth(month);
                 sendMessage(sender, "월이 " + month + "월로 설정되었습니다.", NamedTextColor.GREEN);
             } catch (NumberFormatException e) {
                 sendMessage(sender, "월은 1~12 사이여야 합니다.", NamedTextColor.RED);
@@ -142,7 +142,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 2 && args[1].equalsIgnoreCase("reset")) {
-            MonthManager.setMonth(1);
+            MonthStorage.setMonth(1);
             sendMessage(sender, "월이 1월로 리셋되었습니다.", NamedTextColor.GREEN);
         }
     }
@@ -162,9 +162,9 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
 
         for (Player target : targets) {
             switch (sub) {
-                case "get" -> sendMessage(sender, target.getName() + " 레벨: " + PlayerInfoManager.getLevel(target), NamedTextColor.YELLOW);
+                case "get" -> sendMessage(sender, target.getName() + " 레벨: " + PlayerInfoStorage.getLevel(target), NamedTextColor.YELLOW);
                 case "reset" -> {
-                    PlayerInfoManager.resetLevel(target);
+                    PlayerInfoStorage.resetLevel(target);
                     sendMessage(sender, target.getName() + "의 레벨이 1로 초기화됨.", NamedTextColor.GREEN);
                 }
                 case "set", "add" -> {
@@ -174,8 +174,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                     }
                     try {
                         int value = Integer.parseInt(args[3]);
-                        if (sub.equals("set")) PlayerInfoManager.setLevel(target, value);
-                        else PlayerInfoManager.addLevel(target, value);
+                        if (sub.equals("set")) PlayerInfoStorage.setLevel(target, value);
+                        else PlayerInfoStorage.addLevel(target, value);
                         sendMessage(sender, target.getName() + "의 레벨이 적용됨.", NamedTextColor.GREEN);
                     } catch (NumberFormatException e) {
                         sendMessage(sender, "숫자 형식이 잘못되었습니다.", NamedTextColor.RED);
@@ -201,9 +201,9 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
 
         for (Player target : targets) {
             switch (sub) {
-                case "get" -> sendMessage(sender, target.getName() + " 경험치: " + PlayerInfoManager.getExp(target), NamedTextColor.YELLOW);
+                case "get" -> sendMessage(sender, target.getName() + " 경험치: " + PlayerInfoStorage.getExp(target), NamedTextColor.YELLOW);
                 case "reset" -> {
-                    PlayerInfoManager.setExp(target, 0);
+                    PlayerInfoStorage.setExp(target, 0);
                     sendMessage(sender, target.getName() + "의 경험치가 초기화됨.", NamedTextColor.GREEN);
                 }
                 case "set", "add" -> {
@@ -213,8 +213,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                     }
                     try {
                         int value = Integer.parseInt(args[3]);
-                        if (sub.equals("set")) PlayerInfoManager.setExp(target, value);
-                        else PlayerInfoManager.addExp(target, value);
+                        if (sub.equals("set")) PlayerInfoStorage.setExp(target, value);
+                        else PlayerInfoStorage.addExp(target, value);
                         sendMessage(sender, target.getName() + "의 경험치가 적용됨.", NamedTextColor.GREEN);
                     } catch (NumberFormatException e) {
                         sendMessage(sender, "숫자 형식이 잘못되었습니다.", NamedTextColor.RED);
@@ -240,7 +240,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
             try {
                 int value = Integer.parseInt(args[4]);
                 for (Player p : targets) {
-                    PlayerInfoManager.addStatPoint(p, value);
+                    PlayerInfoStorage.addStatPoint(p, value);
                     sendMessage(sender, p.getName() + "의 스탯 포인트 증가됨.", NamedTextColor.GREEN);
                 }
             } catch (NumberFormatException e) {
@@ -259,7 +259,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
         }
 
         for (Player target : targets) {
-            Set<String> validStats = PlayerInfoManager.getStatKeysExceptPoint(target);
+            Set<String> validStats = PlayerInfoStorage.getStatKeysExceptPoint(target);
             if (!validStats.contains(stat)) {
                 sendMessage(sender, "알 수 없는 능력치입니다: " + stat, NamedTextColor.RED);
                 continue;
@@ -267,11 +267,11 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
 
             switch (sub) {
                 case "get" -> {
-                    int statValue = PlayerInfoManager.getStat(target, stat);
+                    int statValue = PlayerInfoStorage.getStat(target, stat);
                     sendMessage(sender, target.getName() + "의 " + stat + " 스탯: " + statValue, NamedTextColor.YELLOW);
                 }
                 case "reset" -> {
-                    PlayerInfoManager.setStat(target, stat, 0);
+                    PlayerInfoStorage.setStat(target, stat, 0);
                     sendMessage(sender, target.getName() + "의 " + stat + " 스탯이 리셋됨.", NamedTextColor.GREEN);
                 }
                 case "set", "add" -> {
@@ -281,8 +281,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                     }
                     try {
                         int value = Integer.parseInt(args[4]);
-                        if (sub.equals("set")) PlayerInfoManager.setStat(target, stat, value);
-                        else PlayerInfoManager.addStat(target, stat, value);
+                        if (sub.equals("set")) PlayerInfoStorage.setStat(target, stat, value);
+                        else PlayerInfoStorage.addStat(target, stat, value);
                         sendMessage(sender, target.getName() + "의 " + stat + " 스탯 적용됨.", NamedTextColor.GREEN);
                     } catch (NumberFormatException e) {
                         sendMessage(sender, "숫자를 입력해주세요.", NamedTextColor.RED);
@@ -298,10 +298,10 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
     }
 
     private void reload(CommandSender sender) {
-        FishCatalogManager.reload();
-        PlayerInfoManager.reload();
-        PlayerPageManager.reload();
-        MonthManager.reload();
+        FishCatalogStorage.reload();
+        PlayerInfoStorage.reload();
+        PlayerPageStorage.reload();
+        MonthStorage.reload();
         sender.sendMessage(Mm.mm("<green>리로드 완료!"));
     }
 
@@ -349,7 +349,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                 List<Player> targets = resolveTargets(sender, args[2]);
                 if (!targets.isEmpty()) {
                     Player target = targets.getFirst(); // 첫 번째 플레이어 기준
-                    Set<String> statKeys = PlayerInfoManager.getStatKeysExceptPoint(target);
+                    Set<String> statKeys = PlayerInfoStorage.getStatKeysExceptPoint(target);
                     for (String key : statKeys) {
                         if (key.toLowerCase().startsWith(args[3].toLowerCase())) {
                             completions.add(key);

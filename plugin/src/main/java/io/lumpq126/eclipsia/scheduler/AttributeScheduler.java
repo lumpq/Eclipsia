@@ -1,7 +1,7 @@
 package io.lumpq126.eclipsia.scheduler;
 
 import io.lumpq126.eclipsia.EclipsiaPlugin;
-import io.lumpq126.eclipsia.utilities.manager.PlayerInfoManager;
+import io.lumpq126.eclipsia.utilities.storage.PlayerInfoStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -15,20 +15,20 @@ public class AttributeScheduler {
         AttributeInstance speedAttr = player.getAttribute(Attribute.MOVEMENT_SPEED);
         AttributeInstance attackSpeedAttr = player.getAttribute(Attribute.ATTACK_SPEED);
         if (attackAttr != null) {
-            double str = PlayerInfoManager.getStat(player, "str");
+            double str = PlayerInfoStorage.getStat(player, "str");
             attackAttr.setBaseValue(str + 1);
         }
         if (healthAttr != null) {
-            double con = PlayerInfoManager.getStat(player, "con");
+            double con = PlayerInfoStorage.getStat(player, "con");
             healthAttr.setBaseValue(con + 100);
         }
         if (speedAttr != null) {
-            double agi = PlayerInfoManager.getStat(player, "agi");
+            double agi = PlayerInfoStorage.getStat(player, "agi");
             double moveSpeed = Math.min(agi, 2000) * 0.2;
             speedAttr.setBaseValue(0.1 + moveSpeed * 0.01 * 0.1);
         }
         if (attackSpeedAttr != null) {
-            double agi = PlayerInfoManager.getStat(player, "agi");
+            double agi = PlayerInfoStorage.getStat(player, "agi");
             if (agi >= 2000) {
                 double atkSpeed = (agi - 1999) * 0.04;
                 attackSpeedAttr.setBaseValue(4 + 4 * atkSpeed * 0.01);

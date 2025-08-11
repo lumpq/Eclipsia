@@ -1,4 +1,4 @@
-package io.lumpq126.eclipsia.utilities.manager;
+package io.lumpq126.eclipsia.utilities.storage;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -13,7 +13,7 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MonthManager {
+public class MonthStorage {
     private static File file;
     private static FileConfiguration config;
     private static int currentMonth;

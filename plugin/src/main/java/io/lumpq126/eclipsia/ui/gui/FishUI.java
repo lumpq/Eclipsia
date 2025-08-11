@@ -2,8 +2,8 @@ package io.lumpq126.eclipsia.ui.gui;
 
 import io.lumpq126.eclipsia.EclipsiaPlugin;
 import io.lumpq126.eclipsia.items.FishItems;
-import io.lumpq126.eclipsia.utilities.manager.FishCatalogManager;
-import io.lumpq126.eclipsia.utilities.manager.PlayerPageManager;
+import io.lumpq126.eclipsia.utilities.storage.FishCatalogStorage;
+import io.lumpq126.eclipsia.utilities.storage.PlayerPageStorage;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -30,7 +30,7 @@ public class FishUI {
     private static void openFishInventory(Player p, int page, boolean isCatalog) {
         FileConfiguration config;
         if (isCatalog) {
-            config = FishCatalogManager.getConfig();
+            config = FishCatalogStorage.getConfig();
         } else {
             config = EclipsiaPlugin.getFishConfig();
         }
@@ -45,7 +45,7 @@ public class FishUI {
         int totalPages = (int) Math.ceil(fishIds.size() / 21.0);
         page = Math.max(0, Math.min(page, totalPages - 1));
 
-        PlayerPageManager.setBookPage(p.getUniqueId(), page);
+        PlayerPageStorage.setBookPage(p.getUniqueId(), page);
 
         String title = isCatalog ? "§f\uEBBB緊" : "§f\uEBBB篇";
         Inventory inv = Bukkit.createInventory(p, 54, Component.text(title));

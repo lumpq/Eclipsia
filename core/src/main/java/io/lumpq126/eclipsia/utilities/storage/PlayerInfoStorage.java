@@ -1,4 +1,4 @@
-package io.lumpq126.eclipsia.utilities.manager;
+package io.lumpq126.eclipsia.utilities.storage;
 
 import io.lumpq126.eclipsia.events.PlayerExpUpEvent;
 import io.lumpq126.eclipsia.events.PlayerLevelUpEvent;
@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Level;
 
-public class PlayerInfoManager {
+public class PlayerInfoStorage {
     private static final int MAX_LEVEL = 999;
     private static final int INITIAL_LEVEL = 1;
     private static final int INITIAL_STAT = 5;

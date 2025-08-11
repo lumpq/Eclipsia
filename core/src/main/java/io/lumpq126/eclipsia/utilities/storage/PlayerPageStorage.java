@@ -1,4 +1,4 @@
-package io.lumpq126.eclipsia.utilities.manager;
+package io.lumpq126.eclipsia.utilities.storage;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Level;
 
-public class PlayerPageManager {
+public class PlayerPageStorage {
     private static File file;
     private static FileConfiguration config;
     private static JavaPlugin plugin;

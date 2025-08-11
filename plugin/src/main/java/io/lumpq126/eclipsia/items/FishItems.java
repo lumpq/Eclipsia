@@ -3,7 +3,7 @@ package io.lumpq126.eclipsia.items;
 import io.lumpq126.eclipsia.EclipsiaPlugin;
 import io.lumpq126.eclipsia.utilities.Mm;
 import io.lumpq126.eclipsia.utilities.calc.FishGradeCalculator;
-import io.lumpq126.eclipsia.utilities.manager.FishCatalogManager;
+import io.lumpq126.eclipsia.utilities.storage.FishCatalogStorage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import org.bukkit.Material;
@@ -80,8 +80,8 @@ public class FishItems {
                 "<white>길이 <dark_aqua>%.1f %s<white>, 무게 <gold>%.1f %s<white>의 <bold>%s</bold><white>를 낚았다! <bold><gray>(등급: <white>%s<gray>)</bold>",
                 length, lengthUnit, weight, weightUnit, section.getString("display.name", "Unknown Fish"), gradeStr)));
 
-        if (!FishCatalogManager.isFishUnlocked(p, id)) {
-            FishCatalogManager.addUnlockedFish(p, id);
+        if (!FishCatalogStorage.isFishUnlocked(p, id)) {
+            FishCatalogStorage.addUnlockedFish(p, id);
             p.sendMessage(Mm.mm(
                     "<bold><white>도감에 새로운 물고기</white> <bold>" +
                             section.getString("display.name", "Unknown Fish") +

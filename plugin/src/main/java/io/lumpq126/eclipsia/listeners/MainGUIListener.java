@@ -1,7 +1,7 @@
 package io.lumpq126.eclipsia.listeners;
 
 import io.lumpq126.eclipsia.utilities.Mm;
-import io.lumpq126.eclipsia.utilities.manager.PlayerInfoManager;
+import io.lumpq126.eclipsia.utilities.storage.PlayerInfoStorage;
 import io.lumpq126.eclipsia.ui.gui.MainGUI;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Sound;
@@ -20,7 +20,7 @@ public class MainGUIListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
-        PlayerInfoManager.playerInitialSetting(p);
+        PlayerInfoStorage.playerInitialSetting(p);
     }
 
     @EventHandler
@@ -68,7 +68,7 @@ public class MainGUIListener implements Listener {
     }
 
     private void handleStatPointAllocation(Player player, InventoryClickEvent event, String stat) {
-        int availablePoints = PlayerInfoManager.getStatPoint(player);
+        int availablePoints = PlayerInfoStorage.getStatPoint(player);
         if (availablePoints < 1) {
             player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1.0f, 1.5f);
             player.sendMessage(Mm.mm("<red>분배가능한 능력치가 부족합니다!"));
@@ -84,7 +84,7 @@ public class MainGUIListener implements Listener {
             return;
         }
 
-        int currentStatValue = PlayerInfoManager.getStat(player, stat);  // 현재 스탯 값 조회
+        int currentStatValue = PlayerInfoStorage.getStat(player, stat);  // 현재 스탯 값 조회
         int maxStat = 9999;
 
         // 증가 후 값이 9999 초과하지 않도록 조정
@@ -98,8 +98,8 @@ public class MainGUIListener implements Listener {
             }
         }
 
-        PlayerInfoManager.addStat(player, stat, pointsToUse);
-        PlayerInfoManager.addStatPoint(player, -pointsToUse);
+        PlayerInfoStorage.addStat(player, stat, pointsToUse);
+        PlayerInfoStorage.addStatPoint(player, -pointsToUse);
 
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 2.0f);
         player.sendMessage(Mm.mm("<green>능력치가 " + pointsToUse + " 상승했습니다!"));

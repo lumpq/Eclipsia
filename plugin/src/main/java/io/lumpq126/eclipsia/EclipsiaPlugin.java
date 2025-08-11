@@ -1,7 +1,9 @@
 package io.lumpq126.eclipsia;
 
 import io.lumpq126.eclipsia.commands.EclipsiaCommand;
+import io.lumpq126.eclipsia.commands.ElementReload;
 import io.lumpq126.eclipsia.commands.FishCommand;
+import io.lumpq126.eclipsia.elements.ElementEntity;
 import io.lumpq126.eclipsia.listeners.FishListener;
 import io.lumpq126.eclipsia.listeners.LevelUPListener;
 import io.lumpq126.eclipsia.listeners.MainGUIListener;
@@ -9,12 +11,10 @@ import io.lumpq126.eclipsia.nms.NMSHandler;
 import io.lumpq126.eclipsia.nms.NMSHandlerFactory;
 import io.lumpq126.eclipsia.scheduler.AttributeScheduler;
 import io.lumpq126.eclipsia.utilities.Mm;
-import io.lumpq126.eclipsia.utilities.manager.FishCatalogManager;
-import io.lumpq126.eclipsia.utilities.manager.MonthManager;
-import io.lumpq126.eclipsia.utilities.manager.PlayerInfoManager;
-import io.lumpq126.eclipsia.utilities.manager.PlayerPageManager;
+import io.lumpq126.eclipsia.utilities.storage.*;
 import io.lumpq126.eclipsia.scheduler.ActionBarScheduler;
 import net.dv8tion.jda.api.JDA;
+import org.bukkit.command.defaults.ReloadCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -41,10 +41,13 @@ public final class EclipsiaPlugin extends JavaPlugin {
         instance = this;
         fishConfig = YamlConfiguration.loadConfiguration(file);
 
-        MonthManager.init(this);
-        PlayerInfoManager.init(this);
-        PlayerPageManager.init(this);
-        FishCatalogManager.init(this);
+        MonthStorage.init(this);
+        ElementEntity.init(this);
+        PlayerInfoStorage.init(this);
+        PlayerPageStorage.init(this);
+        FishCatalogStorage.init(this);
+
+        ElementStorage.load(this);
 
         getServer().getPluginManager().registerEvents(new FishListener(), this);
         getServer().getPluginManager().registerEvents(new MainGUIListener(), this);
@@ -52,6 +55,7 @@ public final class EclipsiaPlugin extends JavaPlugin {
 
         Objects.requireNonNull(getCommand("fish")).setExecutor(new FishCommand());
         Objects.requireNonNull(getCommand("eclipsia")).setExecutor(new EclipsiaCommand());
+        Objects.requireNonNull(getCommand("element")).setExecutor(new ElementReload(this));
 
         Objects.requireNonNull(getCommand("eclipsia")).setTabCompleter(new EclipsiaCommand());
 

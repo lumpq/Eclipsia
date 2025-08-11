@@ -2,8 +2,8 @@ package io.lumpq126.eclipsia.listeners;
 
 import io.lumpq126.eclipsia.EclipsiaPlugin;
 import io.lumpq126.eclipsia.items.FishItems;
-import io.lumpq126.eclipsia.utilities.manager.MonthManager;
-import io.lumpq126.eclipsia.utilities.manager.PlayerPageManager;
+import io.lumpq126.eclipsia.utilities.storage.MonthStorage;
+import io.lumpq126.eclipsia.utilities.storage.PlayerPageStorage;
 import io.lumpq126.eclipsia.ui.gui.FishUI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -40,7 +40,7 @@ public class FishListener implements Listener {
         if (item == null || !item.hasItemMeta()) return;
 
         int slot = e.getSlot();
-        int currentPage = PlayerPageManager.getBookPage(p.getUniqueId());
+        int currentPage = PlayerPageStorage.getBookPage(p.getUniqueId());
 
         if (item.getType() == Material.PAPER) {
             ItemMeta meta = item.getItemMeta();
@@ -53,13 +53,13 @@ public class FishListener implements Listener {
 
             if (slot == 46 && name.contains("이전")) {
                 FishUI.openBook(p, currentPage - 1);
-                PlayerPageManager.setBookPage(p.getUniqueId(), currentPage - 1);
-                PlayerPageManager.save();
+                PlayerPageStorage.setBookPage(p.getUniqueId(), currentPage - 1);
+                PlayerPageStorage.save();
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
             } else if (slot == 52 && name.contains("다음")) {
                 FishUI.openBook(p, currentPage + 1);
-                PlayerPageManager.setBookPage(p.getUniqueId(), currentPage + 1);
-                PlayerPageManager.save();
+                PlayerPageStorage.setBookPage(p.getUniqueId(), currentPage + 1);
+                PlayerPageStorage.save();
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
             }
         }
@@ -108,7 +108,7 @@ public class FishListener implements Listener {
         if (item == null || !item.hasItemMeta()) return;
 
         int slot = e.getSlot();
-        int currentPage = PlayerPageManager.getBookPage(p.getUniqueId());
+        int currentPage = PlayerPageStorage.getBookPage(p.getUniqueId());
 
         if (item.getType() == Material.PAPER) {
             ItemMeta meta = item.getItemMeta();
@@ -120,13 +120,13 @@ public class FishListener implements Listener {
             String name = (display instanceof TextComponent tc) ? tc.content() : PlainTextComponentSerializer.plainText().serialize(display);
             if (slot == 46 && name.contains("이전")) {
                 FishUI.openCatalog(p, currentPage - 1);
-                PlayerPageManager.setBookPage(p.getUniqueId(), currentPage - 1);
-                PlayerPageManager.save();
+                PlayerPageStorage.setBookPage(p.getUniqueId(), currentPage - 1);
+                PlayerPageStorage.save();
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
             } else if (slot == 52 && name.contains("다음")) {
                 FishUI.openCatalog(p, currentPage + 1);
-                PlayerPageManager.setBookPage(p.getUniqueId(), currentPage + 1);
-                PlayerPageManager.save();
+                PlayerPageStorage.setBookPage(p.getUniqueId(), currentPage + 1);
+                PlayerPageStorage.save();
                 p.playSound(p.getLocation(), Sound.UI_BUTTON_CLICK, 1.0f, 1.0f);
             }
         }
@@ -136,14 +136,14 @@ public class FishListener implements Listener {
     public void onBookClose(InventoryCloseEvent e) {
         if (!(e.getPlayer() instanceof Player player)) return;
         if (!e.getView().title().equals(Component.text("§f\uEBBB篇"))) return;
-        PlayerPageManager.setBookPage(player.getUniqueId(), 0);
+        PlayerPageStorage.setBookPage(player.getUniqueId(), 0);
     }
 
     @EventHandler
     public void onCatalogClose(InventoryCloseEvent e) {
         if (!(e.getPlayer() instanceof Player player)) return;
         if (!e.getView().title().equals(Component.text("§f\uEBBB緊"))) return;
-        PlayerPageManager.setBookPage(player.getUniqueId(), 0);
+        PlayerPageStorage.setBookPage(player.getUniqueId(), 0);
     }
 
     @EventHandler
@@ -153,7 +153,7 @@ public class FishListener implements Listener {
 
         Player player = event.getPlayer();
         FileConfiguration fishConfig = EclipsiaPlugin.getFishConfig();
-        int currentMonth = MonthManager.getCurrentMonth();
+        int currentMonth = MonthStorage.getCurrentMonth();
 
         List<String> candidates = getAvailableFishIds(fishConfig, currentMonth);
         if (candidates.isEmpty()) return;
