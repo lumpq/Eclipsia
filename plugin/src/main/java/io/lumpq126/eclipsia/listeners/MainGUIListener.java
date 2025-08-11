@@ -43,13 +43,14 @@ public class MainGUIListener implements Listener {
         else if (title.equals("main-stat")) {
             event.setCancelled(true);
             if (event.getSlot() == 11) {
-                if (PlayerInfoManager.getStatPoint(player) <= 1) {
+                if (PlayerInfoManager.getStatPoint(player) < 1) {
                     player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1.0f, 1.5f);
                     return;
                 }
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 2.0f);
                 PlayerInfoManager.addStat(player, "str", 1);
                 PlayerInfoManager.addStatPoint(player, -1);
+                event.getInventory().setItem(11, MainGUI.statItem(player, "str"));
             }
         }
     }
