@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-public class NMSHandler_v1_21_R3 implements NMSHandler {
+public class NMSHandlerImpl implements NMSHandler {
     @Override
     public Inventory createInventory(Player owner, int size, String title) {
         return Bukkit.createInventory(owner, size, Mm.mm(title));
