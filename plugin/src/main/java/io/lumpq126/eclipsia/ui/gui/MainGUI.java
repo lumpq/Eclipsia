@@ -4,6 +4,7 @@ import io.lumpq126.eclipsia.utilities.Mm;
 import io.lumpq126.eclipsia.utilities.manager.PlayerInfoManager;
 import io.lumpq126.eclipsia.utilities.InventoryUtility;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -22,14 +23,10 @@ public class MainGUI {
         ItemStack statPaper = ItemStack.of(Material.PAPER);
         ItemMeta homeMeta = homePaper.getItemMeta();
         ItemMeta statMeta = statPaper.getItemMeta();
-
-        // bold, italic 모두 false
-        homeMeta.displayName(Mm.mm("main-home", false, false));
+        homeMeta.displayName(Mm.mm("main-home"));
         homePaper.setItemMeta(homeMeta);
-
-        statMeta.displayName(Mm.mm("main-stat", false, false));
-        statPaper.setItemMeta(statMeta);
-
+        statMeta.displayName(Mm.mm("main-stat"));
+        statPaper.setItemMeta(homeMeta);
         inventory.setItem(0, homePaper);
         inventory.setItem(9, statPaper);
         player.openInventory(inventory);
@@ -42,16 +39,14 @@ public class MainGUI {
         ItemStack statPaper = ItemStack.of(Material.PAPER);
         ItemMeta homeMeta = homePaper.getItemMeta();
         ItemMeta statMeta = statPaper.getItemMeta();
-
-        homeMeta.displayName(Mm.mm("main-home", false, false));
+        homeMeta.displayName(Mm.mm("main-home"));
         homePaper.setItemMeta(homeMeta);
-
-        statMeta.displayName(Mm.mm("main-stat", false, false));
-        statPaper.setItemMeta(statMeta);
-
+        statMeta.displayName(Mm.mm("main-stat"));
+        statPaper.setItemMeta(homeMeta);
         inventory.setItem(0, homePaper);
         inventory.setItem(9, statPaper);
 
+        // 여기에 6개의 스탯 아이템을 순서대로 배치
         inventory.setItem(11, statItem(player, "str")); // 근력
         inventory.setItem(12, statItem(player, "con")); // 건강
         inventory.setItem(13, statItem(player, "agi")); // 민첩
@@ -73,24 +68,27 @@ public class MainGUI {
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return item;
 
+        // 철검과 네더라이트 갑옷일 경우 능력치 숨기기
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         String gradient = type.color.replace("<gradient:", "").replace(">", "");
         Component displayName = Mm.mm(
-                String.format("%s:white%s<gray> : </gray><yellow>[ %d ]</yellow>",
+                String.format("<italic:false>%s:white><bold>%s</bold><gray> : </gray><yellow><bold>[ %d ]</bold></yellow>",
                         gradient, type.display, statValue), false, false);
         meta.displayName(displayName);
 
-        // 그대로 사용, italic 제거 안함 (style 없으니 걱정없음)
-        List<Component> lore = new ArrayList<>(type.loreFunction.apply(statValue, statPoint));
+        List<Component> lore = new ArrayList<>();
+        for (Component line : type.loreFunction.apply(statValue, statPoint)) {
+            lore.add(removeItalic(line));
+        }
 
         if (statValue >= 9999) {
             addEmptyLine(lore);
-            lore.add(Mm.mm("<gradient:#e5ccff:#7f00ff>최대 레벨</gradient>", false, false));
+            lore.add(Mm.mm("<gradient:#e5ccff:#7f00ff><bold>최대 레벨</bold></gradient>", false, false));
         }
 
         addEmptyLine(lore);
-        lore.add(Mm.mm("<white>분배 가능한 능력치</white><gray> : </gray><gold>" + statPoint + "</gold>", false, false));
+        lore.add(Mm.mm("<white>분배 가능한 능력치</white><gray> : </gray><gold><bold>" + statPoint + "</bold></gold>", false, false));
 
         addEmptyLine(lore);
         lore.add(Mm.mm("<gray>----------------------------------------</gray>", false, false));
@@ -104,5 +102,9 @@ public class MainGUI {
 
     private static void addEmptyLine(List<Component> lore) {
         lore.add(Component.empty());
+    }
+
+    private static Component removeItalic(Component component) {
+        return component.decoration(TextDecoration.ITALIC, false);
     }
 }

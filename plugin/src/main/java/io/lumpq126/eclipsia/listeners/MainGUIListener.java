@@ -34,16 +34,16 @@ public class MainGUIListener implements Listener {
         String title = PlainTextComponentSerializer.plainText().serialize(event.getView().title());
         if (title.equals("main-home")) {
             event.setCancelled(true);
-            if (event.getSlot() == 0) {
-                MainGUI.openHomeGUI(player);
-            }
-            else if (event.getSlot() == 9) {
+            if (event.getSlot() == 9) {
                 MainGUI.openStatGUI(player);
             }
         }
         else if (title.equals("main-stat")) {
             event.setCancelled(true);
-            if (event.getSlot() == 11) {
+            if (event.getSlot() == 0) {
+                MainGUI.openHomeGUI(player);
+            }
+            else if (event.getSlot() == 11) {
                 if (PlayerInfoManager.getStatPoint(player) < 1) {
                     player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1.0f, 1.5f);
                     player.sendMessage(Mm.mm("<red>분배가능한 능력치가 부족합니다!"));
