@@ -7,6 +7,7 @@ import io.lumpq126.eclipsia.listeners.LevelUPListener;
 import io.lumpq126.eclipsia.listeners.MainGUIListener;
 import io.lumpq126.eclipsia.nms.NMSHandler;
 import io.lumpq126.eclipsia.nms.NMSHandlerFactory;
+import io.lumpq126.eclipsia.scheduler.AttributeScheduler;
 import io.lumpq126.eclipsia.utilities.Mm;
 import io.lumpq126.eclipsia.utilities.manager.FishCatalogManager;
 import io.lumpq126.eclipsia.utilities.manager.MonthManager;
@@ -83,6 +84,7 @@ public final class EclipsiaPlugin extends JavaPlugin {
          */
 
         ActionBarScheduler.start();
+        AttributeScheduler.start();
     }
 
     @Override
