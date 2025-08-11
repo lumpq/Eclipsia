@@ -8,9 +8,12 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
+
+import java.util.Map;
 
 public class MainGUIListener implements Listener {
 
@@ -31,7 +34,9 @@ public class MainGUIListener implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
+
         String title = PlainTextComponentSerializer.plainText().serialize(event.getView().title());
+
         if (title.equals("main-home")) {
             event.setCancelled(true);
             if (event.getSlot() == 9) {
@@ -40,81 +45,51 @@ public class MainGUIListener implements Listener {
         }
         else if (title.equals("main-stat")) {
             event.setCancelled(true);
+
             if (event.getSlot() == 0) {
                 MainGUI.openHomeGUI(player);
+                return;
             }
-            else if (event.getSlot() == 11) {
-                if (PlayerInfoManager.getStatPoint(player) < 1) {
-                    player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1.0f, 1.5f);
-                    player.sendMessage(Mm.mm("<red>분배가능한 능력치가 부족합니다!"));
-                    return;
-                }
-                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 2.0f);
-                player.sendMessage(Mm.mm("<green>능력치가 상승했습니다!"));
-                PlayerInfoManager.addStat(player, "str", 1);
-                PlayerInfoManager.addStatPoint(player, -1);
-                event.getInventory().setItem(11, MainGUI.statItem(player, "str"));
-            }
-            else if (event.getSlot() == 12) {
-                if (PlayerInfoManager.getStatPoint(player) < 1) {
-                    player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1.0f, 1.5f);
-                    player.sendMessage(Mm.mm("<red>분배가능한 능력치가 부족합니다!"));
-                    return;
-                }
-                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 2.0f);
-                player.sendMessage(Mm.mm("<green>능력치가 상승했습니다!"));
-                PlayerInfoManager.addStat(player, "con", 1);
-                PlayerInfoManager.addStatPoint(player, -1);
-                event.getInventory().setItem(12, MainGUI.statItem(player, "con"));
-            }
-            else if (event.getSlot() == 13) {
-                if (PlayerInfoManager.getStatPoint(player) < 1) {
-                    player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1.0f, 1.5f);
-                    player.sendMessage(Mm.mm("<red>분배가능한 능력치가 부족합니다!"));
-                    return;
-                }
-                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 2.0f);
-                player.sendMessage(Mm.mm("<green>능력치가 상승했습니다!"));
-                PlayerInfoManager.addStat(player, "agi", 1);
-                PlayerInfoManager.addStatPoint(player, -1);
-                event.getInventory().setItem(13, MainGUI.statItem(player, "agi"));
-            }
-            else if (event.getSlot() == 20) {
-                if (PlayerInfoManager.getStatPoint(player) < 1) {
-                    player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1.0f, 1.5f);
-                    player.sendMessage(Mm.mm("<red>분배가능한 능력치가 부족합니다!"));
-                    return;
-                }
-                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 2.0f);
-                player.sendMessage(Mm.mm("<green>능력치가 상승했습니다!"));
-                PlayerInfoManager.addStat(player, "dex", 1);
-                PlayerInfoManager.addStatPoint(player, -1);
-                event.getInventory().setItem(20, MainGUI.statItem(player, "dex"));
-            }
-            else if (event.getSlot() == 21) {
-                if (PlayerInfoManager.getStatPoint(player) < 1) {
-                    player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1.0f, 1.5f);
-                    player.sendMessage(Mm.mm("<red>분배가능한 능력치가 부족합니다!"));
-                    return;
-                }
-                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 2.0f);
-                player.sendMessage(Mm.mm("<green>능력치가 상승했습니다!"));
-                PlayerInfoManager.addStat(player, "wis", 1);
-                PlayerInfoManager.addStatPoint(player, -1);
-                event.getInventory().setItem(21, MainGUI.statItem(player, "wis"));
-            }
-            else if (event.getSlot() == 22) {
-                if (PlayerInfoManager.getStatPoint(player) < 1) {
-                    player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1.0f, 1.5f);
-                    player.sendMessage(Mm.mm("<red>분배가능한 능력치가 부족합니다!"));
-                    return;
-                }
-                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 2.0f);
-                player.sendMessage(Mm.mm("<green>능력치가 상승했습니다!"));
-                PlayerInfoManager.addStat(player, "int", 1);
-                PlayerInfoManager.addStatPoint(player, -1);
-                event.getInventory().setItem(22, MainGUI.statItem(player, "int"));
-            }
+
+            Map<Integer, String> slotStatMap = Map.of(
+                    11, "str",
+                    12, "con",
+                    13, "agi",
+                    20, "dex",
+                    21, "wis",
+                    22, "int"
+            );
+
+            if (!slotStatMap.containsKey(event.getSlot())) return;
+
+            String stat = slotStatMap.get(event.getSlot());
+            handleStatPointAllocation(player, event, stat);
         }
+    }
+
+    private void handleStatPointAllocation(Player player, InventoryClickEvent event, String stat) {
+        int availablePoints = PlayerInfoManager.getStatPoint(player);
+        if (availablePoints < 1) {
+            player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1.0f, 1.5f);
+            player.sendMessage(Mm.mm("<red>분배가능한 능력치가 부족합니다!"));
+            return;
+        }
+
+        int pointsToUse;
+
+        if (event.getClick() == ClickType.LEFT) {
+            pointsToUse = 1;
+        } else if (event.getClick() == ClickType.RIGHT) {
+            pointsToUse = availablePoints;
+        } else {
+            return;
+        }
+
+        PlayerInfoManager.addStat(player, stat, pointsToUse);
+        PlayerInfoManager.addStatPoint(player, -pointsToUse);
+
+        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 2.0f);
+        player.sendMessage(Mm.mm("<green>능력치가 " + pointsToUse + "만큼 상승했습니다!"));
+        event.getInventory().setItem(event.getSlot(), MainGUI.statItem(player, stat));
     }
 }

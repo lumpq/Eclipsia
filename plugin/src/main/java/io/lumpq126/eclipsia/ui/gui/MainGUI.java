@@ -37,14 +37,19 @@ public class MainGUI {
 
         ItemStack homePaper = ItemStack.of(Material.PAPER);
         ItemStack statPaper = ItemStack.of(Material.PAPER);
+        ItemStack resetPaper = ItemStack.of(Material.PAPER);
         ItemMeta homeMeta = homePaper.getItemMeta();
         ItemMeta statMeta = statPaper.getItemMeta();
-        homeMeta.displayName(Mm.mm("main-home"));
+        ItemMeta resetMeta = resetPaper.getItemMeta();
+        homeMeta.displayName(Mm.mm("main-home", true, false));
         homePaper.setItemMeta(homeMeta);
-        statMeta.displayName(Mm.mm("main-stat"));
+        statMeta.displayName(Mm.mm("main-stat", true, false));
         statPaper.setItemMeta(homeMeta);
+        resetMeta.displayName(Mm.mm("reset", true, false));
+        resetPaper.setItemMeta(resetMeta);
         inventory.setItem(0, homePaper);
         inventory.setItem(9, statPaper);
+        inventory.setItem(24, resetPaper);
 
         // 여기에 6개의 스탯 아이템을 순서대로 배치
         inventory.setItem(11, statItem(player, "str")); // 근력

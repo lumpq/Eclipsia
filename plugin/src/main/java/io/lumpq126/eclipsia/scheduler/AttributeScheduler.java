@@ -23,7 +23,7 @@ public class AttributeScheduler {
         }
         if (speedAttr != null) {
             double agi = PlayerInfoManager.getStat(player, "agi");
-            speedAttr.setBaseValue(0.1 + agi * 0.2 * 0.1);
+            speedAttr.setBaseValue(0.1 + agi * 0.0002);
         }
     }
 
