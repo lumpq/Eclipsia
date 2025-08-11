@@ -89,7 +89,7 @@ public class MainGUIListener implements Listener {
         PlayerInfoManager.addStatPoint(player, -pointsToUse);
 
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 2.0f);
-        player.sendMessage(Mm.mm("<green>능력치가 " + pointsToUse + "만큼 상승했습니다!"));
+        player.sendMessage(Mm.mm("<green>능력치가 " + pointsToUse + " 상승했습니다!"));
         event.getInventory().setItem(event.getSlot(), MainGUI.statItem(player, stat));
     }
 }
