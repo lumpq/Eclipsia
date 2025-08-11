@@ -13,8 +13,7 @@ public class AttributeScheduler {
         AttributeInstance attackAttr = player.getAttribute(Attribute.ATTACK_DAMAGE);
         if (attackAttr != null) {
             double str = PlayerInfoManager.getStat(player, "str");
-            double base = attackAttr.getBaseValue();
-            attackAttr.setBaseValue(str + base);
+            attackAttr.setBaseValue(str + 1);
         }
     }
 
