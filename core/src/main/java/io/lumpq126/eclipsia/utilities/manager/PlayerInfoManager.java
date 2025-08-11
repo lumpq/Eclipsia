@@ -1,5 +1,6 @@
 package io.lumpq126.eclipsia.utilities.manager;
 
+import io.lumpq126.eclipsia.events.PlayerExpUpEvent;
 import io.lumpq126.eclipsia.events.PlayerLevelUpEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -19,8 +20,6 @@ public class PlayerInfoManager {
     private static final int INITIAL_LEVEL = 1;
     private static final int INITIAL_STAT = 5;
     private static final int STAT_POINT_PER_LEVEL = 5;
-    private static final double EXP_BASE = 10;
-    private static final double EXP_EXPONENT = 2.25;
     private static final int INITIAL_SIA = 10000;
 
     private static File file;
@@ -71,12 +70,11 @@ public class PlayerInfoManager {
         }
     }
 
-
     public static Set<String> getStatKeysExceptPoint(Player player) {
         String statPath = path(player, "stat");
         if (config.getConfigurationSection(statPath) == null) return new HashSet<>();
 
-        Set<String> keys = Objects.requireNonNull(config.getConfigurationSection(statPath)).getKeys(false);
+        Set<String> keys = new HashSet<>(Objects.requireNonNull(config.getConfigurationSection(statPath)).getKeys(false));
         keys.remove("point");  // point 키 제외
         return keys;
     }
@@ -87,9 +85,9 @@ public class PlayerInfoManager {
         return player.getUniqueId() + "." + String.join(".", keys);
     }
 
-    public static int getRequiredExp(int level) {
-        if (level >= MAX_LEVEL) return Integer.MAX_VALUE;
-        return (int) (EXP_BASE * Math.pow(level, EXP_EXPONENT));
+    public static double getRequiredExp(int level) {
+        if (level >= MAX_LEVEL) return 0;
+        return level * 100;
     }
 
     // ────────────────────── 초기화 ──────────────────────
@@ -121,19 +119,23 @@ public class PlayerInfoManager {
     }
 
     public static void deletePlayerData(Player player) {
-        config.set(player.getUniqueId().toString(), null);
-        save();
+        synchronized (lock) {
+            config.set(player.getUniqueId().toString(), null);
+            save();
+        }
     }
 
     // ────────────────────── CURRENCIES ──────────────────────
 
     public static int getSia(Player player) {
-        return config.getInt(path(player, "currencies", "sia"), 10000);
+        return config.getInt(path(player, "currencies", "sia"), INITIAL_SIA);
     }
 
     public static void setSia(Player player, int value) {
-        config.set(path(player, "currencies", "sia"), value);
-        save();
+        synchronized (lock) {
+            config.set(path(player, "currencies", "sia"), value);
+            save();
+        }
     }
 
     public static void addSia(Player player, int value) {
@@ -148,18 +150,26 @@ public class PlayerInfoManager {
         return config.getInt(path(player, "level"), INITIAL_LEVEL);
     }
 
-    public static void setLevel(Player player, int level) {
-        config.set(path(player, "level"), level);
-        save();
+    public static synchronized void setLevel(Player player, int level) {
+        int clampedLevel = Math.min(level, MAX_LEVEL);
+        int oldLevel = getLevel(player);
+        if (clampedLevel > oldLevel) {
+            levelUp(player, oldLevel, clampedLevel);
+        } else {
+            synchronized (lock) {
+                config.set(path(player, "level"), clampedLevel);
+                save();
+            }
+        }
     }
 
-    public static void addLevel(Player player, int amount) {
+    public static synchronized void addLevel(Player player, int amount) {
         int oldLevel = getLevel(player);
         int newLevel = Math.min(oldLevel + amount, MAX_LEVEL);
         levelUp(player, oldLevel, newLevel);
     }
 
-    public static void resetLevel(Player player) {
+    public static synchronized void resetLevel(Player player) {
         playerInfoReset(player);
         save();
     }
@@ -168,20 +178,48 @@ public class PlayerInfoManager {
         return config.getDouble(path(player, "exp"), 0.0);
     }
 
-    public static void setExp(Player player, double exp) {
-        config.set(path(player, "exp"), exp);
-        save();
+    public static synchronized void setExp(Player player, double exp) {
+        int currentLevel = getLevel(player);
+
+        if (currentLevel >= MAX_LEVEL) {
+            synchronized (lock) {
+                config.set(path(player, "exp"), 0);
+                save();
+            }
+            return;
+        }
+
+        double currentExp = exp;
+        int newLevel = currentLevel;
+
+        while (currentExp >= getRequiredExp(newLevel) && newLevel < MAX_LEVEL) {
+            currentExp -= getRequiredExp(newLevel);
+            newLevel++;
+        }
+
+        if (newLevel > currentLevel) {
+            levelUp(player, currentLevel, newLevel);
+        }
+
+        synchronized (lock) {
+            config.set(path(player, "level"), newLevel);
+            config.set(path(player, "exp"), currentExp);
+            save();
+        }
+
+        Bukkit.getPluginManager().callEvent(new PlayerExpUpEvent(player, 0, currentExp, newLevel));
     }
 
-    public static void addExp(Player player, double exp) {
+    public static synchronized void addExp(Player player, double exp) {
         int currentLevel = getLevel(player);
+        double oldExp = getExp(player);
 
         if (currentLevel >= MAX_LEVEL) {
             setExp(player, 0);
             return;
         }
 
-        double currentExp = getExp(player) + exp;
+        double currentExp = oldExp + exp;
         int newLevel = currentLevel;
 
         while (currentExp >= getRequiredExp(newLevel)) {
@@ -197,17 +235,24 @@ public class PlayerInfoManager {
             levelUp(player, currentLevel, newLevel);
         }
 
-        setLevel(player, newLevel);
-        setExp(player, currentExp);
+        synchronized (lock) {
+            config.set(path(player, "level"), newLevel);
+            config.set(path(player, "exp"), currentExp);
+            save();
+        }
+
+        Bukkit.getPluginManager().callEvent(new PlayerExpUpEvent(player, oldExp, currentExp, newLevel));
     }
 
     private static void levelUp(Player player, int oldLevel, int newLevel) {
         if (newLevel <= oldLevel) return;
 
-        setLevel(player, newLevel);
-        setExp(player, 0); // 경험치 초기화
-
-        addStatPoint(player, (newLevel - oldLevel) * STAT_POINT_PER_LEVEL);
+        synchronized (lock) {
+            config.set(path(player, "level"), newLevel);
+            config.set(path(player, "exp"), 0); // 경험치 초기화
+            addStatPoint(player, (newLevel - oldLevel) * STAT_POINT_PER_LEVEL);
+            save();
+        }
 
         // 레벨업 이벤트 호출 - 사용자 정의 이벤트로 처리
         Bukkit.getPluginManager().callEvent(new PlayerLevelUpEvent(player, oldLevel, newLevel));
@@ -220,8 +265,10 @@ public class PlayerInfoManager {
     }
 
     public static void setStatPoint(Player player, int point) {
-        config.set(path(player, "stat", "point"), point);
-        save();
+        synchronized (lock) {
+            config.set(path(player, "stat", "point"), point);
+            save();
+        }
     }
 
     public static void addStatPoint(Player player, int amount) {
@@ -235,8 +282,10 @@ public class PlayerInfoManager {
     }
 
     public static void setStat(Player player, String statName, int value) {
-        config.set(path(player, "stat", statName), value);
-        save();
+        synchronized (lock) {
+            config.set(path(player, "stat", statName), value);
+            save();
+        }
     }
 
     public static void addStat(Player player, String statName, int amount) {

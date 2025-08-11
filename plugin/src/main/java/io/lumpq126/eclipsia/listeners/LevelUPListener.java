@@ -1,6 +1,7 @@
 package io.lumpq126.eclipsia.listeners;
 
 
+import io.lumpq126.eclipsia.events.PlayerExpUpEvent;
 import io.lumpq126.eclipsia.events.PlayerLevelUpEvent;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Sound;
@@ -13,5 +14,11 @@ public class LevelUPListener implements Listener {
     public void onLevelUP(PlayerLevelUpEvent event) {
         event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1.0f, 2.0f);
         event.getPlayer().sendMessage(Component.text("§l§a레벨 상승! " + event.getOldLevel() + " -> " + event.getNewLevel()));
+    }
+
+    @EventHandler
+    public void onExpUP(PlayerExpUpEvent event) {
+        if (event.getLevel() < 999) return;
+        event.setCancelled(true);
     }
 }
