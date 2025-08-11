@@ -41,11 +41,11 @@ public class MainGUI {
         ItemMeta homeMeta = homePaper.getItemMeta();
         ItemMeta statMeta = statPaper.getItemMeta();
         ItemMeta resetMeta = resetPaper.getItemMeta();
-        homeMeta.displayName(Mm.mm("main-home", true, false));
+        homeMeta.displayName(Mm.mm("main-home", true, true));
         homePaper.setItemMeta(homeMeta);
-        statMeta.displayName(Mm.mm("main-stat", true, false));
+        statMeta.displayName(Mm.mm("main-stat", true, true));
         statPaper.setItemMeta(homeMeta);
-        resetMeta.displayName(Mm.mm("reset", true, false));
+        resetMeta.displayName(Mm.mm("reset", true, true));
         resetPaper.setItemMeta(resetMeta);
         inventory.setItem(0, homePaper);
         inventory.setItem(9, statPaper);
