@@ -76,13 +76,26 @@ public class MainGUIListener implements Listener {
         }
 
         int pointsToUse;
-
         if (event.getClick() == ClickType.LEFT) {
             pointsToUse = 1;
         } else if (event.getClick() == ClickType.RIGHT) {
             pointsToUse = availablePoints;
         } else {
             return;
+        }
+
+        int currentStatValue = PlayerInfoManager.getStat(player, stat);  // 현재 스탯 값 조회
+        int maxStat = 9999;
+
+        // 증가 후 값이 9999 초과하지 않도록 조정
+        if (currentStatValue + pointsToUse > maxStat) {
+            pointsToUse = maxStat - currentStatValue;
+            if (pointsToUse <= 0) {
+                // 이미 최대치 도달
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 0.5f);
+                player.sendMessage(Mm.mm("<red>이미 최대 능력치에 도달했습니다!"));
+                return;
+            }
         }
 
         PlayerInfoManager.addStat(player, stat, pointsToUse);
