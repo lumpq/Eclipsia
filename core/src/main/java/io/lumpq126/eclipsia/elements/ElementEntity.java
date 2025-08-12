@@ -15,9 +15,9 @@ public class ElementEntity {
 
     private final Entity entity;
     private Element cachedElement;
-    private int cachedEnhanceElement = -1;
-    private int cachedEnhanceAttack = -1;
-    private int cachedEnhanceDefense = -1;
+    private int cachedEnhanceElement = 0;
+    private int cachedEnhanceAttack = 0;
+    private int cachedEnhanceDefense = 0;
 
     public static void init(JavaPlugin plugin) {
         elementKey = new NamespacedKey(plugin, "element");
@@ -113,11 +113,11 @@ public class ElementEntity {
         return (entity instanceof Player) ? (Player) entity : null;
     }
 
-    public static ElementEntity parseEntity(Entity e) {
+    public static ElementEntity toElementEntity(Entity e) {
         return new ElementEntity(e);
     }
 
-    public static ElementEntity parsePlayer(Player p) {
+    public static ElementEntity toElementEntity(Player p) {
         return new ElementEntity(p);
     }
 }
