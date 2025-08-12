@@ -7,26 +7,19 @@ pluginManagement {
 
 rootProject.name = "Eclipsia"
 
-// 자동 include 함수
-fun includeIfBuildFile(parentDir: String, prefix: String = "") {
-    val baseDir = file(parentDir)
-    if (!baseDir.exists()) return
+// 기본 모듈
+include("core", "plugin")
 
-    baseDir.listFiles()
-        ?.filter { it.isDirectory }
-        ?.forEach { dir ->
-            if (File(dir, "build.gradle.kts").exists() || File(dir, "build.gradle").exists()) {
-                val path = if (prefix.isEmpty()) ":${dir.name}" else ":$prefix:${dir.name}"
-                include(path)
-            }
-        }
-}
+// nms 디렉토리 자동 포함
+file("nms").listFiles()
+    ?.filter { it.isDirectory }
+    ?.forEach { dir ->
+        include("nms:${dir.name}")
+    }
 
-// 루트 직속 모듈
-includeIfBuildFile(".")
-
-// skills 하위 모듈
-includeIfBuildFile("skills", "skills")
-
-// nms 하위 모듈
-includeIfBuildFile("nms", "nms")
+// skills 디렉토리 자동 포함 (있다면)
+file("skills").listFiles()
+    ?.filter { it.isDirectory }
+    ?.forEach { dir ->
+        include("skills:${dir.name}")
+    }

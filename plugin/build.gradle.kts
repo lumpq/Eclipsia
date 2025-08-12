@@ -5,19 +5,26 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
     implementation(project(":core"))
-    compileOnly(project(":nms:v1_20_R1"))
-    compileOnly(project(":nms:v1_20_R2"))
-    compileOnly(project(":nms:v1_20_R3"))
-    compileOnly(project(":nms:v1_20_R4"))
-    compileOnly(project(":nms:v1_21_R1"))
-    compileOnly(project(":nms:v1_21_R2"))
-    compileOnly(project(":nms:v1_21_R3"))
-    compileOnly(project(":nms:v1_21_R4"))
-    compileOnly(project(":nms:v1_21_R5"))
+
+    // nms:* 모듈 자동 추가
+    rootProject.subprojects
+        .filter { it.path.startsWith(":nms:") }
+        .forEach {
+            compileOnly(project(it.path))
+        }
+
+    // skills:* 모듈 자동 추가
+    rootProject.subprojects
+        .filter { it.path.startsWith(":skills:") }
+        .forEach {
+            compileOnly(project(it.path))
+        }
+
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
 }
 
