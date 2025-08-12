@@ -39,6 +39,7 @@ public class ElementListener implements Listener {
 
     private double getDamageMultiplier(int relation) {
         return switch (relation) {
+            case 10 -> 2.0;  //양방향
             case 5 -> 2.0;   // 최강점
             case 4 -> 1.5;   // 강점
             case 3 -> 0.5;   // 최약점
