@@ -34,27 +34,14 @@ allprojects {
 
     repositories {
         mavenCentral()
-        maven("https://jitpack.io")
         maven("https://repo.papermc.io/repository/maven-public/") { name = "papermc" }
         maven("https://maven.citizensnpcs.co/repo") { name = "citizens-repo" }
-        maven("https://oss.sonatype.org/content/groups/public/")
-        maven("https://repo.dmulloy2.net/repository/public/")
-        maven("https://repo.md-5.net/content/groups/public/")
-        maven("https://repo.codemc.io/repository/maven-releases/")
-        maven("https://repo.codemc.io/repository/maven-snapshots/")
-        maven("https://repo.codemc.org/repository/maven-public/")
-        maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-        maven("https://oss.sonatype.org/content/repositories/snapshots")
     }
 
     dependencies {
-        implementation("me.libraryaddict.disguises:libsdisguises:11.0.6")
         implementation("io.netty:netty-all:4.2.3.Final")
         implementation("net.dv8tion:JDA:5.0.0")
-        compileOnly("com.comphenix.protocol:ProtocolLib:5.3.0")
-        compileOnly("com.github.retrooper:packetevents-spigot:2.9.1")
         compileOnly("net.citizensnpcs:citizensapi:2.0.37-SNAPSHOT")
-        compileOnly("dev.jorel:commandapi-bukkit-core:10.1.2")
     }
 
     tasks.withType<JavaCompile>().configureEach {
