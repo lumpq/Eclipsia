@@ -23,4 +23,4 @@ include("nms:v1_21_R5")
 
 include("skills:core")
 include("skills:common")
-include("skills:vampirism")
+include("skills:skills")
