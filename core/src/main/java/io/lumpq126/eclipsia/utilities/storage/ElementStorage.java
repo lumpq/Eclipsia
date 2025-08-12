@@ -36,6 +36,7 @@ public class ElementStorage {
         }
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 
+        // 모든 엘리먼트 관계 초기화
         for (Element e : ALL_ELEMENTS) {
             e.clearRelations();
         }
@@ -65,13 +66,19 @@ public class ElementStorage {
             }
         }
 
-        // 충돌 관계 검증
+        // 충돌 관계 검증 (mutualStrengths 양방향 상성 제외)
         for (Element e : ALL_ELEMENTS) {
-            Set<Element> s1 = e.getStrengths();
-            Set<Element> s2 = e.getWeaknesses();
-            s1.retainAll(s2);
-            if (!s1.isEmpty()) {
-                plugin.getLogger().warning("⚠ Conflict detected in element " + e.getName() + ": in both strengths and weaknesses -> " + s1);
+            Set<Element> strengths = e.getStrengths();
+            Set<Element> weaknesses = e.getWeaknesses();
+
+            // strengths ∩ weaknesses
+            strengths.retainAll(weaknesses);
+
+            // mutualStrengths 양방향인 요소들 제외
+            strengths.removeIf(other -> e.getMutualStrengths().contains(other) && other.getMutualStrengths().contains(e));
+
+            if (!strengths.isEmpty()) {
+                plugin.getLogger().warning("⚠ Conflict detected in element " + e.getName() + ": in both strengths and weaknesses (excluding mutual strengths) -> " + strengths);
             }
         }
 
