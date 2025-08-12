@@ -39,8 +39,7 @@ allprojects {
     }
 
     dependencies {
-        implementation("io.netty:netty-all:4.2.3.Final")
-        implementation("net.dv8tion:JDA:5.0.0")
+        //implementation("net.dv8tion:JDA:5.0.0")
         compileOnly("net.citizensnpcs:citizensapi:2.0.37-SNAPSHOT")
     }
 

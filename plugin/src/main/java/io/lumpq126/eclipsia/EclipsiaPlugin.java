@@ -13,7 +13,6 @@ import io.lumpq126.eclipsia.scheduler.AttributeScheduler;
 import io.lumpq126.eclipsia.utilities.Mm;
 import io.lumpq126.eclipsia.utilities.storage.*;
 import io.lumpq126.eclipsia.scheduler.ActionBarScheduler;
-import net.dv8tion.jda.api.JDA;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,7 +25,6 @@ public final class EclipsiaPlugin extends JavaPlugin {
     private static FileConfiguration fishConfig;
     private static EclipsiaPlugin instance;
     private static NMSHandler nms;
-    private static JDA jda;
 
     @Override
     public void onEnable() {
@@ -68,33 +66,8 @@ public final class EclipsiaPlugin extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
         }
 
-        /*
-        getServer().getScheduler().runTaskAsynchronously(this, () -> {
-            try {
-                jda = JDABuilder.createDefault(getConfig().getString("token"))
-                        .build()
-                        .awaitReady();
-                getComponentLogger().info(Mm.mm(
-                        "<green>디스코드 봇 활성화 성공! 봇 토큰: " + "<gradient:#b266ff:#e5ccff>" + getConfig().getString("token") + "</gradient>"
-                ));
-            } catch (Exception e) {
-                getLogger().severe("디스코드 봇 활성화 실패");
-                getLogger().log(Level.SEVERE, "Exception stacktrace: ", e);
-                getServer().getPluginManager().disablePlugin(this);
-            }
-        });
-
-         */
-
         ActionBarScheduler.start();
         AttributeScheduler.start();
-    }
-
-    @Override
-    public void onDisable() {
-        if (jda != null) {
-            jda.shutdown();
-        }
     }
 
     public static EclipsiaPlugin getInstance() {
@@ -107,9 +80,5 @@ public final class EclipsiaPlugin extends JavaPlugin {
 
     public static NMSHandler getNms() {
         return nms;
-    }
-
-    public static JDA getJda() {
-        return jda;
     }
 }
