@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class ElementEntity {
     private static NamespacedKey elementKey;
     private final Entity entity;
-    private Element cachedElement;
+    private Element cachedElement; // 캐싱
 
     public static void init(JavaPlugin plugin) {
         elementKey = new NamespacedKey(plugin, "element");
@@ -30,7 +30,6 @@ public class ElementEntity {
     }
 
     public void setElement(Element element) {
-        if (element == null) element = Element.NORMAL;
         cachedElement = element;
         PersistentDataContainer data = entity.getPersistentDataContainer();
         data.set(elementKey, PersistentDataType.STRING, element.getName());
