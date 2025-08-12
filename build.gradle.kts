@@ -1,38 +1,26 @@
 plugins {
-    id ("java")
+    id("java")
     id("xyz.jpenilla.run-paper") version "2.3.1"
     id("io.github.goooler.shadow") version "8.1.8"
-    id("io.papermc.paperweight.userdev") version "2.0.0-beta.18" apply false
 }
 
 group = "io.lumpq126"
 version = "1.0.0"
-
 val pluginVersion = project.version.toString()
 
-val nmsVersions = mapOf(
-    "nms:v1_20_R1" to "1.20.1-R0.1-SNAPSHOT",
-    "nms:v1_20_R2" to "1.20.2-R0.1-SNAPSHOT",
-    "nms:v1_20_R3" to "1.20.4-R0.1-SNAPSHOT",
-    "nms:v1_20_R4" to "1.20.6-R0.1-SNAPSHOT",
-    "nms:v1_21_R1" to "1.21.1-R0.1-SNAPSHOT",
-    "nms:v1_21_R2" to "1.21.2-R0.1-SNAPSHOT",
-    "nms:v1_21_R3" to "1.21.4-R0.1-SNAPSHOT",
-    "nms:v1_21_R4" to "1.21.5-R0.1-SNAPSHOT",
-    "nms:v1_21_R5" to "1.21.8-R0.1-SNAPSHOT"
-)
+val skillsProjects = subprojects.filter { it.path.startsWith(":skills") }
+val nmsProjects = subprojects.filter { it.path.startsWith(":nms") }
 
 allprojects {
     apply(plugin = "java")
 
     repositories {
         mavenCentral()
-        maven("https://repo.papermc.io/repository/maven-public/") { name = "papermc" }
-        maven("https://maven.citizensnpcs.co/repo") { name = "citizens-repo" }
+        maven("https://repo.papermc.io/repository/maven-public/")
+        maven("https://maven.citizensnpcs.co/repo")
     }
 
     dependencies {
-        //implementation("net.dv8tion:JDA:5.0.0")
         compileOnly("net.citizensnpcs:citizensapi:2.0.37-SNAPSHOT")
     }
 
@@ -46,10 +34,37 @@ allprojects {
     }
 }
 
+// 의존성 설정
 dependencies {
     implementation(project(":core"))
     implementation(project(":plugin"))
-    nmsVersions.keys.forEach { implementation(project(":$it", configuration = "reobf")) }
+
+    skillsProjects.forEach {
+        implementation(project(it.path))
+    }
+
+    nmsProjects.forEach {
+        implementation(project(it.path, configuration = "reobf"))
+    }
+}
+
+// skills → shadowJar만
+skillsProjects.forEach { proj ->
+    proj.plugins.apply("io.github.goooler.shadow")
+    proj.tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+        archiveClassifier.set("")
+        archiveFileName.set("${proj.name}-$pluginVersion.jar")
+    }
+}
+
+// nms → shadowJar + reobfJar
+nmsProjects.forEach { proj ->
+    proj.plugins.apply("io.github.goooler.shadow")
+    proj.tasks.named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+        dependsOn("reobfJar")
+        archiveClassifier.set("")
+        archiveFileName.set("${proj.name}-$pluginVersion.jar")
+    }
 }
 
 tasks {
@@ -61,21 +76,22 @@ tasks {
     }
 
     shadowJar {
-        nmsVersions.keys.forEach { dependsOn(":$it:reobfJar") }
+        // nms는 reobf + shadowJar 실행
+        nmsProjects.forEach {
+            dependsOn("${it.path}:reobfJar")
+            dependsOn("${it.path}:shadowJar")
+        }
+        // skills는 shadowJar만 실행
+        skillsProjects.forEach {
+            dependsOn("${it.path}:shadowJar")
+        }
 
         archiveClassifier.set("")
         archiveFileName.set("Eclipsia-$pluginVersion.jar")
 
-        exclude("META-INF/*.SF")
-        exclude("META-INF/*.DSA")
-        exclude("META-INF/*.RSA")
-        exclude("module-info.class")
+        exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA", "module-info.class")
 
         relocate("org.bstats", "io.lumpq.shadowed.bstats")
-    }
-
-    build {
-        dependsOn(shadowJar)
     }
 
     jar {
@@ -83,17 +99,18 @@ tasks {
     }
 
     compileJava.get().dependsOn(clean)
-}
 
-val serverPluginsDir = file("C:/Users/user/Desktop/.server/plugins")
+    val serverPluginsDir = file("C:/Users/user/Desktop/.server/plugins")
 
-tasks.register<Copy>("copyJarToServer") {
-    dependsOn(tasks.shadowJar)
-    from(tasks.shadowJar.get().archiveFile)
-    into(serverPluginsDir)
-    rename { "Eclipsia-${pluginVersion}.jar" }
-}
+    register<Copy>("copyAllJarsToServer") {
+        dependsOn(shadowJar)
+        from(shadowJar.get().archiveFile)
+        from(skillsProjects.map { it.tasks.named("shadowJar") })
+        from(nmsProjects.map { it.tasks.named("shadowJar") })
+        into(serverPluginsDir)
+    }
 
-tasks.build {
-    dependsOn("copyJarToServer")
+    build {
+        dependsOn("copyAllJarsToServer")
+    }
 }
