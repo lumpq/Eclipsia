@@ -10,9 +10,21 @@ version = "1.0.0"
 
 val pluginVersion = version.toString()
 
-// lazy로 선언해서 subprojects가 전부 로드된 뒤에 계산되도록 함
-val nmsProjects by lazy { subprojects.filter { it.path.startsWith(":nms:") } }
-val skillsProjects by lazy { subprojects.filter { it.path.startsWith(":skills:") } }
+// lazy로 선언해서 subprojects가 전부 로드된 뒤 계산되도록 함
+val nmsProjects by lazy {
+    subprojects.filter {
+        it.path.startsWith(":nms:") &&
+                it.parent?.name == "nms" &&
+                it.name != "build"  // build 모듈 제외
+    }
+}
+val skillsProjects by lazy {
+    subprojects.filter {
+        it.path.startsWith(":skills:") &&
+                it.parent?.name == "skills" &&
+                it.name != "build"  // 제외할 모듈 이름
+    }
+}
 
 allprojects {
     apply(plugin = "java")
