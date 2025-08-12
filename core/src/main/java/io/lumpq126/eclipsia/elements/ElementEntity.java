@@ -10,8 +10,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class ElementEntity {
     private static NamespacedKey elementKey;
     private final Entity entity;
+    private Element cachedElement; // 캐싱 추가
 
-    /** 플러그인 초기화 시 호출 */
     public static void init(JavaPlugin plugin) {
         elementKey = new NamespacedKey(plugin, "element");
     }
@@ -21,17 +21,19 @@ public class ElementEntity {
     }
 
     public Element getElement() {
+        if (cachedElement != null) return cachedElement;
         PersistentDataContainer data = entity.getPersistentDataContainer();
         String value = data.get(elementKey, PersistentDataType.STRING);
-        if (value == null) return Element.NORMAL;
+        if (value == null) return cachedElement = Element.NORMAL;
         try {
-            return Element.valueOf(value);
+            return cachedElement = Element.valueOf(value);
         } catch (IllegalArgumentException e) {
-            return Element.NORMAL;
+            return cachedElement = Element.NORMAL;
         }
     }
 
     public void setElement(Element element) {
+        cachedElement = element;
         PersistentDataContainer data = entity.getPersistentDataContainer();
         data.set(elementKey, PersistentDataType.STRING, element.name());
     }

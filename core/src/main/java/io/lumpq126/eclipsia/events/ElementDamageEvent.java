@@ -17,8 +17,8 @@ public class ElementDamageEvent extends Event {
 
     public ElementDamageEvent(EntityDamageByEntityEvent event) {
         this.originalEvent = event;
-        this.damager = new ElementEntity(event.getDamager());
-        this.victim = new ElementEntity(event.getEntity());
+        this.damager = ElementEntity.parseEntity(event.getDamager());
+        this.victim = ElementEntity.parseEntity(event.getEntity());
     }
 
     public EntityDamageByEntityEvent getOriginalEvent() {
@@ -26,11 +26,11 @@ public class ElementDamageEvent extends Event {
     }
 
     public Entity getDamager() {
-        return originalEvent.getDamager();
+        return damager.toEntity();
     }
 
     public Entity getVictim() {
-        return originalEvent.getEntity();
+        return victim.toEntity();
     }
 
     public Element getDamagerElement() {
