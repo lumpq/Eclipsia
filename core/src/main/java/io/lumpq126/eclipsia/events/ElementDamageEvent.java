@@ -3,17 +3,20 @@ package io.lumpq126.eclipsia.events;
 import io.lumpq126.eclipsia.elements.Element;
 import io.lumpq126.eclipsia.elements.ElementEntity;
 import org.bukkit.entity.Entity;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.jetbrains.annotations.NotNull;
 
-public class ElementDamageEvent extends Event {
+public class ElementDamageEvent extends Event implements Cancellable {
     private static final HandlerList HANDLERS = new HandlerList();
 
     private final EntityDamageByEntityEvent originalEvent;
     private final ElementEntity damager;
     private final ElementEntity victim;
+
+    private boolean cancelled;
 
     public ElementDamageEvent(EntityDamageByEntityEvent event) {
         this.originalEvent = event;
@@ -47,6 +50,16 @@ public class ElementDamageEvent extends Event {
 
     public ElementEntity getElementVictim() {
         return victim;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 
     @Override
