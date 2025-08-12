@@ -98,24 +98,3 @@ tasks.register<Copy>("copyJarToServer") {
 tasks.build {
     dependsOn("copyJarToServer")
 }
-
-bukkit {
-    name = "Eclipsia"
-    main = "io.lumpq126.eclipsia.EclipsiaPlugin"
-    version = pluginVersion
-    apiVersion = "1.19"
-    authors = listOf("_LumPq_")
-    commands {
-        register("fish") {
-            permission = "op"
-            aliases = listOf("f")
-        }
-        register("month") {
-            permission = "op"
-        }
-        register("eclipsia") {
-            permission = "op"
-            aliases = listOf("e", "ec", "ecc", "ep")
-        }
-    }
-}

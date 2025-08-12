@@ -1,0 +1,18 @@
+name: Eclipsia
+main: io.lumpq126.eclipsia.EclipsiaPlugin
+version: 1.0.0 # pluginVersion 대신 실제 버전을 적으세요
+api-version: 1.19
+author: _LumPq_
+
+commands:
+  fish:
+    permission: op
+    aliases: [f]
+  month:
+    permission: op
+  eclipsia:
+    permission: op
+    aliases: [e, ec, ecc, ep]
+  element:
+    permission: op
+    aliases: [el]
