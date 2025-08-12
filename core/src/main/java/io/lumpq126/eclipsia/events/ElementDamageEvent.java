@@ -14,11 +14,14 @@ public class ElementDamageEvent extends Event {
     private final EntityDamageByEntityEvent originalEvent;
     private final ElementEntity damager;
     private final ElementEntity victim;
+    private final Element attackElement; // 공격에 사용된 속성
 
-    public ElementDamageEvent(EntityDamageByEntityEvent event) {
+    // 새 버전: 반드시 공격 속성을 명시
+    public ElementDamageEvent(EntityDamageByEntityEvent event, Element attackElement) {
         this.originalEvent = event;
         this.damager = ElementEntity.parseEntity(event.getDamager());
         this.victim = ElementEntity.parseEntity(event.getEntity());
+        this.attackElement = attackElement;
     }
 
     public EntityDamageByEntityEvent getOriginalEvent() {
@@ -47,6 +50,11 @@ public class ElementDamageEvent extends Event {
 
     public ElementEntity getElementVictim() {
         return victim;
+    }
+
+    // 공격에 사용된 속성 반환
+    public Element getAttackElement() {
+        return attackElement;
     }
 
     @Override
