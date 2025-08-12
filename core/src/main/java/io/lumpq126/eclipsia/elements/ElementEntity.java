@@ -19,11 +19,11 @@ public class ElementEntity {
     private int cachedEnhanceAttack = 0;
     private int cachedEnhanceDefense = 0;
 
-    public static void init(JavaPlugin plugin) {
-        elementKey = new NamespacedKey(plugin, "element");
-        enhanceElementKey = new NamespacedKey(plugin, "enhance_element");
-        enhanceAttackKey = new NamespacedKey(plugin, "enhance_attack");
-        enhanceDefenseKey = new NamespacedKey(plugin, "enhance_defense");
+    public static void init(JavaPlugin instance) {
+        elementKey = new NamespacedKey(instance, "element");
+        enhanceElementKey = new NamespacedKey(instance, "enhance_element");
+        enhanceAttackKey = new NamespacedKey(instance, "enhance_attack");
+        enhanceDefenseKey = new NamespacedKey(instance, "enhance_defense");
     }
 
     public ElementEntity(Entity entity) {
