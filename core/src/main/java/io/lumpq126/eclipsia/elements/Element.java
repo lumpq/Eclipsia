@@ -21,12 +21,6 @@ public class Element {
     public static final Element ANGEL = new Element("ANGEL");
     public static final Element DEVIL = new Element("DEVIL");
 
-    private static final Element[] ALL_ELEMENTS = {
-            NORMAL, FIRE, WATER, EARTH, WIND,
-            POISON, LIGHT, DARKNESS, ELECTRIC, ICE,
-            METAL, PLANTS, ROT, SHADOW, ANGEL, DEVIL
-    };
-
     private final String name;
 
     private final Set<Element> strengths = new HashSet<>();
@@ -132,10 +126,5 @@ public class Element {
     @Override
     public int hashCode() {
         return name.hashCode();
-    }
-
-    // 공용 Element 배열 반환
-    public static Element[] values() {
-        return ALL_ELEMENTS.clone();
     }
 }

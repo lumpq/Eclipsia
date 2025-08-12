@@ -13,7 +13,7 @@ public class ElementListener implements Listener {
     // 1차: 원본 이벤트를 커스텀 이벤트로 변환
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onAttack(EntityDamageByEntityEvent event) {
-        ElementDamageEvent e = new ElementDamageEvent(event);
+        ElementDamageEvent e = new ElementDamageEvent(event, Element.ICE);
         Bukkit.getPluginManager().callEvent(e);
     }
 

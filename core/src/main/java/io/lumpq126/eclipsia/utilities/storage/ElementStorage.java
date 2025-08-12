@@ -6,15 +6,23 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class ElementStorage {
 
+    // Element enum이 아니므로 values() 없음. 직접 관리
+    private static final Element[] ALL_ELEMENTS = {
+            Element.NORMAL, Element.FIRE, Element.WATER, Element.EARTH, Element.WIND,
+            Element.POISON, Element.LIGHT, Element.DARKNESS, Element.ELECTRIC, Element.ICE,
+            Element.METAL, Element.PLANTS, Element.ROT, Element.SHADOW, Element.ANGEL, Element.DEVIL
+    };
+
+    // 이름으로 Element 객체 찾기
     private static Element getElementByName(String name) {
-        if (name == null) return null;
-        String cleanName = name.trim().toUpperCase();
-        for (Element e : Element.values()) {
-            if (e.getName().equalsIgnoreCase(cleanName)) {
+        for (Element e : ALL_ELEMENTS) {
+            if (e.getName().equalsIgnoreCase(name)) {
                 return e;
             }
         }
@@ -29,12 +37,12 @@ public class ElementStorage {
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 
         // 모든 엘리먼트 관계 초기화
-        for (Element e : Element.values()) {
+        for (Element e : ALL_ELEMENTS) {
             e.clearRelations();
         }
 
         for (String key : Objects.requireNonNull(config.getConfigurationSection("elements")).getKeys(false)) {
-            Element element = getElementByName(key);
+            Element element = getElementByName(key.toUpperCase());
             if (element == null) {
                 plugin.getLogger().warning("⚠ Unknown element in config: " + key);
                 continue;
@@ -48,7 +56,7 @@ public class ElementStorage {
 
             // mutualStrengths 양방향 동기화
             for (String s : config.getStringList("elements." + key + ".mutual_strengths")) {
-                Element target = getElementByName(s);
+                Element target = getElementByName(s.toUpperCase());
                 if (target != null) {
                     element.addMutualStrength(target);
                     target.addMutualStrength(element);
@@ -58,27 +66,28 @@ public class ElementStorage {
             }
         }
 
-        // 충돌 관계 검증
-        for (Element e : Element.values()) {
-            Set<Element> common = new HashSet<>(e.getStrengths());
-            common.retainAll(e.getWeaknesses());
+        // 충돌 관계 검증 (mutualStrengths 양방향 상성 제외)
+        for (Element e : ALL_ELEMENTS) {
+            Set<Element> strengths = e.getStrengths();
+            Set<Element> weaknesses = e.getWeaknesses();
 
-            // mutualStrengths 양방향 요소 제외
-            common.removeIf(other -> e.getMutualStrengths().contains(other) && other.getMutualStrengths().contains(e));
+            // strengths ∩ weaknesses
+            strengths.retainAll(weaknesses);
 
-            if (!common.isEmpty()) {
-                plugin.getLogger().warning("⚠ Conflict detected in element " + e.getName()
-                        + ": in both strengths and weaknesses (excluding mutual strengths) -> " + common);
+            // mutualStrengths 양방향인 요소들 제외
+            strengths.removeIf(other -> e.getMutualStrengths().contains(other) && other.getMutualStrengths().contains(e));
+
+            if (!strengths.isEmpty()) {
+                plugin.getLogger().warning("⚠ Conflict detected in element " + e.getName() + ": in both strengths and weaknesses (excluding mutual strengths) -> " + strengths);
             }
         }
 
         plugin.getLogger().info("✅ Elements loaded from elements.yml");
     }
 
-    private static void loadList(List<String> list, java.util.function.Consumer<Element> consumer,
-                                 JavaPlugin plugin, Element parent, String category) {
+    private static void loadList(List<String> list, java.util.function.Consumer<Element> consumer, JavaPlugin plugin, Element parent, String category) {
         for (String s : list) {
-            Element e = getElementByName(s);
+            Element e = getElementByName(s.toUpperCase());
             if (e != null) {
                 consumer.accept(e);
             } else {
