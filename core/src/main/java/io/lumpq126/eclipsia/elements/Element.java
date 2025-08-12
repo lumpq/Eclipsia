@@ -4,22 +4,7 @@ import java.util.EnumSet;
 import java.util.Set;
 
 public enum Element {
-    NORMAL,
-    FIRE,
-    WATER,
-    EARTH,
-    WIND,
-    POISON,
-    LIGHT,
-    DARKNESS,
-    ELECTRIC,
-    ICE,
-    METAL,
-    PLANTS,
-    ROT,
-    SHADOW,
-    ANGEL,
-    DEVIL;
+    NORMAL, FIRE, WATER, EARTH, WIND, POISON, LIGHT, DARKNESS, ELECTRIC, ICE, METAL, PLANTS, ROT, SHADOW, ANGEL, DEVIL;
 
     private final Set<Element> strengths = EnumSet.noneOf(Element.class);
     private final Set<Element> ultimateStrengths = EnumSet.noneOf(Element.class);
