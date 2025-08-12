@@ -1,4 +1,4 @@
-package io.lumpq126.eclipsia.skills.cast;
+package io.lumpq126.eclipsia.skills.vampirism.cast;
 
 public class CastingItem {
 

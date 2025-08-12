@@ -51,6 +51,7 @@ allprojects {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":common"))
     implementation(project(":plugin"))
 
     // NMS 모듈 → reobf 구성 사용
