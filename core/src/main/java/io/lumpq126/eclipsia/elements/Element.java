@@ -1,17 +1,42 @@
 package io.lumpq126.eclipsia.elements;
 
-import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Set;
 
-public enum Element {
-    NORMAL, FIRE, WATER, EARTH, WIND, POISON, LIGHT, DARKNESS, ELECTRIC, ICE, METAL, PLANTS, ROT, SHADOW, ANGEL, DEVIL;
+public class Element {
+    public static final Element NORMAL = new Element("NORMAL");
+    public static final Element FIRE = new Element("FIRE");
+    public static final Element WATER = new Element("WATER");
+    public static final Element EARTH = new Element("EARTH");
+    public static final Element WIND = new Element("WIND");
+    public static final Element POISON = new Element("POISON");
+    public static final Element LIGHT = new Element("LIGHT");
+    public static final Element DARKNESS = new Element("DARKNESS");
+    public static final Element ELECTRIC = new Element("ELECTRIC");
+    public static final Element ICE = new Element("ICE");
+    public static final Element METAL = new Element("METAL");
+    public static final Element PLANTS = new Element("PLANTS");
+    public static final Element ROT = new Element("ROT");
+    public static final Element SHADOW = new Element("SHADOW");
+    public static final Element ANGEL = new Element("ANGEL");
+    public static final Element DEVIL = new Element("DEVIL");
 
-    private final Set<Element> strengths = EnumSet.noneOf(Element.class);
-    private final Set<Element> ultimateStrengths = EnumSet.noneOf(Element.class);
-    private final Set<Element> weaknesses = EnumSet.noneOf(Element.class);
-    private final Set<Element> ultimateWeaknesses = EnumSet.noneOf(Element.class);
-    private final Set<Element> generals = EnumSet.noneOf(Element.class);
-    private final Set<Element> mutualStrengths = EnumSet.noneOf(Element.class);
+    private final String name;
+
+    private final Set<Element> strengths = new HashSet<>();
+    private final Set<Element> ultimateStrengths = new HashSet<>();
+    private final Set<Element> weaknesses = new HashSet<>();
+    private final Set<Element> ultimateWeaknesses = new HashSet<>();
+    private final Set<Element> generals = new HashSet<>();
+    private final Set<Element> mutualStrengths = new HashSet<>();
+
+    private Element(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public void clearRelations() {
         strengths.clear();
@@ -47,27 +72,27 @@ public enum Element {
     }
 
     public Set<Element> getStrengths() {
-        return EnumSet.copyOf(strengths);
+        return new HashSet<>(strengths);
     }
 
     public Set<Element> getUltimateStrengths() {
-        return EnumSet.copyOf(ultimateStrengths);
+        return new HashSet<>(ultimateStrengths);
     }
 
     public Set<Element> getWeaknesses() {
-        return EnumSet.copyOf(weaknesses);
+        return new HashSet<>(weaknesses);
     }
 
     public Set<Element> getUltimateWeaknesses() {
-        return EnumSet.copyOf(ultimateWeaknesses);
+        return new HashSet<>(ultimateWeaknesses);
     }
 
     public Set<Element> getGenerals() {
-        return EnumSet.copyOf(generals);
+        return new HashSet<>(generals);
     }
 
     public Set<Element> getMutualStrengths() {
-        return EnumSet.copyOf(mutualStrengths);
+        return new HashSet<>(mutualStrengths);
     }
 
     /**
@@ -75,7 +100,6 @@ public enum Element {
      * 우선순위: mutualStrengths(양방향) > ultimateStrength > strength > ultimateWeakness > weakness > general
      */
     public int getRelation(Element other) {
-        // 상호 강점은 별도 플래그로 사용, 점수 계산에는 영향 없음
         if (mutualStrengths.contains(other) && other.mutualStrengths.contains(this)) {
             return 10; // 특수 플래그
         }
@@ -89,6 +113,18 @@ public enum Element {
 
     @Override
     public String toString() {
-        return "Element." + name();
+        return "Element." + name;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Element other)) return false;
+        return name.equals(other.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }
