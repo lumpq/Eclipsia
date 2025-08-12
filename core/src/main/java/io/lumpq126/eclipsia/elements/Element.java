@@ -90,7 +90,10 @@ public enum Element {
      * 우선순위: mutualStrengths(양방향) > ultimateStrength > strength > ultimateWeakness > weakness > general
      */
     public int getRelation(Element other) {
-        if (mutualStrengths.contains(other) && other.mutualStrengths.contains(this)) return 10;
+        // 상호 강점은 별도 플래그로 사용, 점수 계산에는 영향 없음
+        if (mutualStrengths.contains(other) && other.mutualStrengths.contains(this)) {
+            return 10; // 특수 플래그
+        }
         if (ultimateStrengths.contains(other)) return 5;
         if (strengths.contains(other)) return 4;
         if (ultimateWeaknesses.contains(other)) return 3;
