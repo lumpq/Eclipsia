@@ -10,16 +10,28 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * 엘리먼트 간의 상성 관계를 YAML 파일로부터 불러오고 관리하는 클래스입니다.
+ * <p>
+ * elements.yml 파일을 로드하여 각 엘리먼트의 강점, 약점, 상호 강점 관계 등을 초기화합니다.
+ */
 public class ElementStorage {
 
-    // Element enum이 아니므로 values() 없음. 직접 관리
+    /**
+     * 관리하는 모든 엘리먼트 목록
+     */
     private static final Element[] ALL_ELEMENTS = {
             Element.NORMAL, Element.FIRE, Element.WATER, Element.EARTH, Element.WIND,
             Element.POISON, Element.LIGHT, Element.DARKNESS, Element.ELECTRIC, Element.ICE,
             Element.METAL, Element.PLANTS, Element.ROT, Element.SHADOW, Element.ANGEL, Element.DEVIL
     };
 
-    // 이름으로 Element 객체 찾기
+    /**
+     * 엘리먼트 이름으로 해당 Element 객체를 찾아 반환합니다.
+     *
+     * @param name 엘리먼트 이름 (대소문자 구분 없음)
+     * @return 이름과 일치하는 Element 객체, 없으면 null 반환
+     */
     private static Element getElementByName(String name) {
         for (Element e : ALL_ELEMENTS) {
             if (e.getName().equalsIgnoreCase(name)) {
@@ -29,6 +41,12 @@ public class ElementStorage {
         return null;
     }
 
+    /**
+     * plugin의 data 폴더 내 elements.yml을 읽어 엘리먼트 관계를 초기화합니다.
+     * 파일이 없으면 기본 리소스를 저장 후 로드합니다.
+     *
+     * @param plugin JavaPlugin 인스턴스
+     */
     public static void load(JavaPlugin plugin) {
         File file = new File(plugin.getDataFolder(), "elements.yml");
         if (!file.exists()) {
@@ -85,6 +103,16 @@ public class ElementStorage {
         plugin.getLogger().info("✅ Elements loaded from elements.yml");
     }
 
+    /**
+     * 리스트에 담긴 엘리먼트 이름을 실제 Element 객체로 변환하여 consumer에 전달합니다.
+     * 만약 알 수 없는 이름이 있으면 경고 로그를 남깁니다.
+     *
+     * @param list    엘리먼트 이름 리스트
+     * @param consumer Element 객체를 받는 Consumer 함수
+     * @param plugin  JavaPlugin 인스턴스 (로깅용)
+     * @param parent  현재 처리 중인 엘리먼트
+     * @param category 현재 카테고리명 (strengths, weaknesses 등)
+     */
     private static void loadList(List<String> list, java.util.function.Consumer<Element> consumer, JavaPlugin plugin, Element parent, String category) {
         for (String s : list) {
             Element e = getElementByName(s.toUpperCase());
