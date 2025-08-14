@@ -1,8 +1,8 @@
 package io.lumpq126.eclipsia.scheduler;
 
 import io.lumpq126.eclipsia.EclipsiaPlugin;
-import io.lumpq126.eclipsia.utilities.storage.PlayerInfoStorage;
 import io.lumpq126.eclipsia.utilities.ActionBarUtility;
+import io.lumpq126.eclipsia.utilities.storage.PlayerInfoStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

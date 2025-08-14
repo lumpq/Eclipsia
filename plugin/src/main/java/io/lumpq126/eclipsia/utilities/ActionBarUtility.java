@@ -1,7 +1,5 @@
 package io.lumpq126.eclipsia.utilities;
 
-import io.lumpq126.eclipsia.EclipsiaPlugin;
-import io.lumpq126.eclipsia.nms.NMSHandler;
 import io.lumpq126.eclipsia.protocol.packets.SendActionBarToPacket;
 import org.bukkit.entity.Player;
 
