@@ -1,7 +1,9 @@
 package io.lumpq126.eclipsia.commands;
 
 import io.lumpq126.eclipsia.EclipsiaPlugin;
+import io.lumpq126.eclipsia.entities.EclipsiaEntity;
 import io.lumpq126.eclipsia.items.FishItems;
+import io.lumpq126.eclipsia.stats.Stat;
 import io.lumpq126.eclipsia.utilities.storage.FishCatalogStorage;
 import io.lumpq126.eclipsia.utilities.storage.MonthStorage;
 import io.lumpq126.eclipsia.utilities.storage.PlayerInfoStorage;
@@ -21,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -268,6 +271,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
             return;
         }
 
+        EclipsiaEntity eEntity = new EclipsiaEntity((Entity) sender);
+
         // statPoint add 처리 분기
         if (args[1].equalsIgnoreCase("statpoint") && args[2].equalsIgnoreCase("add")) {
             List<Player> targets = resolveTargets(sender, args[3]);
@@ -278,7 +283,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
             try {
                 int value = Integer.parseInt(args[4]);
                 for (Player p : targets) {
-                    PlayerInfoStorage.addStatPoint(p, value);
+                    eEntity.addStatPoints(value);
                     sendMessage(sender, p.getName() + "의 스탯 포인트 증가됨.", NamedTextColor.GREEN);
                 }
             } catch (NumberFormatException e) {
@@ -298,7 +303,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
 
         for (Player target : targets) {
             // 해당 플레이어가 가진 유효한 스탯 이름들 조회 (statPoint 제외)
-            Set<String> validStats = PlayerInfoStorage.getStatKeysExceptPoint(target);
+            Set<String> validStats = new HashSet<>(List.of("STRENGTH", "CONSTITUTION", "AGILITY", "DEXTERITY", "INTELLIGENCE", "WISDOM"));
             if (!validStats.contains(stat)) {
                 sendMessage(sender, "알 수 없는 능력치입니다: " + stat, NamedTextColor.RED);
                 continue;
@@ -306,11 +311,11 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
 
             switch (sub) {
                 case "get" -> {
-                    int value = PlayerInfoStorage.getStat(target, stat);
+                    int value = eEntity.getStat(Stat.fromName(stat));
                     sendMessage(sender, target.getName() + "의 " + stat + ": " + value, NamedTextColor.YELLOW);
                 }
                 case "reset" -> {
-                    PlayerInfoStorage.setStat(target, stat, 0);
+                    eEntity.setStat(Stat.fromName(stat), 0);
                     sendMessage(sender, target.getName() + "의 " + stat + "이 초기화되었습니다.", NamedTextColor.GREEN);
                 }
                 case "set", "add" -> {
@@ -320,8 +325,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                     }
                     try {
                         int value = Integer.parseInt(args[4]);
-                        if (sub.equals("set")) PlayerInfoStorage.setStat(target, stat, value);
-                        else PlayerInfoStorage.addStat(target, stat, value);
+                        if (sub.equals("set")) eEntity.setStat(Stat.fromName(stat), value);
+                        else eEntity.addStat(Stat.fromName(stat), value);
                         sendMessage(sender, target.getName() + "의 " + stat + "가 적용되었습니다.", NamedTextColor.GREEN);
                     } catch (NumberFormatException e) {
                         sendMessage(sender, "숫자 형식이 잘못되었습니다.", NamedTextColor.RED);
@@ -403,7 +408,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                         Bukkit.getOnlinePlayers().forEach(p -> completions.add(p.getName()));
                     } else {
                         // stat 종류 목록
-                        completions.addAll(PlayerInfoStorage.getStatKeysExceptPoint(null));
+                        completions.addAll(List.of("STRENGTH","CONSTITUTION", "AGILITY", "DEXTERITY", "INTELLIGENCE", "WISDOM"));
                     }
                 }
             }

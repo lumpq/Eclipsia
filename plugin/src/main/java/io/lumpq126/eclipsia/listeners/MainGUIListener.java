@@ -1,10 +1,13 @@
 package io.lumpq126.eclipsia.listeners;
 
+import io.lumpq126.eclipsia.entities.EclipsiaEntity;
+import io.lumpq126.eclipsia.stats.Stat;
 import io.lumpq126.eclipsia.ui.gui.MainGUI;
 import io.lumpq126.eclipsia.utilities.Mm;
 import io.lumpq126.eclipsia.utilities.storage.PlayerInfoStorage;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -52,12 +55,12 @@ public class MainGUIListener implements Listener {
             }
 
             Map<Integer, String> slotStatMap = Map.of(
-                    11, "str",
-                    12, "con",
-                    13, "agi",
-                    20, "dex",
-                    21, "wis",
-                    22, "int"
+                    11, "STRENGTH",
+                    12, "CONSTITUTION",
+                    13, "AGILITY",
+                    20, "DEXTERITY",
+                    21, "WISDOM",
+                    22, "INTELLIGENCE"
             );
 
             if (!slotStatMap.containsKey(event.getSlot())) return;
@@ -68,7 +71,9 @@ public class MainGUIListener implements Listener {
     }
 
     private void handleStatPointAllocation(Player player, InventoryClickEvent event, String stat) {
-        int availablePoints = PlayerInfoStorage.getStatPoint(player);
+        EclipsiaEntity eEntity = new EclipsiaEntity(player);
+
+        int availablePoints = eEntity.getStatPoints();
         if (availablePoints < 1) {
             player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1.0f, 1.5f);
             player.sendMessage(Mm.mm("<red>분배가능한 능력치가 부족합니다!"));
@@ -84,7 +89,7 @@ public class MainGUIListener implements Listener {
             return;
         }
 
-        int currentStatValue = PlayerInfoStorage.getStat(player, stat);  // 현재 스탯 값 조회
+        int currentStatValue = eEntity.getStat(Stat.fromName(stat));  // 현재 스탯 값 조회
         int maxStat = 9999;
 
         // 증가 후 값이 9999 초과하지 않도록 조정
@@ -98,8 +103,8 @@ public class MainGUIListener implements Listener {
             }
         }
 
-        PlayerInfoStorage.addStat(player, stat, pointsToUse);
-        PlayerInfoStorage.addStatPoint(player, -pointsToUse);
+        eEntity.addStat(Stat.fromName(stat), pointsToUse);
+        eEntity.addStatPoints(-pointsToUse);
 
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 2.0f);
         player.sendMessage(Mm.mm("<green>능력치가 " + pointsToUse + " 상승했습니다!"));

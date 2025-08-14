@@ -48,12 +48,12 @@ public enum Element {
     // 관계 설정 및 조회
     // -----------------------------
 
-    /** 특정 Element와의 관계를 설정 */
+    /** 특정 Element 와의 관계를 설정 */
     public void setRelation(Element target, int relation) {
         relationMatrix[this.ordinal()][target.ordinal()] = relation;
     }
 
-    /** 특정 Element와의 관계를 조회 */
+    /** 특정 Element 와의 관계를 조회 */
     public int getRelation(Element target) {
         return relationMatrix[this.ordinal()][target.ordinal()];
     }

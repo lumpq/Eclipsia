@@ -1,6 +1,7 @@
 package io.lumpq126.eclipsia.entities;
 
 import io.lumpq126.eclipsia.elements.Element;
+import io.lumpq126.eclipsia.stats.Stat;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -46,7 +47,6 @@ public class EclipsiaEntity {
     // Element 관리
     // -----------------------------
 
-    /** Entity에 저장된 Element 반환 (없으면 Element.NORMAL) */
     public Element getElement() {
         PersistentDataContainer data = entity.getPersistentDataContainer();
         String name = data.get(elementKey, PersistentDataType.STRING);
@@ -54,7 +54,6 @@ public class EclipsiaEntity {
         return (parsed != null) ? parsed : Element.NORMAL;
     }
 
-    /** Entity에 Element 저장 (null이면 삭제) */
     public void setElement(Element element) {
         PersistentDataContainer data = entity.getPersistentDataContainer();
         if (element != null) {
@@ -64,17 +63,14 @@ public class EclipsiaEntity {
         }
     }
 
-    /** Entity에 Element가 존재하는지 여부 확인 */
     public boolean hasElement() {
         return entity.getPersistentDataContainer().has(elementKey, PersistentDataType.STRING);
     }
 
-    /** 원본 Bukkit Entity 반환 */
     public Entity toEntity() {
         return entity;
     }
 
-    /** Player로 캐스팅(Optional) */
     public Player toPlayer() {
         return (entity instanceof Player p) ? p : null;
     }
@@ -132,5 +128,49 @@ public class EclipsiaEntity {
 
     public void removeEnhanceDefense(int amount) {
         setEnhanceDefense(Math.max(0, getEnhanceDefense() - amount));
+    }
+
+    // -----------------------------
+    // 스탯 관리
+    // -----------------------------
+
+    public int getStat(Stat stat) {
+        int index = Stat.getEntityIndex(entity);
+        return Stat.statValues.get(index)[stat.ordinal()];
+    }
+
+    public void setStat(Stat stat, int value) {
+        int index = Stat.getEntityIndex(entity);
+        Stat.statValues.get(index)[stat.ordinal()] = value;
+    }
+
+    public void addStat(Stat stat, int amount) {
+        setStat(stat, getStat(stat) + amount);
+    }
+
+    public void removeStat(Stat stat, int amount) {
+        setStat(stat, Math.max(0, getStat(stat) - amount));
+    }
+
+    // -----------------------------
+    // 스탯 포인트 관리
+    // -----------------------------
+
+    public int getStatPoints() {
+        int index = Stat.getEntityIndex(entity);
+        return Stat.statPoints.get(index);
+    }
+
+    public void setStatPoints(int points) {
+        int index = Stat.getEntityIndex(entity);
+        Stat.statPoints.set(index, Math.max(0, points));
+    }
+
+    public void addStatPoints(int amount) {
+        setStatPoints(getStatPoints() + amount);
+    }
+
+    public void removeStatPoints(int amount) {
+        setStatPoints(Math.max(0, getStatPoints() - amount));
     }
 }

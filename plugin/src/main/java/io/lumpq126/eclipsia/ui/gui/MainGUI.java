@@ -1,11 +1,14 @@
 package io.lumpq126.eclipsia.ui.gui;
 
+import io.lumpq126.eclipsia.entities.EclipsiaEntity;
+import io.lumpq126.eclipsia.stats.Stat;
 import io.lumpq126.eclipsia.utilities.InventoryUtility;
 import io.lumpq126.eclipsia.utilities.Mm;
 import io.lumpq126.eclipsia.utilities.storage.PlayerInfoStorage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
@@ -47,12 +50,12 @@ public class MainGUI {
         inventory.setItem(9, statPaper);
 
         // 여기에 6개의 스탯 아이템을 순서대로 배치
-        inventory.setItem(11, statItem(player, "str")); // 근력
-        inventory.setItem(12, statItem(player, "con")); // 건강
-        inventory.setItem(13, statItem(player, "agi")); // 민첩
-        inventory.setItem(20, statItem(player, "dex")); // 재주
-        inventory.setItem(21, statItem(player, "wis")); // 지혜
-        inventory.setItem(22, statItem(player, "int")); // 지능
+        inventory.setItem(11, statItem(player, "STRENGTH")); // 근력
+        inventory.setItem(12, statItem(player, "CONSTITUTION")); // 건강
+        inventory.setItem(13, statItem(player, "AGILITY")); // 민첩
+        inventory.setItem(20, statItem(player, "DEXTERITY")); // 재주
+        inventory.setItem(21, statItem(player, "WISDOM")); // 지혜
+        inventory.setItem(22, statItem(player, "INTELLIGENCE")); // 지능
 
         player.openInventory(inventory);
     }
@@ -61,8 +64,10 @@ public class MainGUI {
         StatType type = StatType.fromName(statName);
         if (type == null) return ItemStack.of(Material.BARRIER); // fallback
 
-        int statValue = PlayerInfoStorage.getStat(player, statName);
-        int statPoint = PlayerInfoStorage.getStatPoint(player);
+        EclipsiaEntity eEntity = new EclipsiaEntity(player);
+
+        int statValue = eEntity.getStat(Stat.fromName(statName));
+        int statPoint = eEntity.getStatPoints();
 
         ItemStack item = new ItemStack(type.material);
         ItemMeta meta = item.getItemMeta();

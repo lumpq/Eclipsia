@@ -10,9 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -23,8 +20,6 @@ import java.util.logging.Level;
 public class PlayerInfoStorage {
     private static final int MAX_LEVEL = 999;
     private static final int INITIAL_LEVEL = 1;
-    private static final int INITIAL_STAT = 5;
-    private static final int STAT_POINT_PER_LEVEL = 5;
     private static final int INITIAL_SIA = 10000;
 
     /** 플레이어 정보가 저장된 파일 */
@@ -92,20 +87,6 @@ public class PlayerInfoStorage {
         }
     }
 
-    /**
-     * 플레이어의 스탯 키 목록을 반환합니다. 단, "point" 키는 제외합니다.
-     * @param player 플레이어 객체
-     * @return 스탯 키 문자열 Set
-     */
-    public static Set<String> getStatKeysExceptPoint(Player player) {
-        String statPath = path(player, "stat");
-        if (config.getConfigurationSection(statPath) == null) return new HashSet<>();
-
-        Set<String> keys = new HashSet<>(Objects.requireNonNull(config.getConfigurationSection(statPath)).getKeys(false));
-        keys.remove("point");  // point 키 제외
-        return keys;
-    }
-
     // ────────────────────── PATH UTIL ──────────────────────
 
     /**
@@ -141,28 +122,13 @@ public class PlayerInfoStorage {
 
     /**
      * 플레이어 정보를 초기 상태로 리셋합니다.
-     * 레벨, 경험치, 스탯 포인트, 각종 스탯 및 화폐 초기화 포함.
+     * 레벨, 경험치 및 화폐 초기화 포함.
      * @param player 플레이어 객체
      */
     public static void playerInfoReset(Player player) {
         setLevel(player, INITIAL_LEVEL);
         setExp(player, 0);
-        setStatPoint(player, STAT_POINT_PER_LEVEL);
-        setInitialStats(player);
         setInitialCurrencies(player);
-    }
-
-    /**
-     * 기본 스탯들을 초기값으로 세팅합니다.
-     * @param player 플레이어 객체
-     */
-    private static void setInitialStats(Player player) {
-        setStat(player, "str", INITIAL_STAT);
-        setStat(player, "con", INITIAL_STAT);
-        setStat(player, "agi", INITIAL_STAT);
-        setStat(player, "dex", INITIAL_STAT);
-        setStat(player, "int", INITIAL_STAT);
-        setStat(player, "wis", INITIAL_STAT);
     }
 
     /**
@@ -368,78 +334,10 @@ public class PlayerInfoStorage {
         synchronized (lock) {
             config.set(path(player, "level"), newLevel);
             config.set(path(player, "exp"), 0); // 경험치 초기화
-            addStatPoint(player, (newLevel - oldLevel) * STAT_POINT_PER_LEVEL);
             save();
         }
 
         // 레벨업 이벤트 호출 - 사용자 정의 이벤트로 처리
         Bukkit.getPluginManager().callEvent(new PlayerLevelUpEvent(player, oldLevel, newLevel));
-    }
-
-    // ────────────────────── STAT POINT ──────────────────────
-
-    /**
-     * 플레이어가 사용할 수 있는 스탯 포인트를 반환합니다.
-     * @param player 플레이어 객체
-     * @return 사용 가능한 스탯 포인트 수
-     */
-    public static int getStatPoint(Player player) {
-        return config.getInt(path(player, "stat", "point"), STAT_POINT_PER_LEVEL);
-    }
-
-    /**
-     * 플레이어의 스탯 포인트를 설정합니다.
-     * @param player 플레이어 객체
-     * @param point 설정할 포인트 수
-     */
-    public static void setStatPoint(Player player, int point) {
-        synchronized (lock) {
-            config.set(path(player, "stat", "point"), point);
-            save();
-        }
-    }
-
-    /**
-     * 플레이어의 스탯 포인트를 증가시킵니다.
-     * @param player 플레이어 객체
-     * @param amount 증가할 포인트 수
-     */
-    public static void addStatPoint(Player player, int amount) {
-        setStatPoint(player, getStatPoint(player) + amount);
-    }
-
-    // ────────────────────── STAT ──────────────────────
-
-    /**
-     * 특정 스탯의 값을 반환합니다.
-     * @param player 플레이어 객체
-     * @param statName 스탯 이름 (ex. "str", "agi", "dex" 등)
-     * @return 스탯 값
-     */
-    public static int getStat(Player player, String statName) {
-        return config.getInt(path(player, "stat", statName), INITIAL_STAT);
-    }
-
-    /**
-     * 특정 스탯의 값을 설정합니다.
-     * @param player 플레이어 객체
-     * @param statName 스탯 이름
-     * @param value 설정할 값
-     */
-    public static void setStat(Player player, String statName, int value) {
-        synchronized (lock) {
-            config.set(path(player, "stat", statName), value);
-            save();
-        }
-    }
-
-    /**
-     * 특정 스탯 값을 증가시킵니다.
-     * @param player 플레이어 객체
-     * @param statName 스탯 이름
-     * @param amount 증가할 값
-     */
-    public static void addStat(Player player, String statName, int amount) {
-        setStat(player, statName, getStat(player, statName) + amount);
     }
 }
