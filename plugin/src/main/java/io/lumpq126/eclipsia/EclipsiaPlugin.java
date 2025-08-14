@@ -61,11 +61,17 @@ public final class EclipsiaPlugin extends JavaPlugin {
         try {
             nms = NMSHandlerFactory.loadNMS();
             getComponentLogger().info(Mm.mm(
-                    "<green>NMS 핸들러 활성화 성공! 서버 버전: " + getServer().getBukkitVersion() + ", NMS 버전: " + NMSHandlerFactory.getNMSVersion() + "</green>"));
-        } catch (UnsupportedOperationException e) {
+                    "<green>NMS 핸들러 활성화 성공! 서버 버전: " 
+                    + getServer().getBukkitVersion() 
+                    + ", NMS 버전: " 
+                    + NMSHandlerFactory.getNMSVersion() 
+                    + "</green>"
+            ));
+        } catch (IllegalStateException e) { // 변경됨
             getLogger().severe("NMS 핸들러 활성화 실패: " + e.getMessage());
             getLogger().log(Level.SEVERE, "Exception stacktrace: ", e);
             getServer().getPluginManager().disablePlugin(this);
+            return; // 안전하게 종료
         }
 
         ActionBarScheduler.start();
