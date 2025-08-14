@@ -15,16 +15,17 @@ val nmsProjects by lazy {
     subprojects.filter {
         it.path.startsWith(":nms:") &&
                 it.parent?.name == "nms" &&
-                it.name != "build"
-                it.name != ""
+                it.name != "build" &&
+                it.name.isNotEmpty()
     }
 }
+
 val skillsProjects by lazy {
     subprojects.filter {
         it.path.startsWith(":skills:") &&
                 it.parent?.name == "skills" &&
-                it.name != "build"
-                it.name != ""
+                it.name != "build" &&
+                it.name.isNotEmpty()
     }
 }
 
@@ -56,12 +57,12 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":plugin"))
 
-    // NMS 모듈 → reobf 구성 사용
+    // NMS 모듈 → configuration 지정 제거, reobfJar 의존은 shadowJar에서 처리
     nmsProjects.forEach {
-        implementation(project(it.path, configuration = "reobf"))
+        implementation(project(it.path))
     }
 
-    // Skills 모듈 → shadow 구성 있으면 shadow, 없으면 기본 jar
+    // Skills 모듈 → shadow 있으면 shadow, 없으면 기본 jar
     skillsProjects.forEach { proj ->
         val cfg = if (proj.configurations.findByName("shadow") != null) "shadow" else "default"
         implementation(project(proj.path, configuration = cfg))
@@ -77,8 +78,11 @@ tasks {
     }
 
     shadowJar {
-        // NMS → reobfJar
-        nmsProjects.forEach { dependsOn("${it.path}:reobfJar") }
+        // NMS → reobfJar 의존
+        nmsProjects.forEach { proj ->
+            dependsOn("${proj.path}:reobfJar")
+        }
+
         // Skills → shadowJar 있으면 shadowJar, 없으면 jar
         skillsProjects.forEach { proj ->
             if (proj.tasks.findByName("shadowJar") != null) {

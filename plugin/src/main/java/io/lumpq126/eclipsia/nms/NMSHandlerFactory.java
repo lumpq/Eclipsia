@@ -46,7 +46,10 @@ public final class NMSHandlerFactory {
         NmsVersion nmsVersion = NmsVersion.fromBukkitVersion(bukkitVersion);
 
         try {
-            String className = "io.lumpq126.eclipsia.nms." + nmsVersion.name() + ".NMSHandler";
+            // 패키지 이름을 소문자로 변환하여 대소문자 문제 해결
+            String packageName = nmsVersion.name().toLowerCase();
+            String className = "io.lumpq126.eclipsia.nms." + packageName + ".NMSHandler";
+
             Class<?> clazz = Class.forName(className);
             Constructor<?> constructor = clazz.getDeclaredConstructor();
             constructor.setAccessible(true);
