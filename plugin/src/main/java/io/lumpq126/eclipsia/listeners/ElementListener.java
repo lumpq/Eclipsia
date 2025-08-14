@@ -1,6 +1,8 @@
 package io.lumpq126.eclipsia.listeners;
 
+import io.lumpq126.eclipsia.EclipsiaPlugin;
 import io.lumpq126.eclipsia.elements.Element;
+import io.lumpq126.eclipsia.entities.EclipsiaEntity;
 import io.lumpq126.eclipsia.events.ElementDamageEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -13,7 +15,8 @@ public class ElementListener implements Listener {
     // 1차: 원본 이벤트를 커스텀 이벤트로 변환
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onAttack(EntityDamageByEntityEvent event) {
-        ElementDamageEvent e = new ElementDamageEvent(event, Element.ICE);
+        EclipsiaEntity eEntity = new EclipsiaEntity(EclipsiaPlugin.getInstance(), event.getEntity());
+        ElementDamageEvent e = new ElementDamageEvent(event, eEntity.getElement());
         Bukkit.getPluginManager().callEvent(e);
     }
 

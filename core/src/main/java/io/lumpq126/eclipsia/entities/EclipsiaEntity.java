@@ -8,8 +8,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 
-import java.util.Optional;
-
 /**
  * Bukkit Entity 확장 클래스
  * PersistentDataContainer를 통해 Element 정보와 강화 수치를 영구 저장 가능
@@ -35,11 +33,12 @@ public class EclipsiaEntity {
     // Element 관리
     // -----------------------------
 
-    /** Entity에 저장된 Element 반환 (없으면 Optional.empty) */
-    public Optional<Element> getElement() {
+    /** Entity에 저장된 Element 반환 (없으면 Element.NORMAL) */
+    public Element getElement() {
         PersistentDataContainer data = entity.getPersistentDataContainer();
         String name = data.get(elementKey, PersistentDataType.STRING);
-        return Optional.ofNullable(Element.getByName(name));
+        Element element = Element.getByName(name);
+        return (element != null) ? element : Element.NORMAL;
     }
 
     /** Entity에 Element 저장 (null이면 삭제) */
@@ -53,11 +52,13 @@ public class EclipsiaEntity {
     }
 
     /** 원본 Bukkit Entity 반환 */
-    public Entity toEntity() { return entity; }
+    public Entity toEntity() {
+        return entity;
+    }
 
     /** Player로 캐스팅(Optional) */
-    public Optional<Player> toPlayer() {
-        return (entity instanceof Player p) ? Optional.of(p) : Optional.empty();
+    public Player toPlayer() {
+        return (entity instanceof Player p) ? p : null;
     }
 
     /** Entity에 Element가 존재하는지 여부 확인 */

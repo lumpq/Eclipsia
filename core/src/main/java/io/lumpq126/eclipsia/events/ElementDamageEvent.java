@@ -77,23 +77,23 @@ public class ElementDamageEvent extends Event {
     /**
      * 공격자의 속성 {@link Element}를 반환합니다.
      * <p>
-     * 존재하지 않으면 {@code null}을 반환합니다.
+     * 존재하지 않으면 기본 속성 {@link Element#NORMAL}을 반환합니다.
      *
      * @return 공격자 속성
      */
     public Element getDamagerElement() {
-        return damager.getElement().orElse(null);
+        return damager.getElement(); // 항상 Element 반환
     }
 
     /**
      * 피격자의 속성 {@link Element}를 반환합니다.
      * <p>
-     * 존재하지 않으면 {@code null}을 반환합니다.
+     * 존재하지 않으면 기본 속성 {@link Element#NORMAL}을 반환합니다.
      *
      * @return 피격자 속성
      */
     public Element getVictimElement() {
-        return victim.getElement().orElse(null);
+        return victim.getElement(); // 항상 Element 반환
     }
 
     /**
