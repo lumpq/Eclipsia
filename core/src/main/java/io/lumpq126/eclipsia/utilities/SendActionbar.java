@@ -1,10 +1,10 @@
-package io.lumpq126.eclipsia.protocol.packets;
+package io.lumpq126.eclipsia.utilities;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 
-public class SendActionBarToPacket {
+public class SendActionbar {
 
     public static void send(Player player, String message) {
         if (player == null || message == null) return;
