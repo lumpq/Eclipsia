@@ -54,6 +54,7 @@ public enum Stat {
         try {
             return Stat.valueOf(name.toUpperCase(Locale.ROOT));
         } catch (IllegalArgumentException e) {
+            System.out.println("[Eclipsia] 잘못된 Stat 이름: " + name);
             return null;
         }
     }
