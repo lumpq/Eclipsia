@@ -3,7 +3,6 @@ package io.lumpq126.eclipsia;
 import io.lumpq126.eclipsia.commands.EclipsiaCommand;
 import io.lumpq126.eclipsia.commands.ElementReload;
 import io.lumpq126.eclipsia.commands.FishCommand;
-import io.lumpq126.eclipsia.elements.ElementEntity;
 import io.lumpq126.eclipsia.listeners.ElementListener;
 import io.lumpq126.eclipsia.listeners.FishListener;
 import io.lumpq126.eclipsia.listeners.LevelUPListener;
