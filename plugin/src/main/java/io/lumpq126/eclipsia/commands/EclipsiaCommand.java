@@ -6,7 +6,6 @@ import io.lumpq126.eclipsia.items.FishItems;
 import io.lumpq126.eclipsia.stats.Stat;
 import io.lumpq126.eclipsia.utilities.storage.FishCatalogStorage;
 import io.lumpq126.eclipsia.utilities.storage.MonthStorage;
-import io.lumpq126.eclipsia.utilities.storage.PlayerInfoStorage;
 import io.lumpq126.eclipsia.utilities.storage.PlayerPageStorage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -185,6 +184,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
             return;
         }
 
+        EclipsiaEntity eEntity = new EclipsiaEntity((Entity) sender);
+
         String sub = args[1].toLowerCase();
         List<Player> targets = resolveTargets(sender, args[2]);
         if (targets.isEmpty()) {
@@ -194,9 +195,9 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
 
         for (Player target : targets) {
             switch (sub) {
-                case "get" -> sendMessage(sender, target.getName() + " 레벨: " + PlayerInfoStorage.getLevel(target), NamedTextColor.YELLOW);
+                case "get" -> sendMessage(sender, target.getName() + " 레벨: " + eEntity.getLevel(), NamedTextColor.YELLOW);
                 case "reset" -> {
-                    PlayerInfoStorage.resetLevel(target);
+                    eEntity.resetLevel();
                     sendMessage(sender, target.getName() + "의 레벨이 1로 초기화됨.", NamedTextColor.GREEN);
                 }
                 case "set", "add" -> {
@@ -206,8 +207,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                     }
                     try {
                         int value = Integer.parseInt(args[3]);
-                        if (sub.equals("set")) PlayerInfoStorage.setLevel(target, value);
-                        else PlayerInfoStorage.addLevel(target, value);
+                        if (sub.equals("set")) eEntity.setLevel(value);
+                        else eEntity.addLevel(value);
                         sendMessage(sender, target.getName() + "의 레벨이 적용됨.", NamedTextColor.GREEN);
                     } catch (NumberFormatException e) {
                         sendMessage(sender, "숫자 형식이 잘못되었습니다.", NamedTextColor.RED);
@@ -228,6 +229,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
             return;
         }
 
+        EclipsiaEntity eEntity = new EclipsiaEntity((Entity) sender);
+
         String sub = args[1].toLowerCase();
         List<Player> targets = resolveTargets(sender, args[2]);
         if (targets.isEmpty()) {
@@ -237,9 +240,9 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
 
         for (Player target : targets) {
             switch (sub) {
-                case "get" -> sendMessage(sender, target.getName() + " 경험치: " + PlayerInfoStorage.getExp(target), NamedTextColor.YELLOW);
+                case "get" -> sendMessage(sender, target.getName() + " 경험치: " + eEntity.getExp(), NamedTextColor.YELLOW);
                 case "reset" -> {
-                    PlayerInfoStorage.setExp(target, 0);
+                    eEntity.setExp(0);
                     sendMessage(sender, target.getName() + "의 경험치가 초기화됨.", NamedTextColor.GREEN);
                 }
                 case "set", "add" -> {
@@ -249,8 +252,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                     }
                     try {
                         int value = Integer.parseInt(args[3]);
-                        if (sub.equals("set")) PlayerInfoStorage.setExp(target, value);
-                        else PlayerInfoStorage.addExp(target, value);
+                        if (sub.equals("set")) eEntity.setExp(value);
+                        else eEntity.addExp(value);
                         sendMessage(sender, target.getName() + "의 경험치가 적용됨.", NamedTextColor.GREEN);
                     } catch (NumberFormatException e) {
                         sendMessage(sender, "숫자 형식이 잘못되었습니다.", NamedTextColor.RED);
@@ -343,7 +346,6 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
      */
     private void reload(CommandSender sender) {
         FishCatalogStorage.reload();
-        PlayerInfoStorage.reload();
         PlayerPageStorage.reload();
         MonthStorage.reload();
         sendMessage(sender, "설정 파일이 재로드되었습니다.", NamedTextColor.GREEN);

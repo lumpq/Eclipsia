@@ -43,7 +43,6 @@ public final class EclipsiaPlugin extends JavaPlugin {
         Log.init(this);
         MonthStorage.init(this);
         EclipsiaEntity.init(this);
-        PlayerInfoStorage.init(this);
         PlayerPageStorage.init(this);
         FishCatalogStorage.init(this);
 

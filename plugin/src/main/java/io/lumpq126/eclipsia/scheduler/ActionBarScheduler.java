@@ -1,18 +1,19 @@
 package io.lumpq126.eclipsia.scheduler;
 
 import io.lumpq126.eclipsia.EclipsiaPlugin;
+import io.lumpq126.eclipsia.entities.EclipsiaEntity;
 import io.lumpq126.eclipsia.utilities.ActionBarUtility;
-import io.lumpq126.eclipsia.utilities.storage.PlayerInfoStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class ActionBarScheduler {
 
     public static void showLevelAndExp(Player player) {
-        int level = PlayerInfoStorage.getLevel(player);
-        double exp = PlayerInfoStorage.getExp(player);
-        double nextLevelExp = PlayerInfoStorage.getRequiredExp(level);
-        int sia = PlayerInfoStorage.getSia(player);
+        EclipsiaEntity eEntity = new EclipsiaEntity(player);
+        int level = eEntity.getLevel();
+        double exp = eEntity.getExp();
+        double nextLevelExp = eEntity.getRequiredExp(level);
+        int sia = eEntity.getSia();
 
         String message = "<green>[ Lv<white>. <green>" + level + " ] <dark_gray>| " +
                 "<yellow>[ Exp<white>:<yellow> " + String.format("%.1f", exp) +

@@ -4,10 +4,8 @@ import io.lumpq126.eclipsia.entities.EclipsiaEntity;
 import io.lumpq126.eclipsia.stats.Stat;
 import io.lumpq126.eclipsia.ui.gui.MainGUI;
 import io.lumpq126.eclipsia.utilities.Mm;
-import io.lumpq126.eclipsia.utilities.storage.PlayerInfoStorage;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Sound;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,12 +17,6 @@ import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import java.util.Map;
 
 public class MainGUIListener implements Listener {
-
-    @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
-        Player p = event.getPlayer();
-        PlayerInfoStorage.playerInitialSetting(p);
-    }
 
     @EventHandler
     public void openHome(PlayerSwapHandItemsEvent event) {
