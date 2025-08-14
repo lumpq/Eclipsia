@@ -12,6 +12,10 @@ public class LevelUPListener implements Listener {
 
     @EventHandler
     public void onLevelUP(PlayerLevelUpEvent event) {
+        if (event.getNewLevel() > 999) {
+            event.setCancelled(true);
+            return;
+        }
         event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1.0f, 2.0f);
         event.getPlayer().sendMessage(Component.text("§l§a레벨 상승! " + event.getOldLevel() + " -> " + event.getNewLevel()));
     }

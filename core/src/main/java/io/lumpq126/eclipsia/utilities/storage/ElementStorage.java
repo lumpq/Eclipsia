@@ -16,11 +16,7 @@ import java.util.logging.Logger;
  */
 public class ElementStorage {
 
-    private static final Element[] ALL_ELEMENTS = {
-            Element.NORMAL, Element.FIRE, Element.WATER, Element.EARTH, Element.WIND,
-            Element.POISON, Element.LIGHT, Element.DARKNESS, Element.ELECTRIC, Element.ICE,
-            Element.METAL, Element.PLANTS, Element.ROT, Element.SHADOW, Element.ANGEL, Element.DEVIL
-    };
+    private static final Element[] ALL_ELEMENTS = Element.values();
 
     private static Element getElementByName(String name) {
         for (Element e : ALL_ELEMENTS) {
@@ -44,7 +40,7 @@ public class ElementStorage {
 
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 
-        // 모든 관계 초기화 (한 번만 호출)
+        // 모든 관계 초기화
         Element.clearRelations();
 
         // elements.yml 읽기
@@ -65,8 +61,8 @@ public class ElementStorage {
             for (String s : config.getStringList("elements." + key + ".mutual_strengths")) {
                 Element target = getElementByName(s);
                 if (target != null) {
-                    element.setRelation(target, Element.MUTUAL);
-                    target.setRelation(element, Element.MUTUAL);
+                    Element.setRelation(element, target, Element.MUTUAL);
+                    // MUTUAL은 Element.setRelation에서 자동으로 양방향 설정됨
                 } else {
                     logger.warning("⚠ Unknown mutual_strength element in " + key + ": " + s);
                 }
@@ -79,11 +75,11 @@ public class ElementStorage {
     /**
      * 지정된 목록에 포함된 요소들과 관계를 설정
      */
-    private static void setRelations(List<String> list, Element element, int relationValue, Logger logger, String parentKey) {
+    private static void setRelations(List<String> list, Element from, int relationValue, Logger logger, String parentKey) {
         for (String s : list) {
             Element target = getElementByName(s);
             if (target != null) {
-                element.setRelation(target, relationValue);
+                Element.setRelation(from, target, relationValue);
             } else {
                 logger.warning("⚠ Unknown element in " + parentKey + ": " + s);
             }

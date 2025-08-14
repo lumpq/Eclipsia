@@ -65,8 +65,7 @@ public final class EclipsiaPlugin extends JavaPlugin {
                     + getServer().getBukkitVersion() 
                     + ", NMS 버전: " 
                     + NMSHandlerFactory.getNMSVersion() 
-                    + "</green>"
-            ));
+                    + "</green>"));
         } catch (IllegalStateException e) { // 변경됨
             getLogger().severe("NMS 핸들러 활성화 실패: " + e.getMessage());
             getLogger().log(Level.SEVERE, "Exception stacktrace: ", e);

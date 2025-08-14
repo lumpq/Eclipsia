@@ -30,11 +30,8 @@ public class ElementListener implements Listener {
         Element attackerElement = event.getDamagerElement();
         Element victimElement = event.getVictimElement();
 
-        // 관계 값 가져오기
-        int relation = attackerElement.getRelation(victimElement);
-
         // 배율 계산
-        double multiplier = getDamageMultiplier(relation);
+        double multiplier = Element.getDamageMultiplier(attackerElement, victimElement);
 
         // 기존 대미지
         double baseDamage = event.getOriginalEvent().getDamage();
