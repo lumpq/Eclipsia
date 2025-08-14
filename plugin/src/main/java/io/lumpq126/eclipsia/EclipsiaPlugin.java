@@ -12,6 +12,7 @@ import io.lumpq126.eclipsia.nms.NMSHandler;
 import io.lumpq126.eclipsia.nms.NMSHandlerFactory;
 import io.lumpq126.eclipsia.scheduler.ActionBarScheduler;
 import io.lumpq126.eclipsia.scheduler.AttributeScheduler;
+import io.lumpq126.eclipsia.utilities.Log;
 import io.lumpq126.eclipsia.utilities.Mm;
 import io.lumpq126.eclipsia.utilities.storage.*;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -39,6 +40,7 @@ public final class EclipsiaPlugin extends JavaPlugin {
         instance = this;
         fishConfig = YamlConfiguration.loadConfiguration(file);
 
+        Log.init(this);
         MonthStorage.init(this);
         EclipsiaEntity.init(this);
         PlayerInfoStorage.init(this);
