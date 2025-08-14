@@ -46,8 +46,9 @@ public final class NMSHandlerFactory {
         NmsVersion nmsVersion = NmsVersion.fromBukkitVersion(bukkitVersion);
 
         try {
-            // 패키지 이름을 소문자로 변환하여 대소문자 문제 해결
-            String packageName = nmsVersion.name().toLowerCase();
+            // 패키지 이름: V → v로만 변환, 나머지는 그대로
+            String versionName = nmsVersion.name();
+            String packageName = "v" + versionName.substring(1);
             String className = "io.lumpq126.eclipsia.nms." + packageName + ".NMSHandler";
 
             Class<?> clazz = Class.forName(className);
