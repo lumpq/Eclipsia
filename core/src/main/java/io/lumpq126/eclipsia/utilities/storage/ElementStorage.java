@@ -11,13 +11,24 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
- * elements.yml에서 Element 관계를 불러와
- * Element의 relationMatrix에 직접 세팅하는 유틸 클래스.
+ * {@code ElementStorage} 클래스는 elements.yml 파일에서
+ * {@link Element} 간의 관계를 불러와
+ * 각 Element의 relationMatrix에 세팅하는 유틸리티 클래스입니다.
+ * <p>
+ * strengths, weaknesses, ultimate strengths/weaknesses 등 다양한 관계를 지원하며,
+ * mutual_strengths는 양방향 관계로 자동 설정됩니다.
  */
 public class ElementStorage {
 
+    /** 모든 Element를 캐싱 */
     private static final Element[] ALL_ELEMENTS = Element.values();
 
+    /**
+     * 이름(String)으로 Element를 검색합니다.
+     *
+     * @param name 검색할 Element 이름
+     * @return 해당 이름의 Element 또는 존재하지 않으면 null
+     */
     private static Element getElementByName(String name) {
         for (Element e : ALL_ELEMENTS) {
             if (e.name().equalsIgnoreCase(name)) {
@@ -28,7 +39,9 @@ public class ElementStorage {
     }
 
     /**
-     * elements.yml을 로드하여 Element 관계 매트릭스 초기화
+     * elements.yml을 로드하여 Element 관계 매트릭스를 초기화합니다.
+     *
+     * @param plugin 플러그인 인스턴스 (로깅, 파일 경로, 리소스 저장용)
      */
     public static void load(JavaPlugin plugin) {
         Logger logger = plugin.getLogger();
@@ -73,7 +86,13 @@ public class ElementStorage {
     }
 
     /**
-     * 지정된 목록에 포함된 요소들과 관계를 설정
+     * 지정된 목록(List)에 포함된 요소들과 관계를 설정합니다.
+     *
+     * @param list      관계를 설정할 대상 Element 이름 리스트
+     * @param from      기준 Element
+     * @param relationValue 관계 종류 (Element.STRENGTH, WEAKNESS 등)
+     * @param logger    로깅용 Logger
+     * @param parentKey config 상 부모 키 이름 (로그 메시지용)
      */
     private static void setRelations(List<String> list, Element from, int relationValue, Logger logger, String parentKey) {
         for (String s : list) {
