@@ -21,5 +21,3 @@ include("nms:v1_21_R4")
 include("nms:v1_21_R5")
 
 include("skills")
-
-include("mobs")

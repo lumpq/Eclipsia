@@ -4,6 +4,8 @@ version: 1.0.0 # pluginVersion 대신 실제 버전을 적으세요
 api-version: 1.19
 author: _LumPq_
 
+depend: [ ProtocolLib ]
+
 commands:
   fish:
     permission: op

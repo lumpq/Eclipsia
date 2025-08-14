@@ -24,7 +24,7 @@ public class ElementListener implements Listener {
         Element victimElement = event.getVictimElement();
 
         // 관계 값 가져오기
-        int relation = attackerElement.getRelation(victimElement);
+        int relation = attackerElement.getRelation(attackerElement, victimElement);
 
         // 배율 계산
         double multiplier = getDamageMultiplier(relation);

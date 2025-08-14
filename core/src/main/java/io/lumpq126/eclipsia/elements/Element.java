@@ -215,15 +215,13 @@ public class Element {
      * @param other 비교 대상 속성
      * @return 관계 우선순위를 나타내는 정수 값
      */
-    public int getRelation(Element other) {
-        if (mutualStrengths.contains(other) && other.mutualStrengths.contains(this)) {
-            return 10; // 특수 플래그
-        }
-        if (ultimateStrengths.contains(other)) return 5;
-        if (strengths.contains(other)) return 4;
-        if (ultimateWeaknesses.contains(other)) return 3;
-        if (weaknesses.contains(other)) return 2;
-        if (generals.contains(other)) return 1;
+    public int getRelation(Element element, Element other) {
+        if (element.getMutualStrengths().contains(other)) return 10; // 특수 플래그
+        if (element.getUltimateStrengths().contains(other)) return 5;
+        if (element.getStrengths().contains(other)) return 4;
+        if (element.getUltimateWeaknesses().contains(other)) return 3;
+        if (element.getWeaknesses().contains(other)) return 2;
+        if (element.getGenerals().contains(other)) return 1;
         return 0;
     }
 
@@ -234,7 +232,7 @@ public class Element {
      */
     @Override
     public String toString() {
-        return "Element." + name;
+        return name;
     }
 
     /**

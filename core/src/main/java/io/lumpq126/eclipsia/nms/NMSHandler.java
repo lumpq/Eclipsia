@@ -6,6 +6,4 @@ import org.bukkit.inventory.Inventory;
 public interface NMSHandler {
 
     Inventory createInventory(Player player, int size, String name);
-
-    void sendActionBar(Player player, String message);
 }

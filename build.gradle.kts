@@ -15,14 +15,16 @@ val nmsProjects by lazy {
     subprojects.filter {
         it.path.startsWith(":nms:") &&
                 it.parent?.name == "nms" &&
-                it.name != "build"  // build 모듈 제외
+                it.name != "build"
+                it.name != ""
     }
 }
 val skillsProjects by lazy {
     subprojects.filter {
         it.path.startsWith(":skills:") &&
                 it.parent?.name == "skills" &&
-                it.name != "build"  // 제외할 모듈 이름
+                it.name != "build"
+                it.name != ""
     }
 }
 
@@ -37,6 +39,7 @@ allprojects {
 
     dependencies {
         compileOnly("net.citizensnpcs:citizensapi:2.0.37-SNAPSHOT")
+        compileOnly("net.dmulloy2:ProtocolLib:5.4.0")
     }
 
     tasks.withType<JavaCompile>().configureEach {
