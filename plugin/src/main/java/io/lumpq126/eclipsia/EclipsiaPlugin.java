@@ -3,6 +3,7 @@ package io.lumpq126.eclipsia;
 import io.lumpq126.eclipsia.commands.EclipsiaCommand;
 import io.lumpq126.eclipsia.commands.ElementReload;
 import io.lumpq126.eclipsia.commands.FishCommand;
+import io.lumpq126.eclipsia.entities.EclipsiaEntity;
 import io.lumpq126.eclipsia.listeners.ElementListener;
 import io.lumpq126.eclipsia.listeners.FishListener;
 import io.lumpq126.eclipsia.listeners.LevelUPListener;
@@ -39,7 +40,7 @@ public final class EclipsiaPlugin extends JavaPlugin {
         fishConfig = YamlConfiguration.loadConfiguration(file);
 
         MonthStorage.init(this);
-        ElementEntity.init(this);
+        EclipsiaEntity.init(this);
         PlayerInfoStorage.init(this);
         PlayerPageStorage.init(this);
         FishCatalogStorage.init(this);

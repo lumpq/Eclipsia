@@ -1,6 +1,5 @@
 package io.lumpq126.eclipsia.listeners;
 
-import io.lumpq126.eclipsia.EclipsiaPlugin;
 import io.lumpq126.eclipsia.elements.Element;
 import io.lumpq126.eclipsia.entities.EclipsiaEntity;
 import io.lumpq126.eclipsia.events.ElementDamageEvent;
@@ -12,15 +11,20 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class ElementListener implements Listener {
 
-    // 1차: 원본 이벤트를 커스텀 이벤트로 변환
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    /**
+     * 1차: 원본 이벤트를 커스텀 이벤트로 변환
+     */
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onAttack(EntityDamageByEntityEvent event) {
-        EclipsiaEntity eEntity = new EclipsiaEntity(EclipsiaPlugin.getInstance(), event.getEntity());
-        ElementDamageEvent e = new ElementDamageEvent(event, eEntity.getElement());
+        // 공격자의 속성을 가져와 attackElement로 전달
+        EclipsiaEntity damagerEntity = new EclipsiaEntity(event.getDamager());
+        ElementDamageEvent e = new ElementDamageEvent(event, damagerEntity.getElement());
         Bukkit.getPluginManager().callEvent(e);
     }
 
-    // 2차: 커스텀 이벤트 처리 후 대미지 조정
+    /**
+     * 2차: 커스텀 이벤트 처리 후 대미지 조정
+     */
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onElementAttack(ElementDamageEvent event) {
         Element attackerElement = event.getDamagerElement();
@@ -40,9 +44,12 @@ public class ElementListener implements Listener {
         event.getOriginalEvent().setDamage(finalDamage);
     }
 
+    /**
+     * 관계 값에 따른 대미지 배율 반환
+     */
     private double getDamageMultiplier(int relation) {
         return switch (relation) {
-            case 10 -> 2.0;  //양방향
+            case 10 -> 2.0;  // 양방향
             case 5 -> 2.0;   // 최강점
             case 4 -> 1.5;   // 강점
             case 3 -> 0.5;   // 최약점

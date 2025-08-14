@@ -14,19 +14,32 @@ import org.bukkit.plugin.Plugin;
  */
 public class EclipsiaEntity {
 
+    private static final int DEFAULT_LEVEL = 0;
+    private static Plugin pluginInstance; // 전역 플러그인 참조
+
     private final Entity entity;                  // 실제 Bukkit Entity
     private final NamespacedKey elementKey;       // Element 이름 저장 키
     private final NamespacedKey enhanceElementKey;// Element 강화 레벨 저장 키
     private final NamespacedKey enhanceAttackKey; // 공격 강화 레벨 저장 키
     private final NamespacedKey enhanceDefenseKey;// 방어 강화 레벨 저장 키
 
+    /**
+     * 플러그인 전역 인스턴스 초기화
+     */
+    public static void init(Plugin plugin) {
+        pluginInstance = plugin;
+    }
+
     // 생성자
-    public EclipsiaEntity(Plugin plugin, Entity entity) {
+    public EclipsiaEntity(Entity entity) {
+        if (pluginInstance == null) {
+            throw new IllegalStateException("EclipsiaEntity.init(plugin) must be called before creating instances.");
+        }
         this.entity = entity;
-        this.elementKey = new NamespacedKey(plugin, "element");
-        this.enhanceElementKey = new NamespacedKey(plugin, "enhance_element");
-        this.enhanceAttackKey = new NamespacedKey(plugin, "enhance_attack");
-        this.enhanceDefenseKey = new NamespacedKey(plugin, "enhance_defense");
+        this.elementKey = new NamespacedKey(pluginInstance, "element");
+        this.enhanceElementKey = new NamespacedKey(pluginInstance, "enhance_element");
+        this.enhanceAttackKey = new NamespacedKey(pluginInstance, "enhance_attack");
+        this.enhanceDefenseKey = new NamespacedKey(pluginInstance, "enhance_defense");
     }
 
     // -----------------------------
@@ -37,18 +50,23 @@ public class EclipsiaEntity {
     public Element getElement() {
         PersistentDataContainer data = entity.getPersistentDataContainer();
         String name = data.get(elementKey, PersistentDataType.STRING);
-        Element element = Element.getByName(name);
-        return (element != null) ? element : Element.NORMAL;
+        Element parsed = Element.fromName(name);
+        return (parsed != null) ? parsed : Element.NORMAL;
     }
 
     /** Entity에 Element 저장 (null이면 삭제) */
     public void setElement(Element element) {
         PersistentDataContainer data = entity.getPersistentDataContainer();
         if (element != null) {
-            data.set(elementKey, PersistentDataType.STRING, element.getName());
+            data.set(elementKey, PersistentDataType.STRING, element.getKey());
         } else {
             data.remove(elementKey);
         }
+    }
+
+    /** Entity에 Element가 존재하는지 여부 확인 */
+    public boolean hasElement() {
+        return entity.getPersistentDataContainer().has(elementKey, PersistentDataType.STRING);
     }
 
     /** 원본 Bukkit Entity 반환 */
@@ -61,24 +79,17 @@ public class EclipsiaEntity {
         return (entity instanceof Player p) ? p : null;
     }
 
-    /** Entity에 Element가 존재하는지 여부 확인 */
-    public boolean hasElement() {
-        return entity.getPersistentDataContainer().has(elementKey, PersistentDataType.STRING);
-    }
-
     // -----------------------------
     // 속성 강화도 관리
     // -----------------------------
-    // Element 강화 레벨
+
     public int getEnhanceElement() {
-        PersistentDataContainer data = entity.getPersistentDataContainer();
-        Integer val = data.get(enhanceElementKey, PersistentDataType.INTEGER);
-        return (val != null) ? val : 0;
+        Integer val = entity.getPersistentDataContainer().get(enhanceElementKey, PersistentDataType.INTEGER);
+        return (val != null) ? val : DEFAULT_LEVEL;
     }
 
     public void setEnhanceElement(int level) {
-        PersistentDataContainer data = entity.getPersistentDataContainer();
-        data.set(enhanceElementKey, PersistentDataType.INTEGER, Math.max(0, level));
+        entity.getPersistentDataContainer().set(enhanceElementKey, PersistentDataType.INTEGER, Math.max(0, level));
     }
 
     public void addEnhanceElement(int amount) {
@@ -89,16 +100,13 @@ public class EclipsiaEntity {
         setEnhanceElement(Math.max(0, getEnhanceElement() - amount));
     }
 
-    // 공격력 강화 레벨
     public int getEnhanceAttack() {
-        PersistentDataContainer data = entity.getPersistentDataContainer();
-        Integer val = data.get(enhanceAttackKey, PersistentDataType.INTEGER);
-        return (val != null) ? val : 0;
+        Integer val = entity.getPersistentDataContainer().get(enhanceAttackKey, PersistentDataType.INTEGER);
+        return (val != null) ? val : DEFAULT_LEVEL;
     }
 
     public void setEnhanceAttack(int level) {
-        PersistentDataContainer data = entity.getPersistentDataContainer();
-        data.set(enhanceAttackKey, PersistentDataType.INTEGER, Math.max(0, level));
+        entity.getPersistentDataContainer().set(enhanceAttackKey, PersistentDataType.INTEGER, Math.max(0, level));
     }
 
     public void addEnhanceAttack(int amount) {
@@ -109,16 +117,13 @@ public class EclipsiaEntity {
         setEnhanceAttack(Math.max(0, getEnhanceAttack() - amount));
     }
 
-    // 방어력 강화 레벨
     public int getEnhanceDefense() {
-        PersistentDataContainer data = entity.getPersistentDataContainer();
-        Integer val = data.get(enhanceDefenseKey, PersistentDataType.INTEGER);
-        return (val != null) ? val : 0;
+        Integer val = entity.getPersistentDataContainer().get(enhanceDefenseKey, PersistentDataType.INTEGER);
+        return (val != null) ? val : DEFAULT_LEVEL;
     }
 
     public void setEnhanceDefense(int level) {
-        PersistentDataContainer data = entity.getPersistentDataContainer();
-        data.set(enhanceDefenseKey, PersistentDataType.INTEGER, Math.max(0, level));
+        entity.getPersistentDataContainer().set(enhanceDefenseKey, PersistentDataType.INTEGER, Math.max(0, level));
     }
 
     public void addEnhanceDefense(int amount) {
