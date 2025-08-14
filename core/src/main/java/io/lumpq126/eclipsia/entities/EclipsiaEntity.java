@@ -57,7 +57,7 @@ public class EclipsiaEntity {
     public void setElement(Element element) {
         PersistentDataContainer data = entity.getPersistentDataContainer();
         if (element != null) {
-            data.set(elementKey, PersistentDataType.STRING, element.getKey());
+            data.set(elementKey, PersistentDataType.STRING, Element.getKey(element));
         } else {
             data.remove(elementKey);
         }
