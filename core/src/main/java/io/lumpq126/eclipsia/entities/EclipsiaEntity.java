@@ -57,7 +57,7 @@ public class EclipsiaEntity {
     }
 
     public boolean hasElement() {
-        return hasData(elementKey, PersistentDataType.STRING);
+        return hasData(elementKey);
     }
 
     // -----------------------------
@@ -150,7 +150,7 @@ public class EclipsiaEntity {
         entity.getPersistentDataContainer().remove(key);
     }
 
-    private boolean hasData(NamespacedKey key, PersistentDataType<?, ?> type) {
-        return entity.getPersistentDataContainer().has(key, type);
+    private boolean hasData(NamespacedKey key) {
+        return entity.getPersistentDataContainer().has(key, (PersistentDataType<?, ?>) PersistentDataType.STRING);
     }
 }
