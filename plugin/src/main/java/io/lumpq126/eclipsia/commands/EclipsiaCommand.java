@@ -215,7 +215,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                         return;
                     }
                     io.lumpq126.eclipsia.classes.Class newClass =
-                            io.lumpq126.eclipsia.classes.Class.fromNameOrDefault(args[3]);
+                            io.lumpq126.eclipsia.classes.Class.fromNameOrDefault(args[3].toUpperCase());
                     int stage = 0;
                     if (args.length >= 5) {
                         Integer parsed = parseIntOrNull(args[4], "전직 단계는 숫자여야 합니다.", sender);
@@ -756,7 +756,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                     String sub = args[1].toLowerCase(Locale.ROOT);
                     if (sub.equals("set") || sub.equals("canadvance") || sub.equals("stage")) {
                         for (io.lumpq126.eclipsia.classes.Class c : io.lumpq126.eclipsia.classes.Class.values()) {
-                            suggestions.add(c.name());
+                            suggestions.add(c.name().toLowerCase());
                         }
                     }
                 }
