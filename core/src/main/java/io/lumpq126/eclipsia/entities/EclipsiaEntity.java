@@ -104,7 +104,7 @@ public class EclipsiaEntity {
         this.professionProficiencyKey = new NamespacedKey(pluginInstance, "profession_proficiency");
 
         // 초기값 설정
-        if (!hasData(professionProficiencyKey, PersistentDataType.INTEGER)) setProfessionProficiency(100);
+        if (!hasData(professionProficiencyKey, PersistentDataType.INTEGER)) setProfessionProficiency(0);
         if (!hasData(classKey, PersistentDataType.STRING))
             setClass(io.lumpq126.eclipsia.classes.Class.NOVICE, 0);
         if (!hasData(levelKey, PersistentDataType.INTEGER)) setLevel(INITIAL_LEVEL);
@@ -195,7 +195,7 @@ public class EclipsiaEntity {
     }
 
     /**
-     * 레벨을 설정합니다. 범위는 1~MAX_LEVEL입니다.
+     * 레벨을 설정합니다. 범위는 1~MAX_LEVEL 입니다.
      * 레벨 상승 시 {@link PlayerLevelUpEvent}가 호출됩니다.
      *
      * @param level 새 레벨
@@ -315,7 +315,7 @@ public class EclipsiaEntity {
     }
 
     /**
-     * 속성을 설정합니다. null이면 제거됩니다.
+     * 속성을 설정합니다. null 이면 제거됩니다.
      *
      * @param element 설정할 Element
      * @since 1.0
