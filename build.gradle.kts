@@ -13,10 +13,6 @@ val nmsProjects by lazy {
     subprojects.filter { it.path.startsWith(":nms:") && it.parent?.name == "nms" && it.name != "build" && it.name.isNotEmpty() }
 }
 
-val skillsProjects by lazy {
-    subprojects.filter { it.path.startsWith(":skills:") && it.parent?.name == "skills" && it.name != "build" && it.name.isNotEmpty() }
-}
-
 allprojects {
     apply(plugin = "java")
 
@@ -47,10 +43,8 @@ allprojects {
 tasks {
     shadowJar {
         nmsProjects.forEach { dependsOn("${it.path}:reobfJar") }
-        skillsProjects.forEach {
-            if (it.tasks.findByName("shadowJar") != null) dependsOn("${it.path}:shadowJar")
-            else dependsOn("${it.path}:jar")
-        }
+
+
 
         archiveClassifier.set("")
         archiveFileName.set("Eclipsia-$pluginVersion.jar")
@@ -79,10 +73,7 @@ tasks.build { dependsOn("copyJarToServer") }
 dependencies {
     implementation(project(":core"))
     implementation(project(":plugin"))
+    implementation(project(":skills"))
 
     nmsProjects.forEach { implementation(project(it.path)) }
-    skillsProjects.forEach { proj ->
-        val cfg = if (proj.configurations.findByName("shadow") != null) "shadow" else "default"
-        implementation(project(proj.path, configuration = cfg))
-    }
 }

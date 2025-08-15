@@ -10,17 +10,10 @@ repositories {
 
 dependencies {
     implementation(project(":core"))
-
+    compileOnly(project(":skills"))
     // nms:* 모듈 자동 추가
     rootProject.subprojects
         .filter { it.path.startsWith(":nms:") }
-        .forEach {
-            compileOnly(project(it.path))
-        }
-
-    // skills:* 모듈 자동 추가
-    rootProject.subprojects
-        .filter { it.path.startsWith(":skills:") }
         .forEach {
             compileOnly(project(it.path))
         }
