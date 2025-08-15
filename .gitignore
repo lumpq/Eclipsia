@@ -5,8 +5,6 @@
 *.ipr
 *.iws
 
-gradle/wrapper/gradle-wrapper.properties
-
 # IntelliJ
 out/
 # mpeltonen/sbt-idea plugin

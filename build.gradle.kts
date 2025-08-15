@@ -1,10 +1,7 @@
 plugins {
     id("java")
     id("io.github.goooler.shadow") version "8.1.8"
-    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
     id("xyz.jpenilla.run-paper") version "2.3.1"
-    `maven-publish`
-    signing
 }
 
 group = "io.lumpq126"
@@ -77,57 +74,6 @@ tasks.register<Copy>("copyJarToServer") {
     rename { "Eclipsia-$pluginVersion.jar" }
 }
 tasks.build { dependsOn("copyJarToServer") }
-
-// Maven 배포 설정
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-
-            pom {
-                name.set("Eclipsia Core API")
-                description.set("API module for Eclipsia Minecraft plugin")
-                url.set("https://github.com/lumpq/Eclipsia")
-                licenses {
-                    license {
-                        name.set("MIT License")
-                        url.set("https://opensource.org/licenses/MIT")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("lumpq")
-                        name.set("lumpq")
-                        email.set("yeonggyu915@gmail.com")
-                    }
-                }
-                scm {
-                    connection.set("scm:git:git://github.com/lumpq/Eclipsia.git")
-                    developerConnection.set("scm:git:ssh://github.com/lumpq/Eclipsia.git")
-                    url.set("https://github.com/lumpq/Eclipsia")
-                }
-            }
-        }
-    }
-}
-
-// Nexus / OSSRH 배포
-nexusPublishing {
-    repositories {
-        sonatype {
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
-            username.set(project.findProperty("ossrhUsername") as String?)
-            password.set(project.findProperty("ossrhPassword") as String?)
-        }
-    }
-}
-
-// GPG 서명
-signing {
-    useGpgCmd()
-    sign(publishing.publications["mavenJava"])
-}
 
 // Subproject 의존성
 dependencies {
