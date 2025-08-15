@@ -206,7 +206,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
 
             switch (sub) {
                 case "get" -> sendMessage(sender,
-                        target.getName() + "의 직업: " + currentClass + " (전직 단계: " + currentStage + ")",
+                        target.getName() + "의 직업: " +
+                                currentClass.name() + " (" + currentClass.getKoreaName() + "), 전직 단계: " + currentStage,
                         NamedTextColor.YELLOW);
 
                 case "set" -> {
@@ -224,7 +225,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                     }
                     eEntity.setClass(newClass, stage);
                     sendMessage(sender,
-                            target.getName() + "의 직업이 " + newClass + " (전직 단계: " + stage + ") 으로 변경되었습니다.",
+                            target.getName() + "의 직업이 " +
+                                    newClass.name() + " (" + newClass.getKoreaName() + "), 전직 단계: " + stage + " 으로 변경되었습니다.",
                             NamedTextColor.GREEN);
                 }
 
@@ -242,7 +244,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                     boolean canAdvance =
                             io.lumpq126.eclipsia.classes.Class.canAdvanceTo(currentClass, targetClass);
                     sendMessage(sender,
-                            target.getName() + " → " + targetClass + " 전직 " + (canAdvance ? "가능" : "불가"),
+                            currentClass.name() + " (" + currentClass.getKoreaName() + ") → " +
+                                    targetClass.name() + " (" + targetClass.getKoreaName() + ") 전직 " + (canAdvance ? "가능" : "불가"),
                             canAdvance ? NamedTextColor.GREEN : NamedTextColor.RED);
                 }
 
@@ -259,7 +262,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                     }
                     int stage = io.lumpq126.eclipsia.classes.Class.getAdvancementStage(currentClass, targetClass);
                     sendMessage(sender,
-                            target.getName() + " → " + targetClass + " 전직 단계: " + stage,
+                            currentClass.name() + " (" + currentClass.getKoreaName() + ") → " +
+                                    targetClass.name() + " (" + targetClass.getKoreaName() + ") 전직 단계: " + stage,
                             NamedTextColor.YELLOW);
                 }
 
