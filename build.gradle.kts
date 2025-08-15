@@ -37,6 +37,10 @@ allprojects {
         options.encoding = "UTF-8"
         options.release.set(21)
     }
+
+    tasks.withType<Javadoc>().configureEach {
+        enabled = false
+    }
 }
 
 // ShadowJar 설정

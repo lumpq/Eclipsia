@@ -4,6 +4,7 @@ import io.lumpq126.eclipsia.EclipsiaPlugin;
 import io.lumpq126.eclipsia.entities.EclipsiaEntity;
 import io.lumpq126.eclipsia.items.FishItems;
 import io.lumpq126.eclipsia.stats.Stat;
+import io.lumpq126.eclipsia.utilities.storage.ClassStorage;
 import io.lumpq126.eclipsia.utilities.storage.FishCatalogStorage;
 import io.lumpq126.eclipsia.utilities.storage.MonthStorage;
 import io.lumpq126.eclipsia.utilities.storage.PlayerPageStorage;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class EclipsiaCommand implements CommandExecutor, TabCompleter {
 
@@ -78,11 +80,137 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
             case "level" -> handleLevel(sender, args);
             case "exp" -> handleExp(sender, args);
             case "stat" -> handleStat(sender, args);
+            case "sia" -> handleSia(sender, args);
+            case "class" -> handleClass(sender, args);
             case "reload" -> reload(sender);
             default -> sendMessage(sender, "알 수 없는 명령어입니다.", NamedTextColor.RED);
         }
 
         return true;
+    }
+
+    private void handleClass(CommandSender sender, String[] args) {
+        if (args.length < 3) {
+            sendMessage(sender, "/ec class <get|set|canAdvance|stage|proficiency> <player|@selector> [class/stage/value]", NamedTextColor.RED);
+            return;
+        }
+
+        String sub = args[1].toLowerCase();
+        List<Player> targets = resolveTargets(sender, args[2]);
+
+        if (targets.isEmpty()) {
+            sendMessage(sender, "대상 플레이어를 찾을 수 없습니다.", NamedTextColor.RED);
+            return;
+        }
+
+        for (Player target : targets) {
+            EclipsiaEntity eEntity = new EclipsiaEntity(target);
+            ClassStorage.ClassInfo classInfo = eEntity.getClassInfo();
+            io.lumpq126.eclipsia.classes.Class currentClass = classInfo.clazz();
+            int currentStage = classInfo.stage();
+
+            switch (sub) {
+                case "get" -> {
+                    sendMessage(sender, target.getName() + "의 직업: " + currentClass + " (전직 단계: " + currentStage + ")", NamedTextColor.YELLOW);
+                }
+                case "set" -> {
+                    if (args.length < 4) {
+                        sendMessage(sender, "변경할 직업을 입력하세요.", NamedTextColor.RED);
+                        return;
+                    }
+                    io.lumpq126.eclipsia.classes.Class newClass = io.lumpq126.eclipsia.classes.Class.fromNameOrDefault(args[3]);
+                    int stage = args.length >= 5 ? Integer.parseInt(args[4]) : 0;
+                    eEntity.setClass(newClass, stage);
+                    sendMessage(sender, target.getName() + "의 직업이 " + newClass + " (전직 단계: " + stage + ") 으로 변경되었습니다.", NamedTextColor.GREEN);
+                }
+                case "canadvance" -> {
+                    if (args.length < 4) {
+                        sendMessage(sender, "확인할 직업을 입력하세요.", NamedTextColor.RED);
+                        return;
+                    }
+                    io.lumpq126.eclipsia.classes.Class targetClass = io.lumpq126.eclipsia.classes.Class.fromName(args[3]);
+                    if (targetClass == null) {
+                        sendMessage(sender, "존재하지 않는 직업입니다: " + args[3], NamedTextColor.RED);
+                        return;
+                    }
+                    boolean canAdvance = io.lumpq126.eclipsia.classes.Class.canAdvanceTo(currentClass, targetClass);
+                    sendMessage(sender, target.getName() + " → " + targetClass + " 전직 " + (canAdvance ? "가능" : "불가"), canAdvance ? NamedTextColor.GREEN : NamedTextColor.RED);
+                }
+                case "stage" -> {
+                    if (args.length < 4) {
+                        sendMessage(sender, "조회할 직업을 입력하세요.", NamedTextColor.RED);
+                        return;
+                    }
+                    io.lumpq126.eclipsia.classes.Class targetClass = io.lumpq126.eclipsia.classes.Class.fromName(args[3]);
+                    if (targetClass == null) {
+                        sendMessage(sender, "존재하지 않는 직업입니다: " + args[3], NamedTextColor.RED);
+                        return;
+                    }
+                    int stage = io.lumpq126.eclipsia.classes.Class.getAdvancementStage(currentClass, targetClass);
+                    sendMessage(sender, target.getName() + " → " + targetClass + " 전직 단계: " + stage, NamedTextColor.YELLOW);
+                }
+                case "proficiency" -> {
+                    if (args.length < 4) {
+                        sendMessage(sender, target.getName() + " 숙련도: " + eEntity.getProfessionProficiency(), NamedTextColor.YELLOW);
+                        return;
+                    }
+                    try {
+                        int value = Integer.parseInt(args[3]);
+                        eEntity.setProfessionProficiency(value);
+                        sendMessage(sender, target.getName() + "의 숙련도가 " + value + "으로 설정되었습니다.", NamedTextColor.GREEN);
+                    } catch (NumberFormatException ex) {
+                        sendMessage(sender, "숫자를 입력해주세요.", NamedTextColor.RED);
+                    }
+                }
+                default -> sendMessage(sender, "알 수 없는 하위 명령어입니다. 사용: get, set, canAdvance, stage, proficiency", NamedTextColor.RED);
+            }
+        }
+    }
+
+    private void handleSia(CommandSender sender, String[] args) {
+        if (args.length < 3) {
+            sendMessage(sender, "/ec sia <get|set|add|remove> <player|@selector> [amount]", NamedTextColor.RED);
+            return;
+        }
+
+        String sub = args[1].toLowerCase();
+        List<Player> targets = resolveTargets(sender, args[2]);
+
+        if (targets.isEmpty()) {
+            sendMessage(sender, "대상 플레이어를 찾을 수 없습니다.", NamedTextColor.RED);
+            return;
+        }
+
+        int amount = 0;
+        if (args.length >= 4) {
+            try {
+                amount = Integer.parseInt(args[3]);
+            } catch (NumberFormatException e) {
+                sendMessage(sender, "SIA 값은 숫자여야 합니다.", NamedTextColor.RED);
+                return;
+            }
+        }
+
+        for (Player target : targets) {
+            EclipsiaEntity eEntity = new EclipsiaEntity(target);
+
+            switch (sub) {
+                case "get" -> sendMessage(sender, target.getName() + "의 SIA: " + eEntity.getSia(), NamedTextColor.YELLOW);
+                case "set" -> {
+                    eEntity.setSia(amount);
+                    sendMessage(sender, target.getName() + "의 SIA가 " + amount + "으로 설정되었습니다.", NamedTextColor.GREEN);
+                }
+                case "add" -> {
+                    eEntity.addSia(amount);
+                    sendMessage(sender, target.getName() + "의 SIA가 " + amount + "만큼 증가되었습니다.", NamedTextColor.GREEN);
+                }
+                case "remove" -> {
+                    eEntity.removeSia(amount);
+                    sendMessage(sender, target.getName() + "의 SIA가 " + amount + "만큼 감소되었습니다.", NamedTextColor.GREEN);
+                }
+                default -> sendMessage(sender, "잘못된 하위 명령어입니다. 사용: get, set, add, remove", NamedTextColor.RED);
+            }
+        }
     }
 
     /**
@@ -360,82 +488,63 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
         List<String> completions = new ArrayList<>();
         if (args.length == 1) {
             // 첫번째 인자 - 명령어 종류
-            completions.addAll(List.of("fish", "month", "level", "exp", "stat", "reload"));
+            completions.addAll(List.of("fish", "month", "level", "exp", "stat", "reload", "class")); // class 추가
         } else if (args.length == 2) {
             String type = args[0].toLowerCase();
             switch (type) {
-                case "fish" -> {
-                    completions.add("give");
-                }
-                case "month" -> {
-                    completions.addAll(List.of("set", "reset"));
-                }
-                case "level", "exp" -> {
-                    completions.addAll(List.of("get", "set", "add", "reset"));
-                }
-                case "stat" -> {
-                    completions.addAll(List.of("get", "set", "add", "reset", "statPoint"));
-                }
+                case "fish" -> completions.add("give");
+                case "month" -> completions.addAll(List.of("set", "reset"));
+                case "level", "exp" -> completions.addAll(List.of("get", "set", "add", "reset"));
+                case "stat" -> completions.addAll(List.of("get", "set", "add", "reset", "statPoint"));
+                case "class" -> completions.addAll(List.of("get", "set", "canAdvance", "stage", "proficiency")); // class 하위 명령어
             }
         } else if (args.length == 3) {
             String type = args[0].toLowerCase();
             switch (type) {
-                case "fish" -> {
-                    // 플레이어 또는 선택자
+                case "fish", "level", "exp", "stat", "class" -> {
                     completions.addAll(getPlayersAndSelectors(args[2]));
-                    // 온라인 플레이어 이름 추가
                     Bukkit.getOnlinePlayers().forEach(p -> completions.add(p.getName()));
                 }
-                case "month" -> {
-                    // 월 숫자 탭 완성은 직접 구현하지 않음
-                }
-                case "level", "exp", "stat" -> {
-                    // 플레이어 또는 선택자
-                    Bukkit.getOnlinePlayers().forEach(p -> completions.add(p.getName()));
-                    completions.addAll(getPlayersAndSelectors(args[2]));
-                }
+                case "month" -> { /* 숫자 탭 완성 없음 */ }
             }
         } else if (args.length == 4) {
             String type = args[0].toLowerCase();
             switch (type) {
-                case "fish" -> {
-                    // 물고기 ID 목록 반환
-                    Set<String> fishIds = EclipsiaPlugin.getFishConfig().getKeys(false);
-                    completions.addAll(fishIds);
-                }
+                case "fish" -> completions.addAll(EclipsiaPlugin.getFishConfig().getKeys(false));
                 case "stat" -> {
-                    // stat 하위명령어 제외 statPoint 일 때 처리
                     if (args[1].equalsIgnoreCase("statpoint")) {
-                        // 4번째 인자는 플레이어 이름
                         Bukkit.getOnlinePlayers().forEach(p -> completions.add(p.getName()));
                     } else {
-                        // stat 종류 목록
                         completions.addAll(List.of("STRENGTH","CONSTITUTION", "AGILITY", "DEXTERITY", "INTELLIGENCE", "WISDOM"));
+                    }
+                }
+                case "class" -> {
+                    String sub = args[1].toLowerCase();
+                    if (sub.equals("set") || sub.equals("canadvance") || sub.equals("stage")) {
+                        for (io.lumpq126.eclipsia.classes.Class c : io.lumpq126.eclipsia.classes.Class.values()) {
+                            if (c.name().toLowerCase().startsWith(args[3].toLowerCase())) {
+                                completions.add(c.name());
+                            }
+                        }
                     }
                 }
             }
         }
-        return completions;
+
+        return completions.stream().filter(cmd -> cmd.startsWith(args[0].toLowerCase())).collect(Collectors.toList());
     }
 
     /**
      * 입력된 문자열(arg)을 기준으로 미리 정해진 선택자와 온라인 플레이어 이름 중
      * 해당 문자열로 시작하는 이름들을 리스트로 반환합니다.
-     *
-     * @param arg 플레이어 이름 또는 선택자 입력 일부
-     * @return 선택자 및 필터링된 플레이어 이름 리스트
      */
     private List<String> getPlayersAndSelectors(String arg) {
-        // 기본적으로 사용 가능한 선택자 목록 (@a, @p, @r, @s, @e)로 리스트 초기화
         List<String> list = new ArrayList<>(List.of("@a", "@p", "@r", "@s", "@e"));
-
-        // 현재 접속 중인 플레이어들의 이름 중 arg로 시작하는 이름만 리스트에 추가
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.getName().toLowerCase().startsWith(arg.toLowerCase())) {
                 list.add(player.getName());
             }
         }
-
         return list;
     }
 }

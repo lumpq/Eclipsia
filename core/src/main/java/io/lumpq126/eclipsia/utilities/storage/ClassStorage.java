@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import io.lumpq126.eclipsia.classes.Class;
 
 /**
- * <h1>ClassStorage</h1>
+ * ClassStorage
  * <p>
  * 플레이어의 Class 정보(직업 및 전직 단계)를 Bukkit PersistentDataContainer를 통해
  * 저장 및 불러오는 클래스입니다.

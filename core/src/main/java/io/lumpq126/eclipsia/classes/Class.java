@@ -3,9 +3,9 @@ package io.lumpq126.eclipsia.classes;
 import java.util.*;
 
 /**
- * <h1>Class</h1>
- * 게임 내 직업(Class)과 전직 관계를 정의하는 열거형 클래스.
+ * Class
  * <p>
+ * 게임 내 직업(Class)과 전직 관계를 정의하는 열거형 클래스.
  * 각 직업은 계열별로 나뉘며, 1차 전직부터 최종 전직까지의 관계를 정의할 수 있습니다.
  * 전직 관계는 {@link #setAdvancement(Class, Class, int)}를 통해 설정하며,
  * 전직 없는 클래스는 {@link #setMaxAdvancement(Class, int)}를 통해 최대 전직 단계를 설정할 수 있습니다.
