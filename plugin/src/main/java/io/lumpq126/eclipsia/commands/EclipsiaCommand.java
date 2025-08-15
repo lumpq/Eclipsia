@@ -310,17 +310,18 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
         }
 
         Integer amount = null;
+        // set, add, remove 명령어일 때만 amount 필요
         if (List.of("set", "add", "remove").contains(sub)) {
             if (args.length < 4) {
                 sendMessage(sender, "amount 값을 입력하세요.", NamedTextColor.RED);
                 return;
             }
             amount = parseIntOrNull(args[3], "SIA 값은 숫자여야 합니다.", sender);
-            if (amount == null) return;
+            if (amount == null) return; // 잘못된 숫자 입력 시 중단
         }
 
         if (amount == null) {
-            sendMessage(sender, "숫자 값을 입력하세요.", NamedTextColor.RED);
+            sendMessage(sender, "정상적인 amount 값을 입력하세요", NamedTextColor.RED);
             return;
         }
 
@@ -575,19 +576,19 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
      * /ec stat reset <player|@selector> <statType>
      *
      * // 스탯 포인트
-     * /ec stat statPoint add <player|@selector> <value>
+     * /ec stat point add <player|@selector> <value>
      * </pre>
      */
     private void handleStat(CommandSender sender, String[] args) {
         if (args.length < 4) {
-            sendMessage(sender, "/ec stat <get|set|add|reset> <player|@selector> <statType> [value] 또는 /ec stat statPoint add <player|@selector> <value>", NamedTextColor.RED);
+            sendMessage(sender, "/ec stat <get|set|add|reset> <player|@selector> <statType> [value] 또는 /ec stat point add <player|@selector> <value>", NamedTextColor.RED);
             return;
         }
 
         // 스탯 포인트 처리
-        if (args[1].equalsIgnoreCase("statpoint")) {
+        if (args[1].equalsIgnoreCase("point")) {
             if (args.length < 5 || !args[2].equalsIgnoreCase("add")) {
-                sendMessage(sender, "/ec stat statPoint add <player|@selector> <value>", NamedTextColor.RED);
+                sendMessage(sender, "/ec stat point add <player|@selector> <value>", NamedTextColor.RED);
                 return;
             }
 
@@ -699,19 +700,32 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                 case "fish" -> suggestions.add("give");
                 case "month" -> suggestions.addAll(List.of("set", "reset"));
                 case "level", "exp" -> suggestions.addAll(List.of("get", "set", "add", "reset"));
-                case "stat" -> suggestions.addAll(List.of("get", "set", "add", "reset", "statPoint"));
+                case "stat" -> suggestions.addAll(List.of("get", "set", "add", "reset", "point"));
                 case "class" -> suggestions.addAll(List.of("get", "set", "canAdvance", "stage", "proficiency"));
                 case "sia" -> suggestions.addAll(List.of("get", "set", "add", "remove"));
-                default -> { /* no-op */ }
             }
             return filterByPrefix(suggestions, lastToken);
         }
 
         if (args.length == 3) {
             switch (first) {
-                case "fish", "level", "exp", "stat", "class", "sia" -> suggestions.addAll(getPlayersAndSelectors(lastToken));
-                case "month" -> { /* 숫자 탭 없음 */ }
-                default -> { /* no-op */ }
+                case "sia" -> {
+                    String sub = args[1].toLowerCase(Locale.ROOT);
+                    if (sub.equals("get")) {
+                        suggestions.addAll(getPlayersAndSelectors(lastToken)); // 플레이어 제안
+                    } else {
+                        suggestions.add("<amount>"); // 숫자 제안
+                    }
+                }
+                case "stat" -> {
+                    String sub = args[1].toLowerCase(Locale.ROOT);
+                    if (sub.equals("point")) {
+                        suggestions.addAll(List.of("add", "remove", "set")); // point 하위 명령어
+                    } else {
+                        suggestions.addAll(getPlayersAndSelectors(lastToken)); // 플레이어 제안
+                    }
+                }
+                case "fish", "level", "exp", "class" -> suggestions.addAll(getPlayersAndSelectors(lastToken));
             }
             return filterByPrefix(suggestions, lastToken);
         }
@@ -725,11 +739,9 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                     suggestions.addAll(keys);
                 }
                 case "stat" -> {
-                    if (args[1].equalsIgnoreCase("statpoint")) {
-                        // /ec stat statPoint add <player>
+                    if (args[1].equalsIgnoreCase("point")) {
                         suggestions.addAll(getPlayersAndSelectors(lastToken));
                     } else {
-                        // 스탯 이름
                         suggestions.addAll(List.of("STRENGTH","CONSTITUTION","AGILITY","DEXTERITY","INTELLIGENCE","WISDOM"));
                     }
                 }
@@ -741,15 +753,11 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                         }
                     }
                 }
-                case "sia" -> {
-                    // /ec sia <set|add|remove> <player> <amount> -> amount 니까 제안 없음
-                }
-                default -> { /* no-op */ }
+                // sia의 4번째 인자는 숫자라서 제안 없음
             }
             return filterByPrefix(suggestions, lastToken);
         }
 
-        // 나머지 길이의 인자들에 대해선 숫자/자유입력이라 일반 필터만 적용
         return filterByPrefix(suggestions, lastToken);
     }
 
