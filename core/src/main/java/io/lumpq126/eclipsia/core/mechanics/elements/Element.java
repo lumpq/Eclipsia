@@ -1,4 +1,4 @@
-package io.lumpq126.eclipsia.elements;
+package io.lumpq126.eclipsia.core.mechanics.elements;
 
 import java.util.Arrays;
 import java.util.Locale;

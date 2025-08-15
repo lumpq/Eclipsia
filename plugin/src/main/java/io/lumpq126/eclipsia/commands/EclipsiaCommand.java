@@ -1,10 +1,11 @@
 package io.lumpq126.eclipsia.commands;
 
 import io.lumpq126.eclipsia.EclipsiaPlugin;
-import io.lumpq126.eclipsia.entities.EclipsiaEntity;
+import io.lumpq126.eclipsia.core.mechanics.classes.Class;
+import io.lumpq126.eclipsia.core.mechanics.entities.EclipsiaEntity;
 import io.lumpq126.eclipsia.items.FishItems;
-import io.lumpq126.eclipsia.stats.Stat;
-import io.lumpq126.eclipsia.utilities.storage.ClassStorage;
+import io.lumpq126.eclipsia.core.mechanics.stats.Stat;
+import io.lumpq126.eclipsia.core.mechanics.classes.ClassStorage;
 import io.lumpq126.eclipsia.utilities.storage.FishCatalogStorage;
 import io.lumpq126.eclipsia.utilities.storage.MonthStorage;
 import io.lumpq126.eclipsia.utilities.storage.PlayerPageStorage;
@@ -272,7 +273,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
         for (Player target : targets) {
             EclipsiaEntity eEntity = new EclipsiaEntity(target);
             ClassStorage.ClassInfo classInfo = eEntity.getClassInfo();
-            io.lumpq126.eclipsia.classes.Class currentClass = classInfo.clazz();
+            Class currentClass = classInfo.clazz();
             int currentStage = classInfo.stage();
 
             switch (sub) {
@@ -287,8 +288,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                         sendMessage(sender, "변경할 직업을 입력하세요.", NamedTextColor.RED);
                         return;
                     }
-                    io.lumpq126.eclipsia.classes.Class newClass =
-                            io.lumpq126.eclipsia.classes.Class.fromNameOrDefault(args[3].toUpperCase());
+                    Class newClass =
+                            Class.fromNameOrDefault(args[3].toUpperCase());
                     int stage = 0;
                     if (args.length >= 5) {
                         Integer parsed = parseIntOrNull(args[4], "전직 단계는 숫자여야 합니다.", sender);
@@ -303,18 +304,19 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                 }
 
                 case "reset" -> {
-                    eEntity.setClass(io.lumpq126.eclipsia.classes.Class.NOVICE, 0);
+                    eEntity.setClass(Class.NOVICE, 0);
                     eEntity.setProfessionProficiency(0);
                     sendMessage(sender, target.getName() + "의 직업과 숙련도가 초기화되었습니다.", NamedTextColor.GREEN);
                 }
 
+                /*
                 case "advance" -> {
-                    io.lumpq126.eclipsia.classes.Class next = currentClass.getNextClass();
+                    io.lumpq126.eclipsia.core.mechanics.classes.Class next = currentClass.getNextClass();
                     if (next == null) {
                         sendMessage(sender, "더 이상 전직할 수 없습니다.", NamedTextColor.RED);
                         return;
                     }
-                    if (!io.lumpq126.eclipsia.classes.Class.canAdvanceTo(currentClass, next)) {
+                    if (!io.lumpq126.eclipsia.core.mechanics.classes.Class.canAdvanceTo(currentClass, next)) {
                         sendMessage(sender, "조건을 만족하지 않아 전직할 수 없습니다.", NamedTextColor.RED);
                         return;
                     }
@@ -322,6 +324,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                     sendMessage(sender, target.getName() + "이(가) " + next.name() + " (" + next.getKoreaName() + ") 으로 전직했습니다.",
                             NamedTextColor.GREEN);
                 }
+                */
 
                 default -> sendMessage(sender, "알 수 없는 하위 명령어입니다.", NamedTextColor.RED);
             }

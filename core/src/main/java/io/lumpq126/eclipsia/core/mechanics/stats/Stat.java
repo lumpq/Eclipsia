@@ -1,4 +1,4 @@
-package io.lumpq126.eclipsia.stats;
+package io.lumpq126.eclipsia.core.mechanics.stats;
 
 import java.util.Locale;
 

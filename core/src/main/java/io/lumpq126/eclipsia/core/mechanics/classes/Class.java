@@ -1,4 +1,4 @@
-package io.lumpq126.eclipsia.classes;
+package io.lumpq126.eclipsia.core.mechanics.classes;
 
 import java.util.*;
 
@@ -251,26 +251,8 @@ public enum Class {
         return advancementMatrix[from.ordinal()][to.ordinal()] > 0;
     }
 
-    public static int getAdvancementStage(Class from, Class to) {
-        return advancementMatrix[from.ordinal()][to.ordinal()];
-    }
-
     public static int getMaxAdvancement(Class c) {
         return maxAdvancements[c.ordinal()];
-    }
-
-    /**
-     * 현재 클래스에서 전직 가능한 다음 클래스를 반환합니다.
-     * 없으면 null 반환.
-     */
-    public Class getNextClass() {
-        int fromIndex = this.ordinal();
-        for (int toIndex = 0; toIndex < SIZE; toIndex++) {
-            if (advancementMatrix[fromIndex][toIndex] > 0) {
-                return values()[toIndex];
-            }
-        }
-        return null;
     }
 
     public static void clearAdvancements() {

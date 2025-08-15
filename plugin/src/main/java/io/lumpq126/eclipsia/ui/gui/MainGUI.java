@@ -1,7 +1,7 @@
 package io.lumpq126.eclipsia.ui.gui;
 
-import io.lumpq126.eclipsia.entities.EclipsiaEntity;
-import io.lumpq126.eclipsia.stats.Stat;
+import io.lumpq126.eclipsia.core.mechanics.entities.EclipsiaEntity;
+import io.lumpq126.eclipsia.core.mechanics.stats.Stat;
 import io.lumpq126.eclipsia.utilities.InventoryUtility;
 import io.lumpq126.eclipsia.utilities.Mm;
 import net.kyori.adventure.text.Component;

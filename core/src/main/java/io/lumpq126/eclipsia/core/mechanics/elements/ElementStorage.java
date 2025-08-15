@@ -1,6 +1,5 @@
-package io.lumpq126.eclipsia.utilities.storage;
+package io.lumpq126.eclipsia.core.mechanics.elements;
 
-import io.lumpq126.eclipsia.elements.Element;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;

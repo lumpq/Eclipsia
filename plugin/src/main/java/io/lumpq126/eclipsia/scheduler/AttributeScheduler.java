@@ -1,8 +1,8 @@
 package io.lumpq126.eclipsia.scheduler;
 
 import io.lumpq126.eclipsia.EclipsiaPlugin;
-import io.lumpq126.eclipsia.entities.EclipsiaEntity;
-import io.lumpq126.eclipsia.stats.Stat;
+import io.lumpq126.eclipsia.core.mechanics.entities.EclipsiaEntity;
+import io.lumpq126.eclipsia.core.mechanics.stats.Stat;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;

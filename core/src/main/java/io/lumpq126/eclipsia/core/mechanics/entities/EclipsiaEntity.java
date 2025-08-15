@@ -1,10 +1,11 @@
-package io.lumpq126.eclipsia.entities;
+package io.lumpq126.eclipsia.core.mechanics.entities;
 
-import io.lumpq126.eclipsia.elements.Element;
+import io.lumpq126.eclipsia.core.mechanics.classes.Class;
+import io.lumpq126.eclipsia.core.mechanics.elements.Element;
 import io.lumpq126.eclipsia.events.PlayerExpUpEvent;
 import io.lumpq126.eclipsia.events.PlayerLevelUpEvent;
-import io.lumpq126.eclipsia.stats.Stat;
-import io.lumpq126.eclipsia.utilities.storage.ClassStorage;
+import io.lumpq126.eclipsia.core.mechanics.stats.Stat;
+import io.lumpq126.eclipsia.core.mechanics.classes.ClassStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;
@@ -106,7 +107,7 @@ public class EclipsiaEntity {
         // 초기값 설정
         if (!hasData(professionProficiencyKey, PersistentDataType.INTEGER)) setProfessionProficiency(0);
         if (!hasData(classKey, PersistentDataType.STRING))
-            setClass(io.lumpq126.eclipsia.classes.Class.NOVICE, 0);
+            setClass(Class.NOVICE, 0);
         if (!hasData(levelKey, PersistentDataType.INTEGER)) setLevel(INITIAL_LEVEL);
         if (!hasData(expKey, PersistentDataType.DOUBLE)) setExp(0);
         if (!hasData(siaKey, PersistentDataType.INTEGER)) setSia(INITIAL_SIA);
@@ -386,16 +387,16 @@ public class EclipsiaEntity {
     public ClassStorage.ClassInfo getClassInfo() {
         String className = getStringData(classKey);
         int stage = getIntData(classStageKey, 0);
-        io.lumpq126.eclipsia.classes.Class clazz = io.lumpq126.eclipsia.classes.Class.fromNameOrDefault(className);
+        Class clazz = Class.fromNameOrDefault(className);
         return new ClassStorage.ClassInfo(clazz, stage);
     }
 
-    public void setClass(io.lumpq126.eclipsia.classes.Class clazz, int stage) {
+    public void setClass(Class clazz, int stage) {
         setStringData(classKey, clazz.name());
         setIntData(classStageKey, Math.max(0, stage));
     }
 
-    public record ClassInfo(io.lumpq126.eclipsia.classes.Class clazz, int stage) { }
+    public record ClassInfo(Class clazz, int stage) { }
 
     public int getProfessionProficiency() { return getIntData(professionProficiencyKey, 100); }
     public void setProfessionProficiency(int value) { setIntData(professionProficiencyKey, Math.max(0, value)); }

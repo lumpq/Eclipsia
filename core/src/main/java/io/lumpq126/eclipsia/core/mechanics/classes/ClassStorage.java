@@ -1,11 +1,10 @@
-package io.lumpq126.eclipsia.utilities.storage;
+package io.lumpq126.eclipsia.core.mechanics.classes;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
-import io.lumpq126.eclipsia.classes.Class;
 
 /**
  * ClassStorage

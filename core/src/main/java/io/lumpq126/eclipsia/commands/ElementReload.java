@@ -1,6 +1,6 @@
 package io.lumpq126.eclipsia.commands;
 
-import io.lumpq126.eclipsia.utilities.storage.ElementStorage;
+import io.lumpq126.eclipsia.core.mechanics.elements.ElementStorage;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

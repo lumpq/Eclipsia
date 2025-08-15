@@ -1,7 +1,7 @@
 package io.lumpq126.eclipsia.listeners;
 
-import io.lumpq126.eclipsia.entities.EclipsiaEntity;
-import io.lumpq126.eclipsia.stats.Stat;
+import io.lumpq126.eclipsia.core.mechanics.entities.EclipsiaEntity;
+import io.lumpq126.eclipsia.core.mechanics.stats.Stat;
 import io.lumpq126.eclipsia.ui.gui.MainGUI;
 import io.lumpq126.eclipsia.utilities.Mm;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
@@ -11,7 +11,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 
 import java.util.Map;
