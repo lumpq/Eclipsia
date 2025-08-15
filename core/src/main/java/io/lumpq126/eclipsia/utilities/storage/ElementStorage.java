@@ -43,7 +43,7 @@ public class ElementStorage {
      *
      * @param plugin 플러그인 인스턴스 (로깅, 파일 경로, 리소스 저장용)
      */
-    public static void load(JavaPlugin plugin) {
+    public static void init(JavaPlugin plugin) {
         Logger logger = plugin.getLogger();
         File file = new File(plugin.getDataFolder(), "elements.yml");
 

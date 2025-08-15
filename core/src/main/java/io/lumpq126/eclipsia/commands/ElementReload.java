@@ -17,7 +17,7 @@ public class ElementReload implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
         plugin.reloadConfig();
-        ElementStorage.load(plugin);
+        ElementStorage.init(plugin);
         sender.sendMessage("§aElement config reloaded!");
         return true;
     }

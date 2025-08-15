@@ -41,12 +41,12 @@ public final class EclipsiaPlugin extends JavaPlugin {
         fishConfig = YamlConfiguration.loadConfiguration(file);
 
         Log.init(this);
+        ClassStorage.init(this);
         MonthStorage.init(this);
         EclipsiaEntity.init(this);
+        ElementStorage.init(this);
         PlayerPageStorage.init(this);
         FishCatalogStorage.init(this);
-
-        ElementStorage.load(this);
 
         getServer().getPluginManager().registerEvents(new FishListener(), this);
         getServer().getPluginManager().registerEvents(new MainGUIListener(), this);
