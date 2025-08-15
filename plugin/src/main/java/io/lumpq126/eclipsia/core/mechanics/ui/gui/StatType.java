@@ -1,4 +1,4 @@
-package io.lumpq126.eclipsia.ui.gui;
+package io.lumpq126.eclipsia.core.mechanics.ui.gui;
 
 import io.lumpq126.eclipsia.utilities.Mm;
 import net.kyori.adventure.text.Component;

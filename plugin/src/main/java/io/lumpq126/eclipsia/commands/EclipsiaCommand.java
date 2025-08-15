@@ -3,7 +3,7 @@ package io.lumpq126.eclipsia.commands;
 import io.lumpq126.eclipsia.EclipsiaPlugin;
 import io.lumpq126.eclipsia.core.mechanics.classes.Class;
 import io.lumpq126.eclipsia.core.mechanics.entities.EclipsiaEntity;
-import io.lumpq126.eclipsia.items.FishItems;
+import io.lumpq126.eclipsia.core.mechanics.items.FishItems;
 import io.lumpq126.eclipsia.core.mechanics.stats.Stat;
 import io.lumpq126.eclipsia.core.mechanics.classes.ClassStorage;
 import io.lumpq126.eclipsia.utilities.storage.FishCatalogStorage;

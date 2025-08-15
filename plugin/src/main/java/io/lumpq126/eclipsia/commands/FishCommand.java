@@ -1,6 +1,6 @@
 package io.lumpq126.eclipsia.commands;
 
-import io.lumpq126.eclipsia.ui.gui.FishUI;
+import io.lumpq126.eclipsia.core.mechanics.ui.gui.FishUI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

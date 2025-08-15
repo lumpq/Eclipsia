@@ -1,7 +1,7 @@
-package io.lumpq126.eclipsia.ui.gui;
+package io.lumpq126.eclipsia.core.mechanics.ui.gui;
 
 import io.lumpq126.eclipsia.EclipsiaPlugin;
-import io.lumpq126.eclipsia.items.FishItems;
+import io.lumpq126.eclipsia.core.mechanics.items.FishItems;
 import io.lumpq126.eclipsia.utilities.storage.FishCatalogStorage;
 import io.lumpq126.eclipsia.utilities.storage.PlayerPageStorage;
 import net.kyori.adventure.text.Component;

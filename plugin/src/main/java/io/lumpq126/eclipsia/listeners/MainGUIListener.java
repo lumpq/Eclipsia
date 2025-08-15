@@ -2,7 +2,7 @@ package io.lumpq126.eclipsia.listeners;
 
 import io.lumpq126.eclipsia.core.mechanics.entities.EclipsiaEntity;
 import io.lumpq126.eclipsia.core.mechanics.stats.Stat;
-import io.lumpq126.eclipsia.ui.gui.MainGUI;
+import io.lumpq126.eclipsia.core.mechanics.ui.gui.MainGUI;
 import io.lumpq126.eclipsia.utilities.Mm;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Sound;

@@ -1,4 +1,4 @@
-package io.lumpq126.eclipsia.items;
+package io.lumpq126.eclipsia.core.mechanics.items;
 
 import io.lumpq126.eclipsia.EclipsiaPlugin;
 import io.lumpq126.eclipsia.utilities.Mm;
