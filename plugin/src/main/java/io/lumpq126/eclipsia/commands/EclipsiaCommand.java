@@ -320,25 +320,32 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
             if (amount == null) return; // 잘못된 숫자 입력 시 중단
         }
 
-        if (amount == null) {
-            sendMessage(sender, "정상적인 amount 값을 입력하세요", NamedTextColor.RED);
-            return;
-        }
-
         for (Player target : targets) {
             EclipsiaEntity eEntity = new EclipsiaEntity(target);
 
             switch (sub) {
                 case "get" -> sendMessage(sender, target.getName() + "의 SIA: " + eEntity.getSia(), NamedTextColor.YELLOW);
                 case "set" -> {
+                    if (amount == null) {
+                        sendMessage(sender, "amount 값을 입력하세요.", NamedTextColor.RED);
+                        return;
+                    }
                     eEntity.setSia(amount);
                     sendMessage(sender, target.getName() + "의 SIA가 " + amount + "으로 설정되었습니다.", NamedTextColor.GREEN);
                 }
                 case "add" -> {
+                    if (amount == null) {
+                        sendMessage(sender, "amount 값을 입력하세요.", NamedTextColor.RED);
+                        return;
+                    }
                     eEntity.addSia(amount);
                     sendMessage(sender, target.getName() + "의 SIA가 " + amount + "만큼 증가되었습니다.", NamedTextColor.GREEN);
                 }
                 case "remove" -> {
+                    if (amount == null) {
+                        sendMessage(sender, "amount 값을 입력하세요.", NamedTextColor.RED);
+                        return;
+                    }
                     eEntity.removeSia(amount);
                     sendMessage(sender, target.getName() + "의 SIA가 " + amount + "만큼 감소되었습니다.", NamedTextColor.GREEN);
                 }
