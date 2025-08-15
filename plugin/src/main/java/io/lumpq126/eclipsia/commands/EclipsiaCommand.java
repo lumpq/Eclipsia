@@ -487,8 +487,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String @NotNull [] args) {
         List<String> completions = new ArrayList<>();
         if (args.length == 1) {
-            // 첫번째 인자 - 명령어 종류
-            completions.addAll(List.of("fish", "month", "level", "exp", "stat", "reload", "class")); // class 추가
+            completions.addAll(List.of("fish", "month", "level", "exp", "stat", "reload", "class", "sia")); // class, sia 추가
         } else if (args.length == 2) {
             String type = args[0].toLowerCase();
             switch (type) {
@@ -496,7 +495,8 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                 case "month" -> completions.addAll(List.of("set", "reset"));
                 case "level", "exp" -> completions.addAll(List.of("get", "set", "add", "reset"));
                 case "stat" -> completions.addAll(List.of("get", "set", "add", "reset", "statPoint"));
-                case "class" -> completions.addAll(List.of("get", "set", "canAdvance", "stage", "proficiency")); // class 하위 명령어
+                case "class" -> completions.addAll(List.of("get", "set", "canAdvance", "stage", "proficiency"));
+                case "sia" -> completions.addAll(List.of("get", "set", "add"));
             }
         } else if (args.length == 3) {
             String type = args[0].toLowerCase();
@@ -505,6 +505,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                     completions.addAll(getPlayersAndSelectors(args[2]));
                     Bukkit.getOnlinePlayers().forEach(p -> completions.add(p.getName()));
                 }
+                case "sia" -> completions.addAll(getPlayersAndSelectors(args[2])); // sia 플레이어/선택자
                 case "month" -> { /* 숫자 탭 완성 없음 */ }
             }
         } else if (args.length == 4) {
@@ -530,7 +531,6 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                 }
             }
         }
-
         return completions.stream().filter(cmd -> cmd.startsWith(args[0].toLowerCase())).collect(Collectors.toList());
     }
 
