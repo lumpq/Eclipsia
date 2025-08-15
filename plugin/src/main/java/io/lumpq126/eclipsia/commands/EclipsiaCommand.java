@@ -778,7 +778,10 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                 case "month" -> suggestions.addAll(List.of("set", "reset"));
                 case "level", "exp" -> suggestions.addAll(List.of("get", "set", "add", "reset"));
                 case "stat" -> suggestions.addAll(List.of("get", "set", "add", "reset", "point"));
-                case "class" -> suggestions.addAll(List.of("get", "set", "canAdvance", "stage", "proficiency"));
+                case "class" -> suggestions.addAll(List.of(
+                        "get", "set", "canAdvance", "stage", "proficiency",
+                        "reset", "addProficiency", "removeProficiency", "stageSet", "advance"
+                ));
                 case "sia" -> suggestions.addAll(List.of("get", "set", "add", "remove"));
             }
             return filterByPrefix(suggestions, lastToken);
@@ -789,17 +792,17 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                 case "sia" -> {
                     String sub = args[1].toLowerCase(Locale.ROOT);
                     if (sub.equals("get")) {
-                        suggestions.addAll(getPlayersAndSelectors(lastToken)); // 플레이어 제안
+                        suggestions.addAll(getPlayersAndSelectors(lastToken));
                     } else {
-                        suggestions.add("<amount>"); // 숫자 제안
+                        suggestions.add("<amount>");
                     }
                 }
                 case "stat" -> {
                     String sub = args[1].toLowerCase(Locale.ROOT);
                     if (sub.equals("point")) {
-                        suggestions.addAll(List.of("add", "remove", "set")); // point 하위 명령어
+                        suggestions.addAll(List.of("add", "remove", "set"));
                     } else {
-                        suggestions.addAll(getPlayersAndSelectors(lastToken)); // 플레이어 제안
+                        suggestions.addAll(getPlayersAndSelectors(lastToken));
                     }
                 }
                 case "fish", "level", "exp", "class" -> suggestions.addAll(getPlayersAndSelectors(lastToken));
@@ -830,7 +833,6 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                         }
                     }
                 }
-                // sia의 4번째 인자는 숫자라서 제안 없음
             }
             return filterByPrefix(suggestions, lastToken);
         }
@@ -838,9 +840,6 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
         return filterByPrefix(suggestions, lastToken);
     }
 
-    /**
-     * 마지막 토큰 기준으로 제안을 필터링합니다. (대소문자 무시)
-     */
     private List<String> filterByPrefix(Collection<String> source, String prefix) {
         String lower = prefix == null ? "" : prefix.toLowerCase(Locale.ROOT);
         return source.stream()
