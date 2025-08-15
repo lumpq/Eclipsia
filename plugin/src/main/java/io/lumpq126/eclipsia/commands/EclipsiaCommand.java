@@ -180,23 +180,89 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
      * <pre>
      * /ec class get <player|@selector>
      * /ec class set <player|@selector> <class> [stage]
-     * /ec class canAdvance <player|@selector> <class>
-     * /ec class stage <player|@selector> <class>
-     * /ec class proficiency <player|@selector> [value]
      * /ec class reset <player|@selector>
-     * /ec class addProficiency <player|@selector> <amount>
-     * /ec class removeProficiency <player|@selector> <amount>
-     * /ec class stageSet <player|@selector> <stage>
+     * /ec class proficiency get <player|@selector>
+     * /ec class proficiency set <player|@selector> <value>
+     * /ec class proficiency add <player|@selector> <amount>
+     * /ec class proficiency remove <player|@selector> <amount>
      * /ec class advance <player|@selector>
      * </pre>
      */
     private void handleClass(CommandSender sender, String[] args) {
         if (args.length < 3) {
-            sendMessage(sender, "/ec class <get|set|canAdvance|stage|proficiency|reset|addProficiency|removeProficiency|stageSet|advance> <player|@selector> [args...]", NamedTextColor.RED);
+            sendMessage(sender, "사용법: /ec class <get|set|reset|proficiency|advance> <player|@selector> [args...]", NamedTextColor.RED);
             return;
         }
 
         String sub = args[1].toLowerCase(Locale.ROOT);
+
+        // proficiency 명령 처리
+        if (sub.equals("proficiency")) {
+            if (args.length < 4) {
+                sendMessage(sender, "사용법: /ec class proficiency <get|set|add|remove> <player|@selector> [값]", NamedTextColor.RED);
+                return;
+            }
+
+            String profCmd = args[2].toLowerCase(Locale.ROOT);
+            List<Player> targets = resolveTargets(sender, args[3]);
+            if (targets.isEmpty()) {
+                sendMessage(sender, "대상 플레이어를 찾을 수 없습니다.", NamedTextColor.RED);
+                return;
+            }
+
+            for (Player target : targets) {
+                EclipsiaEntity eEntity = new EclipsiaEntity(target);
+                switch (profCmd) {
+                    case "get" -> sendMessage(sender,
+                            target.getName() + " 숙련도: " + eEntity.getProfessionProficiency(),
+                            NamedTextColor.YELLOW);
+
+                    case "set" -> {
+                        if (args.length < 5) {
+                            sendMessage(sender, "설정할 숙련도 값을 입력하세요.", NamedTextColor.RED);
+                            return;
+                        }
+                        Integer value = parseIntOrNull(args[4], "숙련도는 숫자여야 합니다.", sender);
+                        if (value == null) return;
+                        value = Math.max(0, Math.min(100, value));
+                        eEntity.setProfessionProficiency(value);
+                        sendMessage(sender, target.getName() + "의 숙련도가 " + value + "으로 설정되었습니다.",
+                                NamedTextColor.GREEN);
+                    }
+
+                    case "add" -> {
+                        if (args.length < 5) {
+                            sendMessage(sender, "추가할 숙련도 값을 입력하세요.", NamedTextColor.RED);
+                            return;
+                        }
+                        Integer amount = parseIntOrNull(args[4], "숙련도는 숫자여야 합니다.", sender);
+                        if (amount == null) return;
+                        int newValue = Math.max(0, Math.min(100, eEntity.getProfessionProficiency() + amount));
+                        eEntity.setProfessionProficiency(newValue);
+                        sendMessage(sender, target.getName() + "의 숙련도가 " + amount + "만큼 증가했습니다. 현재: " + newValue,
+                                NamedTextColor.GREEN);
+                    }
+
+                    case "remove" -> {
+                        if (args.length < 5) {
+                            sendMessage(sender, "감소할 숙련도 값을 입력하세요.", NamedTextColor.RED);
+                            return;
+                        }
+                        Integer amount = parseIntOrNull(args[4], "숙련도는 숫자여야 합니다.", sender);
+                        if (amount == null) return;
+                        int newValue = Math.max(0, Math.min(100, eEntity.getProfessionProficiency() - amount));
+                        eEntity.setProfessionProficiency(newValue);
+                        sendMessage(sender, target.getName() + "의 숙련도가 " + amount + "만큼 감소했습니다. 현재: " + newValue,
+                                NamedTextColor.GREEN);
+                    }
+
+                    default -> sendMessage(sender, "사용법: /ec class proficiency <get|set|add|remove> <player|@selector> [값]", NamedTextColor.RED);
+                }
+            }
+            return; // proficiency 처리 끝
+        }
+
+        // proficiency 외 명령
         List<Player> targets = resolveTargets(sender, args[2]);
         if (targets.isEmpty()) {
             sendMessage(sender, "대상 플레이어를 찾을 수 없습니다.", NamedTextColor.RED);
@@ -236,100 +302,10 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                             NamedTextColor.GREEN);
                 }
 
-                case "canadvance" -> {
-                    if (args.length < 4) {
-                        sendMessage(sender, "확인할 직업을 입력하세요.", NamedTextColor.RED);
-                        return;
-                    }
-                    io.lumpq126.eclipsia.classes.Class targetClass =
-                            io.lumpq126.eclipsia.classes.Class.fromName(args[3]);
-                    if (targetClass == null) {
-                        sendMessage(sender, "존재하지 않는 직업입니다: " + args[3], NamedTextColor.RED);
-                        return;
-                    }
-                    boolean canAdvance =
-                            io.lumpq126.eclipsia.classes.Class.canAdvanceTo(currentClass, targetClass);
-                    sendMessage(sender,
-                            currentClass.name() + " (" + currentClass.getKoreaName() + ") → " +
-                                    targetClass.name() + " (" + targetClass.getKoreaName() + ") 전직 " + (canAdvance ? "가능" : "불가"),
-                            canAdvance ? NamedTextColor.GREEN : NamedTextColor.RED);
-                }
-
-                case "stage" -> {
-                    if (args.length < 4) {
-                        sendMessage(sender, "조회할 직업을 입력하세요.", NamedTextColor.RED);
-                        return;
-                    }
-                    io.lumpq126.eclipsia.classes.Class targetClass =
-                            io.lumpq126.eclipsia.classes.Class.fromName(args[3]);
-                    if (targetClass == null) {
-                        sendMessage(sender, "존재하지 않는 직업입니다: " + args[3], NamedTextColor.RED);
-                        return;
-                    }
-                    int stage = io.lumpq126.eclipsia.classes.Class.getAdvancementStage(currentClass, targetClass);
-                    sendMessage(sender,
-                            currentClass.name() + " (" + currentClass.getKoreaName() + ") → " +
-                                    targetClass.name() + " (" + targetClass.getKoreaName() + ") 전직 단계: " + stage,
-                            NamedTextColor.YELLOW);
-                }
-
-                case "proficiency" -> {
-                    if (args.length < 4) {
-                        sendMessage(sender,
-                                target.getName() + " 숙련도: " + eEntity.getProfessionProficiency(),
-                                NamedTextColor.YELLOW);
-                        return;
-                    }
-                    Integer value = parseIntOrNull(args[3], "숙련도는 숫자여야 합니다.", sender);
-                    if (value == null) return;
-                    value = Math.max(0, Math.min(100, value));
-                    eEntity.setProfessionProficiency(value);
-                    sendMessage(sender, target.getName() + "의 숙련도가 " + value + "으로 설정되었습니다.",
-                            NamedTextColor.GREEN);
-                }
-
                 case "reset" -> {
                     eEntity.setClass(io.lumpq126.eclipsia.classes.Class.NOVICE, 0);
                     eEntity.setProfessionProficiency(0);
                     sendMessage(sender, target.getName() + "의 직업과 숙련도가 초기화되었습니다.", NamedTextColor.GREEN);
-                }
-
-                case "addproficiency" -> {
-                    if (args.length < 4) {
-                        sendMessage(sender, "추가할 숙련도 값을 입력하세요.", NamedTextColor.RED);
-                        return;
-                    }
-                    Integer amount = parseIntOrNull(args[3], "숙련도는 숫자여야 합니다.", sender);
-                    if (amount == null) return;
-                    int newValue = Math.max(0, Math.min(100, eEntity.getProfessionProficiency() + amount));
-                    eEntity.setProfessionProficiency(newValue);
-                    sendMessage(sender, target.getName() + "의 숙련도가 " + amount + "만큼 증가했습니다. 현재: " + newValue,
-                            NamedTextColor.GREEN);
-                }
-
-                case "removeproficiency" -> {
-                    if (args.length < 4) {
-                        sendMessage(sender, "감소할 숙련도 값을 입력하세요.", NamedTextColor.RED);
-                        return;
-                    }
-                    Integer amount = parseIntOrNull(args[3], "숙련도는 숫자여야 합니다.", sender);
-                    if (amount == null) return;
-                    int newValue = Math.max(0, Math.min(100, eEntity.getProfessionProficiency() - amount));
-                    eEntity.setProfessionProficiency(newValue);
-                    sendMessage(sender, target.getName() + "의 숙련도가 " + amount + "만큼 감소했습니다. 현재: " + newValue,
-                            NamedTextColor.GREEN);
-                }
-
-                case "stageset" -> {
-                    if (args.length < 4) {
-                        sendMessage(sender, "설정할 전직 단계를 입력하세요.", NamedTextColor.RED);
-                        return;
-                    }
-                    Integer stageValue = parseIntOrNull(args[3], "전직 단계는 숫자여야 합니다.", sender);
-                    if (stageValue == null) return;
-                    eEntity.setClass(currentClass, stageValue);
-                    sendMessage(sender, target.getName() + "의 전직 단계가 " + stageValue + "으로 설정되었습니다.",
-                            NamedTextColor.GREEN);
                 }
 
                 case "advance" -> {
@@ -347,8 +323,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                             NamedTextColor.GREEN);
                 }
 
-                default -> sendMessage(sender, "알 수 없는 하위 명령어입니다. 사용: get, set, canAdvance, stage, proficiency, reset, addProficiency, removeProficiency, stageSet, advance",
-                        NamedTextColor.RED);
+                default -> sendMessage(sender, "알 수 없는 하위 명령어입니다.", NamedTextColor.RED);
             }
         }
     }
@@ -778,10 +753,7 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
                 case "month" -> suggestions.addAll(List.of("set", "reset"));
                 case "level", "exp" -> suggestions.addAll(List.of("get", "set", "add", "reset"));
                 case "stat" -> suggestions.addAll(List.of("get", "set", "add", "reset", "point"));
-                case "class" -> suggestions.addAll(List.of(
-                        "get", "set", "canAdvance", "stage", "proficiency",
-                        "reset", "addProficiency", "removeProficiency", "stageSet", "advance"
-                ));
+                case "class" -> suggestions.addAll(List.of("get", "set", "reset", "proficiency", "advance"));
                 case "sia" -> suggestions.addAll(List.of("get", "set", "add", "remove"));
             }
             return filterByPrefix(suggestions, lastToken);
@@ -790,48 +762,53 @@ public class EclipsiaCommand implements CommandExecutor, TabCompleter {
         if (args.length == 3) {
             switch (first) {
                 case "sia" -> {
-                    String sub = args[1].toLowerCase(Locale.ROOT);
-                    if (sub.equals("get")) {
+                    if (args[1].equalsIgnoreCase("get")) {
                         suggestions.addAll(getPlayersAndSelectors(lastToken));
-                    } else {
-                        suggestions.add("<amount>");
                     }
                 }
                 case "stat" -> {
-                    String sub = args[1].toLowerCase(Locale.ROOT);
-                    if (sub.equals("point")) {
+                    if (args[1].equalsIgnoreCase("point")) {
                         suggestions.addAll(List.of("add", "remove", "set"));
                     } else {
                         suggestions.addAll(getPlayersAndSelectors(lastToken));
                     }
                 }
-                case "fish", "level", "exp", "class" -> suggestions.addAll(getPlayersAndSelectors(lastToken));
+                case "class" -> {
+                    if (args[1].equalsIgnoreCase("proficiency")) {
+                        suggestions.addAll(List.of("get", "set", "add", "remove"));
+                    } else {
+                        suggestions.addAll(getPlayersAndSelectors(lastToken));
+                    }
+                }
+                case "fish", "level", "exp" -> suggestions.addAll(getPlayersAndSelectors(lastToken));
             }
             return filterByPrefix(suggestions, lastToken);
         }
 
         if (args.length == 4) {
-            switch (first) {
-                case "fish" -> {
-                    Set<String> keys = EclipsiaPlugin.getFishConfig() != null
-                            ? EclipsiaPlugin.getFishConfig().getKeys(false)
-                            : Collections.emptySet();
-                    suggestions.addAll(keys);
+            if (first.equals("class") && args[1].equalsIgnoreCase("proficiency")) {
+                // player name 추천
+                suggestions.addAll(getPlayersAndSelectors(lastToken));
+            } else if (first.equals("stat")) {
+                if (args[1].equalsIgnoreCase("point")) {
+                    suggestions.addAll(getPlayersAndSelectors(lastToken));
+                } else {
+                    suggestions.addAll(List.of("STRENGTH", "CONSTITUTION", "AGILITY", "DEXTERITY", "INTELLIGENCE", "WISDOM"));
                 }
-                case "stat" -> {
-                    if (args[1].equalsIgnoreCase("point")) {
-                        suggestions.addAll(getPlayersAndSelectors(lastToken));
-                    } else {
-                        suggestions.addAll(List.of("STRENGTH","CONSTITUTION","AGILITY","DEXTERITY","INTELLIGENCE","WISDOM"));
-                    }
-                }
-                case "class" -> {
-                    String sub = args[1].toLowerCase(Locale.ROOT);
-                    if (sub.equals("set") || sub.equals("canadvance") || sub.equals("stage")) {
-                        for (io.lumpq126.eclipsia.classes.Class c : io.lumpq126.eclipsia.classes.Class.values()) {
-                            suggestions.add(c.name().toLowerCase());
-                        }
-                    }
+            } else if (first.equals("fish")) {
+                Set<String> keys = EclipsiaPlugin.getFishConfig() != null
+                        ? EclipsiaPlugin.getFishConfig().getKeys(false)
+                        : Collections.emptySet();
+                suggestions.addAll(keys);
+            }
+            return filterByPrefix(suggestions, lastToken);
+        }
+
+        if (args.length == 5) {
+            if (first.equals("class") && args[1].equalsIgnoreCase("proficiency")) {
+                String sub = args[2].toLowerCase(Locale.ROOT);
+                if (sub.equals("set") || sub.equals("add") || sub.equals("remove")) {
+                    suggestions.add("<number>");
                 }
             }
             return filterByPrefix(suggestions, lastToken);
