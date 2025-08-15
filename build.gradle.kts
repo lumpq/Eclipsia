@@ -20,11 +20,13 @@ allprojects {
         mavenCentral()
         maven("https://repo.papermc.io/repository/maven-public/") { name = "papermc" }
         maven("https://maven.citizensnpcs.co/repo") { name = "citizens-repo" }
+        maven("https://repo.nightexpressdev.com/releases") { name = "nightexpress-releases" }
     }
 
     dependencies {
         compileOnly("net.citizensnpcs:citizensapi:2.0.37-SNAPSHOT")
         compileOnly("net.dmulloy2:ProtocolLib:5.4.0")
+        //compileOnly("su.nightexpress.excellentenchants:Core:5.2.1")
     }
 
     java {

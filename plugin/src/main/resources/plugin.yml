@@ -18,3 +18,5 @@ commands:
   element:
     permission: op
     aliases: [el]
+  test:
+    permission: op

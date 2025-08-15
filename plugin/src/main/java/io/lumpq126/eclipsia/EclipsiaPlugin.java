@@ -3,6 +3,7 @@ package io.lumpq126.eclipsia;
 import io.lumpq126.eclipsia.commands.EclipsiaCommand;
 import io.lumpq126.eclipsia.commands.ElementReload;
 import io.lumpq126.eclipsia.commands.FishCommand;
+import io.lumpq126.eclipsia.commands.Test;
 import io.lumpq126.eclipsia.core.mechanics.classes.ClassStorage;
 import io.lumpq126.eclipsia.core.mechanics.elements.ElementStorage;
 import io.lumpq126.eclipsia.core.mechanics.entities.EclipsiaEntity;
@@ -54,6 +55,8 @@ public final class EclipsiaPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MainGUIListener(), this);
         getServer().getPluginManager().registerEvents(new LevelUPListener(), this);
         getServer().getPluginManager().registerEvents(new ElementListener(), this);
+
+        Objects.requireNonNull(getCommand("test")).setExecutor(new Test());
 
         Objects.requireNonNull(getCommand("fish")).setExecutor(new FishCommand());
         Objects.requireNonNull(getCommand("eclipsia")).setExecutor(new EclipsiaCommand());
