@@ -20,7 +20,6 @@ import io.lumpq126.eclipsia.scheduler.AttributeScheduler;
 import io.lumpq126.eclipsia.utilities.Log;
 import io.lumpq126.eclipsia.utilities.Mm;
 import io.lumpq126.eclipsia.utilities.storage.*;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -85,11 +84,13 @@ public final class EclipsiaPlugin extends JavaPlugin {
         Vampirism vampirism = new Vampirism();
         getServer().getPluginManager().registerEvents(new VampirismListener(vampirism), this);
 
-        CustomEnchantmentRegistry.registry(this);
-
         // 스케줄러 시작
         ActionBarScheduler.start();
         AttributeScheduler.start();
+    }
+
+    public void onLoad() {
+        CustomEnchantmentRegistry.registry(this);
     }
 
     public static EclipsiaPlugin getInstance() {
