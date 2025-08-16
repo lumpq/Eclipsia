@@ -34,11 +34,11 @@ public class ElementListener implements Listener {
         double multiplier = Element.getDamageMultiplier(attackerElement, victimElement);
 
         // 기존 대미지
-        double baseDamage = event.getOriginalEvent().getDamage();
+        double baseDamage = event.getEvent().getDamage();
         double finalDamage = baseDamage * multiplier;
 
         // 최종 대미지 적용
-        event.getOriginalEvent().setDamage(finalDamage);
+        event.getEvent().setDamage(finalDamage);
     }
 
     /**

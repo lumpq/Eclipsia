@@ -22,7 +22,7 @@ public class ElementDamageEvent extends Event {
     private static final HandlerList HANDLERS = new HandlerList();
 
     /** 원본 엔티티 데미지 이벤트 */
-    private final EntityDamageByEntityEvent originalEvent;
+    private final EntityDamageByEntityEvent event;
 
     /** 공격자 EclipsiaEntity */
     private final EclipsiaEntity damager;
@@ -40,7 +40,7 @@ public class ElementDamageEvent extends Event {
      * @param attackElement 공격에 사용된 {@link Element}
      */
     public ElementDamageEvent(EntityDamageByEntityEvent event, Element attackElement) {
-        this.originalEvent = event;
+        this.event = event;
         this.damager = new EclipsiaEntity(event.getDamager());
         this.victim = new EclipsiaEntity(event.getEntity());
         this.attackElement = attackElement;
@@ -51,8 +51,8 @@ public class ElementDamageEvent extends Event {
      *
      * @return 원본 엔티티 데미지 이벤트
      */
-    public EntityDamageByEntityEvent getOriginalEvent() {
-        return originalEvent;
+    public EntityDamageByEntityEvent getEvent() {
+        return event;
     }
 
     /**
