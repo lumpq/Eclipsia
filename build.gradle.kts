@@ -77,8 +77,8 @@ tasks.build { dependsOn("copyJarToServer") }
 
 // Subproject 의존성
 dependencies {
+    implementation(project(":api"))
     implementation(project(":core"))
-    implementation(project(":plugin"))
     implementation(project(":skills"))
 
     nmsProjects.forEach { implementation(project(it.path)) }
