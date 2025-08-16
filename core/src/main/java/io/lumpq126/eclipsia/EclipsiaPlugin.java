@@ -6,6 +6,8 @@ import io.lumpq126.eclipsia.commands.FishCommand;
 import io.lumpq126.eclipsia.commands.Test;
 import io.lumpq126.eclipsia.core.mechanics.classes.ClassStorage;
 import io.lumpq126.eclipsia.core.mechanics.elements.ElementStorage;
+import io.lumpq126.eclipsia.core.mechanics.enchants.enchantment.Vampirism;
+import io.lumpq126.eclipsia.core.mechanics.enchants.listener.VampirismListener;
 import io.lumpq126.eclipsia.core.mechanics.entities.EclipsiaEntity;
 import io.lumpq126.eclipsia.listeners.ElementListener;
 import io.lumpq126.eclipsia.listeners.FishListener;
@@ -55,6 +57,9 @@ public final class EclipsiaPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MainGUIListener(), this);
         getServer().getPluginManager().registerEvents(new LevelUPListener(), this);
         getServer().getPluginManager().registerEvents(new ElementListener(), this);
+
+        getServer().getPluginManager().registerEvents(new VampirismListener(new Vampirism()), this);
+        CustomEnchantmentRegistry.registry(this);
 
         Objects.requireNonNull(getCommand("test")).setExecutor(new Test());
 

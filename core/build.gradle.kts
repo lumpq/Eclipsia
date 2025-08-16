@@ -10,7 +10,6 @@ repositories {
 
 dependencies {
     implementation(project(":api"))
-    compileOnly(project(":skills"))
     // nms:* 모듈 자동 추가
     rootProject.subprojects
         .filter { it.path.startsWith(":nms:") }

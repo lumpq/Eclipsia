@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":api"))
     paperweight.paperDevBundle("1.21.5-R0.1-SNAPSHOT")
 }
 
