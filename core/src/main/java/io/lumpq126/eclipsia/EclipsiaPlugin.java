@@ -82,11 +82,10 @@ public final class EclipsiaPlugin extends JavaPlugin {
             return;
         }
 
-        Bukkit.getScheduler().runTask(this, () -> {
-            Vampirism vampirism = new Vampirism();
-            getServer().getPluginManager().registerEvents(new VampirismListener(vampirism), this);
-            CustomEnchantmentRegistry.registry(this);
-        });
+        Vampirism vampirism = new Vampirism();
+        getServer().getPluginManager().registerEvents(new VampirismListener(vampirism), this);
+
+        CustomEnchantmentRegistry.registry(this);
 
         // 스케줄러 시작
         ActionBarScheduler.start();
