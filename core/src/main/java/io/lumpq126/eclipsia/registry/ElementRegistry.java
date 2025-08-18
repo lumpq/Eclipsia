@@ -59,19 +59,74 @@ public class ElementRegistry {
         register(angel);
         register(devil);
 
+        // 불 🔥
+        relation(fire, plants, strong);
+        relation(fire, ice, strong);
+        relation(fire, poison, strong);
         relation(fire, water, weak);
         relation(fire, earth, weak);
-        relation(fire, wind, strong);
-        relation(fire, ice, strong);
-        relation(fire, plants, strong);
 
+        // 물 💧
+        relation(water, fire, strong);
         relation(water, earth, strong);
         relation(water, poison, strong);
+        relation(water, rot, strong);
         relation(water, electric, weak);
         relation(water, plants, weak);
-        relation(water, rot, strong);
 
-        relation(earth);
+        // 땅 🌍
+        relation(earth, electric, strong);
+        relation(earth, metal, strong);
+        relation(earth, wind, weak);
+        relation(earth, ice, weak);
+
+        // 바람 💨
+        relation(wind, plants, strong);
+        relation(wind, earth, strong);
+        relation(wind, ice, weak);
+        relation(wind, metal, weak);
+
+        // 번개 ⚡
+        relation(electric, water, strong);
+        relation(electric, metal, strong);
+        relation(electric, earth, weak);
+
+        // 얼음 ❄️
+        relation(ice, earth, strong);
+        relation(ice, plants, strong);
+        relation(ice, wind, strong);
+        relation(ice, fire, weak);
+
+        // 식물 🌱
+        relation(plants, water, strong);
+        relation(plants, earth, strong);
+        relation(plants, fire, weak);
+        relation(plants, ice, weak);
+        relation(plants, wind, weak);
+
+        // 빛 ☀️ ↔ 어둠 🌑
+        relation(light, darkness, mutualStrong);
+        // 빛 ☀️ ↔ 그림자 🌒
+        relation(light, shadow, mutualStrong);
+        // 천사 😇 ↔ 악마 😈
+        relation(angel, devil, mutualStrong);
+
+        // 추가 단방향
+        relation(light, devil, strong);
+        relation(light, rot, strong);
+
+        relation(darkness, angel, strong);
+
+        // 독 ☠️
+        relation(poison, plants, strong);
+        relation(poison, light, weak);
+        relation(poison, water, weak);
+
+        // 부패 🦠
+        relation(rot, light, weak);
+        relation(rot, fire, weak);
+        relation(rot, water, weak);
+        relation(rot, darkness, strong);
     }
 
     private static void register(Element element) {
