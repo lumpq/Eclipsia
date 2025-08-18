@@ -1,7 +1,6 @@
 package io.lumpq126.eclipsia.core.mechanics.entities;
 
 import io.lumpq126.eclipsia.core.mechanics.classes.Class;
-import io.lumpq126.eclipsia.core.mechanics.elements.Element;
 import io.lumpq126.eclipsia.events.PlayerExpUpEvent;
 import io.lumpq126.eclipsia.events.PlayerLevelUpEvent;
 import io.lumpq126.eclipsia.core.mechanics.stats.Stat;

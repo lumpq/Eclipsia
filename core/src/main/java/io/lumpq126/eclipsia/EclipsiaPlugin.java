@@ -5,7 +5,6 @@ import io.lumpq126.eclipsia.commands.ElementReload;
 import io.lumpq126.eclipsia.commands.FishCommand;
 import io.lumpq126.eclipsia.commands.Test;
 import io.lumpq126.eclipsia.core.mechanics.classes.ClassStorage;
-import io.lumpq126.eclipsia.core.mechanics.elements.ElementStorage;
 import io.lumpq126.eclipsia.core.mechanics.entities.EclipsiaEntity;
 import io.lumpq126.eclipsia.listeners.ElementListener;
 import io.lumpq126.eclipsia.listeners.FishListener;
@@ -13,6 +12,8 @@ import io.lumpq126.eclipsia.listeners.LevelUPListener;
 import io.lumpq126.eclipsia.listeners.MainGUIListener;
 import io.lumpq126.eclipsia.nms.NMSHandler;
 import io.lumpq126.eclipsia.nms.NMSHandlerFactory;
+import io.lumpq126.eclipsia.registry.CustomEnchantmentRegistry;
+import io.lumpq126.eclipsia.registry.ElementRegistry;
 import io.lumpq126.eclipsia.scheduler.ActionBarScheduler;
 import io.lumpq126.eclipsia.scheduler.AttributeScheduler;
 import io.lumpq126.eclipsia.utilities.Log;
@@ -46,7 +47,6 @@ public final class EclipsiaPlugin extends JavaPlugin {
         ClassStorage.init(this);
         MonthStorage.init(this);
         EclipsiaEntity.init(this);
-        ElementStorage.init(this);
         PlayerPageStorage.init(this);
         FishCatalogStorage.init(this);
 
@@ -82,6 +82,8 @@ public final class EclipsiaPlugin extends JavaPlugin {
         // 스케줄러 시작
         ActionBarScheduler.start();
         AttributeScheduler.start();
+
+        ElementRegistry.registry(this);
     }
 
     public void onLoad() {

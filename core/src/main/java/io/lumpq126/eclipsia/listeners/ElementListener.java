@@ -1,6 +1,5 @@
 package io.lumpq126.eclipsia.listeners;
 
-import io.lumpq126.eclipsia.core.mechanics.elements.Element;
 import io.lumpq126.eclipsia.core.mechanics.entities.EclipsiaEntity;
 import io.lumpq126.eclipsia.events.ElementDamageEvent;
 import org.bukkit.Bukkit;
