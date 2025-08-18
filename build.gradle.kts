@@ -28,6 +28,7 @@ allprojects {
         compileOnly("net.citizensnpcs:citizensapi:2.0.37-SNAPSHOT")
         compileOnly("net.dmulloy2:ProtocolLib:5.4.0")
         compileOnly("io.lumpq126:enchantapi:1.0.0")
+        compileOnly("io.lumpq126:elementapi:1.0.0")
     }
 
     java {

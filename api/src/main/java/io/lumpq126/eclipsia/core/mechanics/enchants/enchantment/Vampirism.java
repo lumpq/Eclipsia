@@ -16,9 +16,10 @@ public class Vampirism extends CustomEnchantment {
             }
         }
         .anvilCost(15)
-                .weight(5).rarity(Rarity.COMMON)
-                .enchantmentTarget(EnchantmentTarget.WEAPON)
                 .applicableSlots(EquipmentSlot.HAND)
+                .weight(5)
+                .rarity(Rarity.COMMON)
+                .enchantmentTarget(EnchantmentTarget.WEAPON)
                 .treasure(false)
                 .cursed(false)
                 .canTrade(true)
