@@ -6,8 +6,6 @@ import io.lumpq126.eclipsia.commands.FishCommand;
 import io.lumpq126.eclipsia.commands.Test;
 import io.lumpq126.eclipsia.core.mechanics.classes.ClassStorage;
 import io.lumpq126.eclipsia.core.mechanics.elements.ElementStorage;
-import io.lumpq126.eclipsia.core.mechanics.enchants.enchantment.Vampirism;
-import io.lumpq126.eclipsia.core.mechanics.enchants.listener.VampirismListener;
 import io.lumpq126.eclipsia.core.mechanics.entities.EclipsiaEntity;
 import io.lumpq126.eclipsia.listeners.ElementListener;
 import io.lumpq126.eclipsia.listeners.FishListener;
@@ -80,9 +78,6 @@ public final class EclipsiaPlugin extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
-
-        Vampirism vampirism = new Vampirism();
-        getServer().getPluginManager().registerEvents(new VampirismListener(vampirism), this);
 
         // 스케줄러 시작
         ActionBarScheduler.start();
