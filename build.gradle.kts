@@ -27,6 +27,7 @@ allprojects {
         compileOnly("net.citizensnpcs:citizensapi:2.0.37-SNAPSHOT")
         compileOnly("net.dmulloy2:ProtocolLib:5.4.0")
         implementation("io.github.snowyblossom126:elementapi:1.0.1")
+        implementation("io.github.snowyblossom126:enchantapi:1.0.0")
     }
 
     java {
