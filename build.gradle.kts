@@ -4,7 +4,7 @@ plugins {
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
-group = "io.lumpq126"
+group = "io.github.snowyblossom126"
 version = "1.0.0"
 
 val pluginVersion = version.toString()
@@ -18,17 +18,15 @@ allprojects {
 
     repositories {
         mavenCentral()
-        mavenLocal()
         maven("https://repo.papermc.io/repository/maven-public/") { name = "papermc" }
+        maven("https://repo.dmulloy2.net/repository/public/") { name = "dmulloy2-repo" }
         maven("https://maven.citizensnpcs.co/repo") { name = "citizens-repo" }
-        maven("https://repo.nightexpressdev.com/releases") { name = "nightexpress-releases" }
     }
 
     dependencies {
         compileOnly("net.citizensnpcs:citizensapi:2.0.37-SNAPSHOT")
         compileOnly("net.dmulloy2:ProtocolLib:5.4.0")
-        compileOnly("io.lumpq126:enchantapi:1.0.0")
-        compileOnly("io.lumpq126:elementapi:1.0.0")
+        implementation("io.github.snowyblossom126:elementapi:1.0.1")
     }
 
     java {
@@ -51,8 +49,6 @@ allprojects {
 tasks {
     shadowJar {
         nmsProjects.forEach { dependsOn("${it.path}:reobfJar") }
-
-
 
         archiveClassifier.set("")
         archiveFileName.set("Eclipsia-$pluginVersion.jar")

@@ -1,0 +1,104 @@
+package io.snowyblossom126.eclipsia.listeners;
+
+import io.snowyblossom126.eclipsia.core.mechanics.entities.EclipsiaEntity;
+import io.snowyblossom126.eclipsia.core.mechanics.stats.Stat;
+import io.snowyblossom126.eclipsia.core.mechanics.ui.gui.MainGUI;
+import io.snowyblossom126.eclipsia.utilities.Mm;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
+
+import java.util.Map;
+
+public class MainGUIListener implements Listener {
+
+    @EventHandler
+    public void openHome(PlayerSwapHandItemsEvent event) {
+        Player p = event.getPlayer();
+        if (!p.isSneaking()) return;
+        event.setCancelled(true);
+        MainGUI.openHomeGUI(p);
+    }
+
+    @EventHandler
+    public void onClick(InventoryClickEvent event) {
+        if (!(event.getWhoClicked() instanceof Player player)) return;
+
+        String title = PlainTextComponentSerializer.plainText().serialize(event.getView().title());
+
+        if (title.equals("main-home")) {
+            event.setCancelled(true);
+            if (event.getSlot() == 9) {
+                MainGUI.openStatGUI(player);
+            }
+        }
+        else if (title.equals("main-stat")) {
+            event.setCancelled(true);
+
+            if (event.getSlot() == 0) {
+                MainGUI.openHomeGUI(player);
+                return;
+            }
+
+            Map<Integer, String> slotStatMap = Map.of(
+                    11, "STRENGTH",
+                    12, "CONSTITUTION",
+                    13, "AGILITY",
+                    20, "DEXTERITY",
+                    21, "WISDOM",
+                    22, "INTELLIGENCE"
+            );
+
+            if (!slotStatMap.containsKey(event.getSlot())) return;
+
+            String stat = slotStatMap.get(event.getSlot());
+            handleStatPointAllocation(player, event, stat);
+        }
+    }
+
+    private void handleStatPointAllocation(Player player, InventoryClickEvent event, String stat) {
+        EclipsiaEntity eEntity = new EclipsiaEntity(player);
+
+        int availablePoints = eEntity.getStatPoints();
+        if (availablePoints < 1) {
+            player.playSound(player.getLocation(), Sound.BLOCK_ENDER_CHEST_CLOSE, 1.0f, 1.5f);
+            player.sendMessage(Mm.mm("<red>분배가능한 능력치가 부족합니다!"));
+            return;
+        }
+
+        int pointsToUse;
+        if (event.getClick() == ClickType.LEFT) {
+            pointsToUse = 1;
+        } else if (event.getClick() == ClickType.RIGHT) {
+            pointsToUse = availablePoints;
+        } else {
+            return;
+        }
+
+        int currentStatValue = eEntity.getStat(Stat.fromName(stat));  // 현재 스탯 값 조회
+        int maxStat = 9999;
+
+        // 증가 후 값이 9999 초과하지 않도록 조정
+        if (currentStatValue + pointsToUse > maxStat) {
+            pointsToUse = maxStat - currentStatValue;
+            if (pointsToUse <= 0) {
+                // 이미 최대치 도달
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1.0f, 0.5f);
+                player.sendMessage(Mm.mm("<red>이미 최대 능력치에 도달했습니다!"));
+                return;
+            }
+        }
+
+        eEntity.addStat(Stat.fromName(stat), pointsToUse);
+        eEntity.addStatPoints(-pointsToUse);
+
+        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 2.0f);
+        player.sendMessage(Mm.mm("<green>능력치가 " + pointsToUse + " 상승했습니다!"));
+        event.getInventory().setItem(event.getSlot(), MainGUI.statItem(player, stat));
+    }
+}
