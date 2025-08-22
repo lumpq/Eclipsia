@@ -17,6 +17,7 @@ allprojects {
     apply(plugin = "java")
 
     repositories {
+        mavenLocal()
         mavenCentral()
         maven("https://repo.papermc.io/repository/maven-public/") { name = "papermc" }
         maven("https://repo.dmulloy2.net/repository/public/") { name = "dmulloy2-repo" }
@@ -76,8 +77,16 @@ tasks.build { dependsOn("copyJarToServer") }
 
 // Subproject 의존성
 dependencies {
-    implementation(project(":api"))
-    implementation(project(":core"))
+    implementation(project(":eclipsia-core"))
 
     nmsProjects.forEach { implementation(project(it.path)) }
+}
+
+// 모든 nms 모듈이 core를 참조하도록 설정
+nmsProjects.forEach { nmsProject ->
+    project(nmsProject.path) {
+        dependencies {
+            implementation(project(":eclipsia-core"))
+        }
+    }
 }

@@ -8,7 +8,7 @@ pluginManagement {
 rootProject.name = "Eclipsia"
 
 // 기본 모듈
-include("api", "core")
+include("eclipsia-core")
 
 include("nms:v1_20_R1")
 include("nms:v1_20_R2")
