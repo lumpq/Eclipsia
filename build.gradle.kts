@@ -25,10 +25,10 @@ allprojects {
     }
 
     dependencies {
-        compileOnly("net.citizensnpcs:citizensapi:2.0.37-SNAPSHOT")
         compileOnly("net.dmulloy2:ProtocolLib:5.4.0")
-        implementation("io.github.snowyblossom126:elementapi:1.0.1")
-        implementation("io.github.snowyblossom126:enchantapi:1.0.0")
+        compileOnly("net.citizensnpcs:citizensapi:2.0.37-SNAPSHOT")
+        implementation("io.github.snowyblossom126:element-api:1.0.2")
+        implementation("io.github.snowyblossom126:enchant-api:1.0.0")
     }
 
     java {
@@ -47,7 +47,6 @@ allprojects {
     }
 }
 
-// ShadowJar 설정
 tasks {
     shadowJar {
         nmsProjects.forEach { dependsOn("${it.path}:reobfJar") }
@@ -58,14 +57,14 @@ tasks {
         relocate("org.bstats", "io.lumpq.shadowed.bstats")
     }
 
-    build { dependsOn(shadowJar) }
-
-    jar { enabled = false }
+    build {
+        dependsOn(shadowJar)
+        finalizedBy("copyJarToServer")
+    }
 
     compileJava.get().dependsOn(clean)
 }
 
-// 서버 테스트용 복사
 val serverPluginsDir = file("C:/Users/user/Desktop/.server/plugins")
 tasks.register<Copy>("copyJarToServer") {
     dependsOn(tasks.shadowJar)
@@ -73,16 +72,13 @@ tasks.register<Copy>("copyJarToServer") {
     into(serverPluginsDir)
     rename { "Eclipsia-$pluginVersion.jar" }
 }
-tasks.build { dependsOn("copyJarToServer") }
 
-// Subproject 의존성
 dependencies {
     implementation(project(":eclipsia-core"))
 
     nmsProjects.forEach { implementation(project(it.path)) }
 }
 
-// 모든 nms 모듈이 core를 참조하도록 설정
 nmsProjects.forEach { nmsProject ->
     project(nmsProject.path) {
         dependencies {

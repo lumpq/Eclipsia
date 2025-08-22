@@ -1,5 +1,6 @@
 package io.snowyblossom126.eclipsia.enchantments;
 
+import io.snowyblossom126.eclipsia.EclipsiaPlugin;
 import io.snowyblossom126.enchantapi.api.enchantments.CustomEnchantment;
 import io.snowyblossom126.enchantapi.api.enchantments.properties.Rarity;
 import org.bukkit.enchantments.Enchantment;
@@ -30,23 +31,13 @@ public class Vampirism extends CustomEnchantment {
     }
 
     @Override
-    public void addEnchant(ItemStack itemStack, int i) {
-
-    }
-
-    @Override
-    public void removeEnchant(ItemStack itemStack) {
-
-    }
-
-    @Override
     public boolean canEnchant(ItemStack itemStack) {
         return false;
     }
 
     @Override
     public Enchantment parseToBukkitEnchantment() {
-        return null;
+        return EclipsiaPlugin.getNms().getEnchantmentParser().getBukkitEnchantment(this);
     }
 
     private Vampirism(Builder builder) {

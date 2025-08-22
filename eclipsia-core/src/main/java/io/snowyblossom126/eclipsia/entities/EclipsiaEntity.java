@@ -1,13 +1,13 @@
 package io.snowyblossom126.eclipsia.entities;
 
+import io.snowyblossom126.eclipsia.classes.Class;
 import io.snowyblossom126.eclipsia.classes.ClassStorage;
 import io.snowyblossom126.eclipsia.elements.Normal;
-import io.snowyblossom126.eclipsia.stats.Stat;
 import io.snowyblossom126.eclipsia.events.PlayerExpUpEvent;
 import io.snowyblossom126.eclipsia.events.PlayerLevelUpEvent;
+import io.snowyblossom126.eclipsia.stats.Stat;
 import io.snowyblossom126.elementapi.api.ElementAPI;
 import io.snowyblossom126.elementapi.api.elements.Element;
-import io.snowyblossom126.eclipsia.classes.Class;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;

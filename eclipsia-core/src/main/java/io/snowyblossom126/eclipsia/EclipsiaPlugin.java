@@ -1,9 +1,9 @@
 package io.snowyblossom126.eclipsia;
 
+import io.snowyblossom126.eclipsia.classes.ClassStorage;
 import io.snowyblossom126.eclipsia.commands.EclipsiaCommand;
 import io.snowyblossom126.eclipsia.commands.FishCommand;
 import io.snowyblossom126.eclipsia.commands.Test;
-import io.snowyblossom126.eclipsia.classes.ClassStorage;
 import io.snowyblossom126.eclipsia.entities.EclipsiaEntity;
 import io.snowyblossom126.eclipsia.listeners.FishListener;
 import io.snowyblossom126.eclipsia.listeners.LevelUPListener;
